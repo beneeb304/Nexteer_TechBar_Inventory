@@ -45,9 +45,9 @@ namespace InvScanApp
         public static void InitializeDB()
         {
             //Make connection to DB
-            SqlConnection DBConn = new SqlConnection("Server=" + Settings.Default.dbServerName.ToString());
+            DBConn = new SqlConnection("Server=" + Settings.Default.dbServerName.ToString());
 
-            SqlCommand DBCmd = new SqlCommand();
+            //SqlCommand DBCmd = new SqlCommand();
 
             try
             {
@@ -68,9 +68,7 @@ namespace InvScanApp
                 sbSQL.Append(" END;");
 
                 //Execute
-                DBCmd.CommandText = sbSQL.ToString();
-                DBCmd.Connection = DBConn;
-                DBCmd.ExecuteNonQuery();
+                ExecuteSQLNonQ(sbSQL.ToString());
 
                 //Clear string builder for next build
                 sbSQL.Clear();
@@ -106,14 +104,6 @@ namespace InvScanApp
                 sbSQL.Append(" Staff_Name VARCHAR(100) NOT NULL UNIQUE);");
                 sbSQL.Append(" END;");
 
-                //Execute
-                DBCmd.CommandText = sbSQL.ToString();
-                DBCmd.Connection = DBConn;
-                DBCmd.ExecuteNonQuery();
-
-                //Clear string builder for next build
-                sbSQL.Clear();
-
                 //Create Log Table if it doesn't exist
                 sbSQL.Append("IF NOT EXISTS (");
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblLog')");
@@ -127,11 +117,8 @@ namespace InvScanApp
                 sbSQL.Append(" Qty_Action INT);");
                 sbSQL.Append(" END;");
 
-                Console.WriteLine(sbSQL.ToString());
-
-                DBCmd.CommandText = sbSQL.ToString();
-                DBCmd.Connection = DBConn;
-                DBCmd.ExecuteNonQuery();
+                //Execute
+                ExecuteSQLNonQ(sbSQL.ToString());
             }
             catch (Exception e)
             {
@@ -144,18 +131,23 @@ namespace InvScanApp
             }
         }
 
-        private static void ExecuteSQLNonQ(string strSQL)
+        public static void ExecuteSQLNonQ(string strSQL)
         {
-            SqlCommand DBCmd = new SqlCommand();
-            DBCmd.CommandText = strSQL;
-            DBCmd.Connection = DBConn;
+            if(DBConn.State == ConnectionState.Closed)
+            {
+                DBConn.Open();
+            }
+            
+            //Create SQL command
+            SqlCommand DBCmd = new SqlCommand(strSQL, DBConn);
 
             try
             {
                 DBCmd.ExecuteNonQuery();
-            } catch
+            } 
+            catch (Exception e)
             {
-                MessageBox.Show("Error executing SQL statement");
+                MessageBox.Show(e.Message, "Error executing SQL statement");
             }
         }
 
@@ -180,42 +172,6 @@ namespace InvScanApp
             {
                 return null;
             }
-
         }
-
-        //public static int SelectID(int intSelectedID)
-        //{
-        //    //Make connection to DB
-        //    SqlConnection DBConn = ConnectToDB();
-
-        //    SqlCommand DBCmd = new SqlCommand();
-
-        //    try
-        //    {
-        //        //SELECT FROM Register table and store in container (string array for now)
-        //        DBCmd.CommandText = "USE ScaleVue; SELECT COUNT(1) FROM Register WHERE ID = " + intSelectedID;
-        //        DBCmd.Connection = DBConn;
-
-        //        SqlDataReader myDataReader;
-        //        myDataReader = DBCmd.ExecuteReader();
-
-        //        int intCtr = 0;
-
-        //        while (myDataReader.Read())
-        //        {
-        //            intCtr = int.Parse(myDataReader[0].ToString());
-        //        }
-
-        //        //Close data reader since we're done with it
-        //        myDataReader.Close();
-
-        //        return intCtr;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //FIND ME
-        //        return -1;
-        //    }
-        //}
     }
 }

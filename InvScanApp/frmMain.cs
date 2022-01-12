@@ -35,6 +35,17 @@ namespace InvScanApp
                 //Connect to the DB
                 clsDatabase.ConnectToDB();
             }
+
+            //Populate DGV
+            //string strSelect = "SELECT * FROM tblInventory";
+            //var c = new SqlConnection(); // Your Connection String here
+            //var dataAdapter = new SqlDataAdapter(select, c);
+
+            //var commandBuilder = new SqlCommandBuilder(dataAdapter);
+            //var ds = new DataSet();
+            //dataAdapter.Fill(ds);
+            //dataGridView1.ReadOnly = true;
+            //dataGridView1.DataSource = ds.Tables[0];
         }
 
         private void btnQuit_Click(object sender, EventArgs e)

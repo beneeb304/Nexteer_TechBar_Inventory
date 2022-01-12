@@ -33,6 +33,8 @@ namespace InvScanApp
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -74,11 +76,20 @@ namespace InvScanApp
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
+            // dgvMain
+            // 
+            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMain.Location = new System.Drawing.Point(12, 12);
+            this.dgvMain.Name = "dgvMain";
+            this.dgvMain.Size = new System.Drawing.Size(650, 426);
+            this.dgvMain.TabIndex = 4;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgvMain);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.btnRemove);
@@ -86,6 +97,7 @@ namespace InvScanApp
             this.Name = "frmMain";
             this.Text = "Main Page";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,6 +108,7 @@ namespace InvScanApp
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnQuit;
+        private System.Windows.Forms.DataGridView dgvMain;
     }
 }
 
