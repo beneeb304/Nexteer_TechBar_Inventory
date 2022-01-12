@@ -18,17 +18,10 @@ namespace InvScanApp
         private static string GetConnectionString()
         {
             //Build connection string
-            //SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            //builder.DataSource = Settings.Default.dbIP.ToString() + @"\TBInvDB";  //FIND ME  CHANGE THIS TO DIFFERENT NAME DURING SETUP?
-            //builder.UserID = Settings.Default.dbUser.ToString();
-            //builder.Password = Settings.Default.dbPassword.ToString();
-            //builder.InitialCatalog = "master";
-            //builder.IntegratedSecurity = false;
-
-            //return builder.ToString();
-
-            return "server=(LocalDB)\\MSSQLLocalDB;database=TBInvDB;UID=tbUser;password=tbPassword";
-
+            return "server=" + Properties.Settings.Default.dbServerName + 
+                ";database=" + Properties.Settings.Default.dbServerName + 
+                "; UID=" + Properties.Settings.Default.dbUser + 
+                ";password=" + Properties.Settings.Default.dbPassword;
         }
 
         public static SqlConnection ConnectToDB()
