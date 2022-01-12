@@ -15,7 +15,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dbIP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">10.199.91.38</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dbUser" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

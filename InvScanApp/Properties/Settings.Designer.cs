@@ -73,7 +73,7 @@ namespace InvScanApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.199.91.38")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string dbIP {
             get {
                 return ((string)(this["dbIP"]));

@@ -47,8 +47,6 @@ namespace InvScanApp
             //Make connection to DB
             DBConn = new SqlConnection("Server=" + Settings.Default.dbServerName.ToString());
 
-            //SqlCommand DBCmd = new SqlCommand();
-
             try
             {
                 //NOTE: if the client fails to connect, nothing beyond this line of this method will execute!!!
@@ -149,6 +147,28 @@ namespace InvScanApp
             {
                 MessageBox.Show(e.Message, "Error executing SQL statement");
             }
+        }
+
+        public static SqlDataReader ExecuteSqlReader(string strSQL)
+        {
+            if (DBConn.State == ConnectionState.Closed)
+            {
+                DBConn.Open();
+            }
+
+            SqlCommand DBCmd = new SqlCommand(strSQL, DBConn);
+            SqlDataReader dataReader = null;
+
+            try
+            {
+                dataReader = DBCmd.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error reading SQL");
+            }
+
+            return dataReader;
         }
 
         public static DataTable PopulateDGV()

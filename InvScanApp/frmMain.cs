@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,16 +37,20 @@ namespace InvScanApp
                 clsDatabase.ConnectToDB();
             }
 
-            //Populate DGV
-            //string strSelect = "SELECT * FROM tblInventory";
-            //var c = new SqlConnection(); // Your Connection String here
-            //var dataAdapter = new SqlDataAdapter(select, c);
+            //using (SqlCommand cmd = new SqlCommand("USE TBInvDB; SELECT * FROM dbo.tblCommodity;", ))
+            //{
+            //    cmd.CommandType = CommandType.Text;
+            //    con.Open();
+            //    DataTable dt = new DataTable();
+            //    dt.Load(cmd.ExecuteReader());
+            //    dataGridView1.DataSource = dt;
+            //    con.Close();
+            //}
 
-            //var commandBuilder = new SqlCommandBuilder(dataAdapter);
-            //var ds = new DataSet();
-            //dataAdapter.Fill(ds);
-            //dataGridView1.ReadOnly = true;
-            //dataGridView1.DataSource = ds.Tables[0];
+
+            //Populate DGV
+            SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCommodity;");
+            dgvMain.DataSource = dataReader;
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
