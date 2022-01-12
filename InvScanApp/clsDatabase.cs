@@ -26,7 +26,7 @@ namespace InvScanApp
 
         public static SqlConnection ConnectToDB()
         {
-            SqlConnection DBConn = new SqlConnection();
+            DBConn = new SqlConnection();
 
             try
             {
