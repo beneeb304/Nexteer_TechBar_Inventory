@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InvScanApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +25,7 @@ namespace InvScanApp
         private void frmMain_Load(object sender, EventArgs e)
         {
             //If the database doesn't exist, create it
-            if(!File.Exists(Properties.Settings.Default.dbDBPath.ToString()))
+            if(!File.Exists(Settings.Default.dbDBPath.ToString()))
             {
                 //Create database, build tables, and insert initial data
                 clsDatabase.InitializeDB();

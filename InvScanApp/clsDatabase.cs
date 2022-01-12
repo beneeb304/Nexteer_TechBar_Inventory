@@ -18,10 +18,10 @@ namespace InvScanApp
         private static string GetConnectionString()
         {
             //Build connection string
-            return "server=" + Properties.Settings.Default.dbServerName + 
-                ";database=" + Properties.Settings.Default.dbServerName + 
-                "; UID=" + Properties.Settings.Default.dbUser + 
-                ";password=" + Properties.Settings.Default.dbPassword;
+            return "server=" + Settings.Default.dbServerName + 
+                ";database=" + Settings.Default.dbServerName + 
+                "; UID=" + Settings.Default.dbUser + 
+                ";password=" + Settings.Default.dbPassword;
         }
 
         public static SqlConnection ConnectToDB()
@@ -45,7 +45,7 @@ namespace InvScanApp
         public static void InitializeDB()
         {
             //Make connection to DB
-            SqlConnection DBConn = new SqlConnection("Server=" + Properties.Settings.Default.dbServerName.ToString());
+            SqlConnection DBConn = new SqlConnection("Server=" + Settings.Default.dbServerName.ToString());
 
             SqlCommand DBCmd = new SqlCommand();
 

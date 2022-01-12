@@ -32,7 +32,6 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.txtSQLString = new System.Windows.Forms.TextBox();
             this.btnEnter = new System.Windows.Forms.Button();
-            this.btnSQLConnect = new System.Windows.Forms.Button();
             this.cmbString = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -63,16 +62,6 @@ namespace InvScanApp
             this.btnEnter.UseVisualStyleBackColor = true;
             this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
-            // btnSQLConnect
-            // 
-            this.btnSQLConnect.Location = new System.Drawing.Point(192, 237);
-            this.btnSQLConnect.Name = "btnSQLConnect";
-            this.btnSQLConnect.Size = new System.Drawing.Size(138, 61);
-            this.btnSQLConnect.TabIndex = 7;
-            this.btnSQLConnect.Text = "Connect to SQL Server";
-            this.btnSQLConnect.UseVisualStyleBackColor = true;
-            this.btnSQLConnect.Click += new System.EventHandler(this.btnSQLConnect_Click);
-            // 
             // cmbString
             // 
             this.cmbString.FormattingEnabled = true;
@@ -93,7 +82,6 @@ namespace InvScanApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.cmbString);
-            this.Controls.Add(this.btnSQLConnect);
             this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.txtSQLString);
             this.Controls.Add(this.btnBack);
@@ -108,7 +96,6 @@ namespace InvScanApp
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtSQLString;
         private System.Windows.Forms.Button btnEnter;
-        private System.Windows.Forms.Button btnSQLConnect;
         private System.Windows.Forms.ComboBox cmbString;
     }
 }
