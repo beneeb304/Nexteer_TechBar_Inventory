@@ -34,6 +34,7 @@ namespace InvScanApp
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
             this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.btnHandOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,12 +50,10 @@ namespace InvScanApp
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(668, 126);
+            this.btnRemove.Location = new System.Drawing.Point(0, 0);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(120, 100);
-            this.btnRemove.TabIndex = 1;
-            this.btnRemove.Text = "Remove from Inventory";
-            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 5;
             // 
             // btnSettings
             // 
@@ -62,7 +61,7 @@ namespace InvScanApp
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(120, 100);
             this.btnSettings.TabIndex = 2;
-            this.btnSettings.Text = "Settings";
+            this.btnSettings.Text = "Administration";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
@@ -79,16 +78,27 @@ namespace InvScanApp
             // dgvMain
             // 
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMain.Location = new System.Drawing.Point(12, 12);
+            this.dgvMain.Location = new System.Drawing.Point(12, 20);
             this.dgvMain.Name = "dgvMain";
-            this.dgvMain.Size = new System.Drawing.Size(650, 426);
+            this.dgvMain.Size = new System.Drawing.Size(650, 418);
             this.dgvMain.TabIndex = 4;
+            // 
+            // btnHandOut
+            // 
+            this.btnHandOut.Location = new System.Drawing.Point(668, 126);
+            this.btnHandOut.Name = "btnHandOut";
+            this.btnHandOut.Size = new System.Drawing.Size(120, 100);
+            this.btnHandOut.TabIndex = 6;
+            this.btnHandOut.Text = "Hand Out Item(s)";
+            this.btnHandOut.UseVisualStyleBackColor = true;
+            this.btnHandOut.Click += new System.EventHandler(this.btnHandOut_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnHandOut);
             this.Controls.Add(this.dgvMain);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnSettings);
@@ -109,6 +119,7 @@ namespace InvScanApp
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.DataGridView dgvMain;
+        private System.Windows.Forms.Button btnHandOut;
     }
 }
 

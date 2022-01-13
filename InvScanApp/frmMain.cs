@@ -25,32 +25,29 @@ namespace InvScanApp
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //If the database doesn't exist, create it
-            if(!File.Exists(Settings.Default.dbDBPath.ToString()))
+            try
             {
-                //Create database, build tables, and insert initial data
-                clsDatabase.InitializeDB();
+                //If the database doesn't exist, create it
+                if (!File.Exists(Settings.Default.dbDBPath.ToString()))
+                {
+                    //Create database, build tables, and insert initial data
+                    clsDatabase.InitializeDB();
+                }
+                else
+                {
+                    //Connect to the DB
+                    clsDatabase.ConnectToDB();
+                }
+
+                //Populate DGV
+                DataTable dt = new DataTable();
+                dt.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCommodity;"));
+                dgvMain.DataSource = dt;
             }
-            else
+            catch (Exception ex)
             {
-                //Connect to the DB
-                clsDatabase.ConnectToDB();
+                MessageBox.Show(ex.Message, "Error with Database connections");
             }
-
-            //using (SqlCommand cmd = new SqlCommand("USE TBInvDB; SELECT * FROM dbo.tblCommodity;", ))
-            //{
-            //    cmd.CommandType = CommandType.Text;
-            //    con.Open();
-            //    DataTable dt = new DataTable();
-            //    dt.Load(cmd.ExecuteReader());
-            //    dataGridView1.DataSource = dt;
-            //    con.Close();
-            //}
-
-
-            //Populate DGV
-            SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCommodity;");
-            dgvMain.DataSource = dataReader;
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -74,6 +71,17 @@ namespace InvScanApp
         {
             //Show settings form
             Form f = new frmAdd();
+            f.Show();
+            f.Location = Location;
+
+            //Hide main form
+            Hide();
+        }
+
+        private void btnHandOut_Click(object sender, EventArgs e)
+        {
+            //Show settings form
+            Form f = new frmHandOut();
             f.Show();
             f.Location = Location;
 
