@@ -53,10 +53,6 @@ namespace InvScanApp
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            frmMain.strConnection = "SERVER=" + Settings.Default.dbServerName 
-                + ";DATABASE=" + Settings.Default.dbDBName
-                + ";Integrated Security=SSPI;AttachDbFileName=" + Settings.Default.dbDBPath;
-
             //Show main form
             Form f = new frmMain();
             f.Show();

@@ -98,7 +98,7 @@ namespace InvScanApp
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblStaff')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblStaff (");
-                sbSQL.Append(" Staff_Barcode VARCHAR(100) PRIMARY KEY,");   //Will be used as barcode
+                sbSQL.Append(" Staff_Barcode VARCHAR(100) PRIMARY KEY,");   //FIND ME  SHOULD BE INT?
                 sbSQL.Append(" Staff_Name VARCHAR(100) NOT NULL UNIQUE);");
                 sbSQL.Append(" END;");
 
@@ -107,7 +107,7 @@ namespace InvScanApp
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblLog')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblLog (");
-                sbSQL.Append(" Log_TUID INT IDENTITY(1,1) PRIMARY KEY,");   //Will be used as barcode
+                sbSQL.Append(" Log_TUID INT IDENTITY(1,1) PRIMARY KEY,");
                 sbSQL.Append(" Staff_Name VARCHAR(100) FOREIGN KEY REFERENCES tblStaff(Staff_Name),");
                 sbSQL.Append(" User_Name VARCHAR(100) NOT NULL,");
                 sbSQL.Append(" Commodity_Name VARCHAR(100) FOREIGN KEY REFERENCES tblCommodity(Commodity_Name),");
