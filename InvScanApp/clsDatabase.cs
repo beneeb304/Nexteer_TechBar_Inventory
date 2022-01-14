@@ -117,7 +117,6 @@ namespace InvScanApp
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblLog (");
                 sbSQL.Append(" Log_TUID INT IDENTITY(1,1) PRIMARY KEY,");
-                sbSQL.Append(" Staff_ID INT FOREIGN KEY REFERENCES tblStaff(Staff_ID),");
                 sbSQL.Append(" Staff_Name VARCHAR(100),");
                 sbSQL.Append(" User_Name VARCHAR(100) NOT NULL,");
                 sbSQL.Append(" Commodity_Category VARCHAR(100),");

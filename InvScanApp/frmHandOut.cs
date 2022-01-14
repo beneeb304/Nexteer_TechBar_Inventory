@@ -13,13 +13,13 @@ namespace InvScanApp
 {
     public partial class frmHandOut : Form
     {
-        //Current available quantity of selected item in stock
-        private int intAvailableQty;
-
         public frmHandOut()
         {
             InitializeComponent();
         }
+
+        //FIND ME - make this page more of a shopping experience. Add a "add to cart" button and a "checkout" button that 
+        //  will perform the transactions at the end.
 
         private void frmHandOut_Load(object sender, EventArgs e)
         {
@@ -85,18 +85,44 @@ namespace InvScanApp
             else
             {
                 //Make sure there is enough quantity available to subtract
+                int intQty = 0;
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Name = '" + cmbItemName.Text + "';");
 
+                while (dataReader.Read())
+                {
+                    intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
+                }
 
-                //If so, add transaction to Log table
-                clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES ();");
-                //staff name
-                //user name
-                //commodity category
-                //commodity name
-                //qty removed
+                dataReader.Close();
 
-                //Remove items from Commodity table
+                if(nudQty.Value > intQty)
+                {
+                    MessageBox.Show("There are not enough items in inventory for this transaction!", "Error");
+                }
+                else
+                {
+                    //Add transaction to Log table
+                    clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
+                        "'" + cmbStaffName.Text + "'" +
+                        "'" + txtRecipientName.Text + "'" +
+                        "'" + cmbItemCategory.Text + "'" +
+                        "'" + cmbItemName.Text + "'" +
+                        nudQty.Value + ");");
 
+                    Console.WriteLine("INSERT INTO dbo.tblLog VALUES(" +
+                        "'" + cmbStaffName.Text + "'" +
+                        "'" + txtRecipientName.Text + "'" +
+                        "'" + cmbItemCategory.Text + "'" +
+                        "'" + cmbItemName.Text + "'" +
+                        nudQty.Value + ");");
+
+                    //Remove items from Commodity table
+                    clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
+                        (intQty - nudQty.Value) +
+                        " WHERE Commodity_Category = '" + cmbItemCategory.Text + "' AND Commodity_Name = '" + cmbItemName.Text + "'");
+
+                    MessageBox.Show("Successfully Handed-Out!");
+                }
             }
         }
 

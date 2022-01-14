@@ -51,9 +51,12 @@ namespace InvScanApp
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.nudQty = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             this.gpbStaff.SuspendLayout();
             this.gpbRecipient.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQty)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -209,6 +212,8 @@ namespace InvScanApp
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nudQty);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.cmbItemCategory);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.cmbItemName);
@@ -219,10 +224,10 @@ namespace InvScanApp
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(17, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(634, 160);
+            this.groupBox1.Size = new System.Drawing.Size(771, 160);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Staff Info";
+            this.groupBox1.Text = "Item Info";
             // 
             // cmbItemCategory
             // 
@@ -297,6 +302,33 @@ namespace InvScanApp
             this.label9.TabIndex = 31;
             this.label9.Text = "Item ID:";
             // 
+            // nudQty
+            // 
+            this.nudQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudQty.Location = new System.Drawing.Point(651, 83);
+            this.nudQty.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudQty.Name = "nudQty";
+            this.nudQty.Size = new System.Drawing.Size(114, 44);
+            this.nudQty.TabIndex = 31;
+            this.nudQty.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(646, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(114, 55);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Item Quantity";
+            // 
             // frmHandOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -316,6 +348,7 @@ namespace InvScanApp
             this.gpbRecipient.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -343,5 +376,7 @@ namespace InvScanApp
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cmbItemCategory;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nudQty;
+        private System.Windows.Forms.Label label11;
     }
 }
