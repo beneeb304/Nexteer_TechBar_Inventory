@@ -71,7 +71,7 @@ namespace InvScanApp
                 //Clear string builder for next build
                 sbSQL.Clear();
 
-                //Create Category Table if it doesn't exist
+                //Create Category Table
                 sbSQL.Append("USE TBInvDB; ");
                 sbSQL.Append("IF NOT EXISTS (");
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblCategory')");
@@ -80,38 +80,48 @@ namespace InvScanApp
                 sbSQL.Append(" Category_Name VARCHAR(100) PRIMARY KEY);");
                 sbSQL.Append(" END;");
 
-                //Create Commodity Table if it doesn't exist
+                //Create Commodity Table
                 sbSQL.Append("IF NOT EXISTS (");
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblCommodity')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblCommodity (");
                 sbSQL.Append(" Commodity_Barcode VARCHAR(100) PRIMARY KEY,");
-                sbSQL.Append(" Commodity_Name VARCHAR(100) NOT NULL UNIQUE,");
-                sbSQL.Append(" Commodity_Category VARCHAR(100) NOT NULL UNIQUE FOREIGN KEY REFERENCES tblCategory(Category_Name),");
+                sbSQL.Append(" Commodity_Name VARCHAR(100) NOT NULL,");
+                sbSQL.Append(" Commodity_Category VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES tblCategory(Category_Name),");
                 sbSQL.Append(" Vendor_Name VARCHAR(100),");
                 sbSQL.Append(" Vendor_URL VARCHAR(100),");
                 sbSQL.Append(" Commodity_Qty INT CHECK (Commodity_Qty >= 0));");
                 sbSQL.Append(" END;");
 
-                //Create Staff Table if it doesn't exist
+                //Create Vendor Table
+                sbSQL.Append("USE TBInvDB; ");
+                sbSQL.Append("IF NOT EXISTS (");
+                sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblVendor')");
+                sbSQL.Append(" BEGIN");
+                sbSQL.Append(" CREATE TABLE dbo.tblVendor (");
+                sbSQL.Append(" Vendor_Name VARCHAR(100) PRIMARY KEY);");
+                sbSQL.Append(" END;");
+
+                //Create Staff Table
                 sbSQL.Append("IF NOT EXISTS (");
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblStaff')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblStaff (");
                 sbSQL.Append(" Staff_ID INT PRIMARY KEY,");
-                sbSQL.Append(" Staff_Name VARCHAR(100) NOT NULL UNIQUE);");
+                sbSQL.Append(" Staff_Name VARCHAR(100) NOT NULL);");
                 sbSQL.Append(" END;");
 
-                //Create Log Table if it doesn't exist
+                //Create Log Table
                 sbSQL.Append("IF NOT EXISTS (");
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblLog')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblLog (");
                 sbSQL.Append(" Log_TUID INT IDENTITY(1,1) PRIMARY KEY,");
-                sbSQL.Append(" Staff_Name VARCHAR(100) FOREIGN KEY REFERENCES tblStaff(Staff_Name),");
+                sbSQL.Append(" Staff_ID INT FOREIGN KEY REFERENCES tblStaff(Staff_ID),");
+                sbSQL.Append(" Staff_Name VARCHAR(100),");
                 sbSQL.Append(" User_Name VARCHAR(100) NOT NULL,");
-                sbSQL.Append(" Commodity_Category VARCHAR(100) FOREIGN KEY REFERENCES tblCommodity(Commodity_Category),");
-                sbSQL.Append(" Commodity_Name VARCHAR(100) FOREIGN KEY REFERENCES tblCommodity(Commodity_Name),");
+                sbSQL.Append(" Commodity_Category VARCHAR(100),");
+                sbSQL.Append(" Commodity_Name VARCHAR(100),");
                 sbSQL.Append(" Qty_Action INT);");
                 sbSQL.Append(" END;");
 
