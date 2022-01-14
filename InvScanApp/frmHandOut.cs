@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,10 @@ namespace InvScanApp
 
         private void cmbItemCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Make datatables
+            //Clear txt
+            txtItemID.Text = "";
+            
+            //Make datatable
             DataTable dtName = new DataTable();
 
             //Get list of item names for selected category and populate combobox
@@ -66,14 +70,14 @@ namespace InvScanApp
             if(cmbStaffName.Text == "" && txtStaffID.Text == "")
             {
                 //Something isn't filled out, so inform user
-                strError += "Staff Name OR Staff ID (barcode)\n";
+                strError += "Staff Name OR Staff ID (QR code)\n";
             }
 
             //Make sure Recipient info is filled out
             if(txtRecipientName.Text == "" && txtRecipientID.Text == "")
             {
                 //Something isn't filled out, so inform user
-                strError += "Recipient Name OR Recipient ID (barcode)\n";
+                strError += "Recipient Name OR Recipient ID (QR code)\n";
             }
 
             //Check if we had any errors
@@ -84,6 +88,12 @@ namespace InvScanApp
             else
             {
                 //Add transaction to Log table
+                clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES ();");
+                //staff name
+                //user name
+                //commodity category
+                //commodity name
+                //qty removed
 
                 //Remove items from Commodity table
 
@@ -99,6 +109,45 @@ namespace InvScanApp
 
             //Hide hand-out form
             Close();
+        }
+
+        private void txtStaffID_TextChanged(object sender, EventArgs e)
+        {
+            if(txtStaffID.Text.Length == 5)
+            {
+                try
+                {
+                    //dtName.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + txtStaffID));
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_Barcode = '" + txtStaffID.Text + "';");
+
+                    while (dataReader.Read())
+                    {
+                        cmbStaffName.SelectedValue = dataReader["Staff_Name"];
+                    }
+
+                    dataReader.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Error retreiving Staff ID");
+                }
+            }            
+        }
+
+        private void cmbItemName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Clear txt
+            txtItemID.Text = "";
+
+
+        }
+
+        private void cmbStaffName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Clear txt
+            txtStaffID.Text = "";
+
+
         }
     }
 }

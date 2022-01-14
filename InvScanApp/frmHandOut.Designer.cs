@@ -44,13 +44,13 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbItemCategory = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.cmbItemName = new System.Windows.Forms.ComboBox();
             this.txtItemID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmbItemCategory = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.gpbStaff.SuspendLayout();
             this.gpbRecipient.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -74,6 +74,7 @@ namespace InvScanApp
             this.txtStaffID.ReadOnly = true;
             this.txtStaffID.Size = new System.Drawing.Size(443, 31);
             this.txtStaffID.TabIndex = 25;
+            this.txtStaffID.TextChanged += new System.EventHandler(this.txtStaffID_TextChanged);
             // 
             // label7
             // 
@@ -119,6 +120,7 @@ namespace InvScanApp
             this.cmbStaffName.Name = "cmbStaffName";
             this.cmbStaffName.Size = new System.Drawing.Size(443, 33);
             this.cmbStaffName.TabIndex = 29;
+            this.cmbStaffName.SelectedIndexChanged += new System.EventHandler(this.cmbStaffName_SelectedIndexChanged);
             // 
             // gpbRecipient
             // 
@@ -219,6 +221,27 @@ namespace InvScanApp
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Staff Info";
             // 
+            // cmbItemCategory
+            // 
+            this.cmbItemCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbItemCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbItemCategory.FormattingEnabled = true;
+            this.cmbItemCategory.Location = new System.Drawing.Point(182, 21);
+            this.cmbItemCategory.Name = "cmbItemCategory";
+            this.cmbItemCategory.Size = new System.Drawing.Size(443, 33);
+            this.cmbItemCategory.TabIndex = 36;
+            this.cmbItemCategory.SelectedIndexChanged += new System.EventHandler(this.cmbItemCategory_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(6, 24);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(151, 25);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Item Category:";
+            // 
             // cmbItemName
             // 
             this.cmbItemName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -228,6 +251,7 @@ namespace InvScanApp
             this.cmbItemName.Name = "cmbItemName";
             this.cmbItemName.Size = new System.Drawing.Size(443, 33);
             this.cmbItemName.TabIndex = 34;
+            this.cmbItemName.SelectedIndexChanged += new System.EventHandler(this.cmbItemName_SelectedIndexChanged);
             // 
             // txtItemID
             // 
@@ -267,27 +291,6 @@ namespace InvScanApp
             this.label9.Size = new System.Drawing.Size(84, 25);
             this.label9.TabIndex = 31;
             this.label9.Text = "Item ID:";
-            // 
-            // cmbItemCategory
-            // 
-            this.cmbItemCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbItemCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbItemCategory.FormattingEnabled = true;
-            this.cmbItemCategory.Location = new System.Drawing.Point(182, 21);
-            this.cmbItemCategory.Name = "cmbItemCategory";
-            this.cmbItemCategory.Size = new System.Drawing.Size(443, 33);
-            this.cmbItemCategory.TabIndex = 36;
-            this.cmbItemCategory.SelectedIndexChanged += new System.EventHandler(this.cmbItemCategory_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 24);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(151, 25);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Item Category:";
             // 
             // frmHandOut
             // 
