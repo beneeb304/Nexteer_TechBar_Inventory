@@ -74,6 +74,7 @@ namespace InvScanApp
             this.txtStaffID.ReadOnly = true;
             this.txtStaffID.Size = new System.Drawing.Size(443, 31);
             this.txtStaffID.TabIndex = 25;
+            this.txtStaffID.TabStop = false;
             this.txtStaffID.TextChanged += new System.EventHandler(this.txtStaffID_TextChanged);
             // 
             // label7
@@ -145,6 +146,7 @@ namespace InvScanApp
             this.txtRecipientID.ReadOnly = true;
             this.txtRecipientID.Size = new System.Drawing.Size(443, 31);
             this.txtRecipientID.TabIndex = 25;
+            this.txtRecipientID.TabStop = false;
             // 
             // label3
             // 
@@ -173,6 +175,7 @@ namespace InvScanApp
             this.txtRecipientName.Name = "txtRecipientName";
             this.txtRecipientName.Size = new System.Drawing.Size(443, 31);
             this.txtRecipientName.TabIndex = 23;
+            this.txtRecipientName.TextChanged += new System.EventHandler(this.txtRecipientName_TextChanged);
             // 
             // label5
             // 
@@ -261,6 +264,8 @@ namespace InvScanApp
             this.txtItemID.ReadOnly = true;
             this.txtItemID.Size = new System.Drawing.Size(443, 31);
             this.txtItemID.TabIndex = 32;
+            this.txtItemID.TabStop = false;
+            this.txtItemID.TextChanged += new System.EventHandler(this.txtItemID_TextChanged);
             // 
             // label1
             // 

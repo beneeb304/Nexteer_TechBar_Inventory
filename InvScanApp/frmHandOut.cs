@@ -42,9 +42,6 @@ namespace InvScanApp
 
         private void cmbItemCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Clear txt
-            txtItemID.Text = "";
-            
             //Make datatable
             DataTable dtName = new DataTable();
 
@@ -87,7 +84,10 @@ namespace InvScanApp
             }
             else
             {
-                //Add transaction to Log table
+                //Make sure there is enough quantity available to subtract
+
+
+                //If so, add transaction to Log table
                 clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES ();");
                 //staff name
                 //user name
@@ -98,6 +98,24 @@ namespace InvScanApp
                 //Remove items from Commodity table
 
             }
+        }
+
+        private void cmbStaffName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Clear textbox
+            txtStaffID.Text = "";
+        }
+
+        private void cmbItemName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Clear textbox
+            txtItemID.Text = "";
+        }
+
+        private void txtRecipientName_TextChanged(object sender, EventArgs e)
+        {
+            //Clear textbox
+            txtRecipientID.Text = "";
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -111,9 +129,42 @@ namespace InvScanApp
             Close();
         }
 
+        private void txtItemID_TextChanged(object sender, EventArgs e)
+        {
+            //Set name combobox back to blank
+            cmbItemCategory.SelectedIndex = -1;
+            cmbItemName.SelectedIndex = -1;
+
+            try
+            {
+                string strCat = "", strName = "";
+
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Category, Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + txtItemID.Text + "'");
+
+                while (dataReader.Read())
+                {
+                    strCat = dataReader["Commodity_Category"].ToString();
+                    strName = dataReader["Commodity_Name"].ToString();
+                }
+
+                dataReader.Close();
+
+                cmbItemCategory.SelectedValue = strCat;
+                cmbItemName.SelectedValue = strName;
+            }
+            catch
+            {
+                MessageBox.Show("Error retreiving Item ID");
+            }
+        }
+
         private void txtStaffID_TextChanged(object sender, EventArgs e)
         {
-            if(txtStaffID.Text.Length == 5)
+            //Set name combobox back to blank
+            cmbStaffName.SelectedIndex = -1;
+
+            //Only continue if the input is all digits
+            if (txtStaffID.Text.Length > 0 && txtStaffID.Text.All(Char.IsDigit))
             {
                 try
                 {
@@ -130,23 +181,7 @@ namespace InvScanApp
                 {
                     MessageBox.Show("Error retreiving Staff ID");
                 }
-            }            
-        }
-
-        private void cmbItemName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Clear txt
-            txtItemID.Text = "";
-
-
-        }
-
-        private void cmbStaffName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Clear txt
-            txtStaffID.Text = "";
-
-
+            }
         }
     }
 }
