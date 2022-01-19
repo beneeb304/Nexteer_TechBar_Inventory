@@ -138,7 +138,7 @@ namespace InvScanApp
             }
         }
 
-        public static void ExecuteSQLNonQ(string strSQL)
+        public static bool ExecuteSQLNonQ(string strSQL)
         {
             if(DBConn.State == ConnectionState.Closed)
             {
@@ -151,10 +151,12 @@ namespace InvScanApp
             try
             {
                 DBCmd.ExecuteNonQuery();
+                return true;
             } 
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error executing SQL statement");
+                return false;
             }
         }
 
