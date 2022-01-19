@@ -50,8 +50,8 @@ namespace InvScanApp
                         {
                             //Get current quantity in inventory
                             int intQty = 0;
-                            SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Category = '" + 
-                                cmb0Category.Text + "' AND Commodity_Name = '" + cmb0Commodities.Text + "';");
+                            SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Category = '"
+                                + cmb0Category.Text + "' AND Commodity_Name = '" + cmb0Commodities.Text + "';");
 
                             while (dataReader.Read())
                             {
@@ -116,8 +116,39 @@ namespace InvScanApp
                     }
                     break;
                 case 2:
+                    //Update inventory (with or without quantity)
+                    string strCmd;
 
+                    if (chk2Qty.Checked)
+                    {
+                        strCmd = "UPDATE dbo.tblCommodity SET " +
+                        "Commodity_Barcode = '" + txt2Barcode.Text + "', " +
+                        "Commodity_Name = '" + txt2NewCommodity.Text + "', " +
+                        "Commodity_Category = '" + cmb2NewCategory.Text + "', " +
+                        "Vendor_Name = '" + cmb2NewVendor.Text + "', " +
+                        "Vendor_URL = '" + txt2VendorURL.Text + "', " +
+                        "Commodity_Qty = " + nud2Qty.Value +
+                        " WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';";
+                    }
+                    else
+                    {
+                        strCmd = "UPDATE dbo.tblCommodity SET " +
+                        "Commodity_Barcode = '" + txt2Barcode.Text + "', " +
+                        "Commodity_Name = '" + txt2NewCommodity.Text + "', " +
+                        "Commodity_Category = '" + cmb2NewCategory.Text + "', " +
+                        "Vendor_Name = '" + cmb2NewVendor.Text + "', " +
+                        "Vendor_URL = '" + txt2VendorURL.Text + "' " +
+                        " WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';";
+                    }
 
+                    if (clsDatabase.ExecuteSQLNonQ(strCmd))
+                    {
+                        lblResult.Text = "Updated inventory!";
+                    }
+                    else
+                    {
+                        lblResult.Text = "Failed to update the inventory!";
+                    }
 
                     break;
                 case 3:
@@ -207,26 +238,12 @@ namespace InvScanApp
                 case 2:
                     //Make datatable
                     DataTable dt2OldCategory = new DataTable();
-                    DataTable dt2NewCategory = new DataTable();
-                    DataTable dt2Vendor = new DataTable();
 
                     //Get list of commodities
                     dt2OldCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
                     cmb2Category.DataSource = dt2OldCategory;
                     cmb2Category.ValueMember = "Category_Name";
                     cmb2Category.SelectedIndex = -1;
-
-                    //Get list of commodities
-                    dt2NewCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
-                    cmb2NewCategory.DataSource = dt2NewCategory;
-                    cmb2NewCategory.ValueMember = "Category_Name";
-                    cmb2NewCategory.SelectedIndex = -1;
-
-                    //Get list of vendors
-                    dt2Vendor.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_Name FROM dbo.tblVendor;"));
-                    cmb2Vendor.DataSource = dt2Vendor;
-                    cmb2Vendor.ValueMember = "Vendor_Name";
-                    cmb2Vendor.SelectedIndex = -1;
                     break;
                 case 3:
                     break;
@@ -239,7 +256,8 @@ namespace InvScanApp
             DataTable dtCommodity = new DataTable();
 
             //Get list of commodities
-            dtCommodity.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '" + cmb0Category.Text + "';"));
+            dtCommodity.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '" 
+                + cmb0Category.Text + "';"));
             cmb0Commodities.DataSource = dtCommodity;
             cmb0Commodities.ValueMember = "Commodity_Name";
             cmb0Commodities.SelectedIndex = -1;
@@ -247,11 +265,23 @@ namespace InvScanApp
 
         private void cmb2Category_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //First, clear any data from beneath
+            cmb2NewCategory.DataSource = null;
+            cmb2NewCategory.Items.Clear();
+            cmb2NewVendor.DataSource = null;
+            cmb2NewVendor.Items.Clear();
+            txt2Barcode.Text = "";
+            txt2NewCommodity.Text = "";
+            txt2VendorURL.Text = "";
+            nud2Qty.Value = 1;
+            chk2Qty.Checked = false;
+
             //Make datatable
             DataTable dtCommodity = new DataTable();
 
             //Get list of commodities
-            dtCommodity.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '" + cmb2Category.Text + "';"));
+            dtCommodity.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '"
+                + cmb2Category.Text + "';"));
             cmb2Commodities.DataSource = dtCommodity;
             cmb2Commodities.ValueMember = "Commodity_Name";
             cmb2Commodities.SelectedIndex = -1;
@@ -271,25 +301,62 @@ namespace InvScanApp
             }
         }
 
-        //private void cmb2Commodities_SelectedIndexChanged(object sender, EventArgs e)
-        //{
+        private void btn2Lookup_Click(object sender, EventArgs e)
+        {
+            //Make sure all fields are filled out
+            if (cmb2Category.Text.Length > 0 && cmb2Commodities.Text.Length > 0)
+            {
+                //Comboboxes
+                DataTable dt2NewCategory = new DataTable();
+                DataTable dt2Vendor = new DataTable();
 
-        //    if(cmb2Category.Text.Length > 0 && cmb2Commodities.Text.Length > 0)
-        //    {
-        //        //Make datatable
-        //        DataTable dtEdit = new DataTable();
+                //Get list of commodities
+                dt2NewCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
+                cmb2NewCategory.DataSource = dt2NewCategory;
+                cmb2NewCategory.ValueMember = "Category_Name";
 
-        //        //Get list of data for category and commodity
-        //        dtEdit.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCommodity WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';"));
+                //Get list of vendors
+                dt2Vendor.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_Name FROM dbo.tblVendor;"));
+                cmb2NewVendor.DataSource = dt2Vendor;
+                cmb2NewVendor.ValueMember = "Vendor_Name";
 
-        //        //Category
-        //        cmb2NewCategory.DataSource = dtEdit;
-        //        cmb2NewCategory.ValueMember = "Commodity_Category";
+                //Buttons
+                string strBarcode = "", strURL = "";
 
-        //        //Vendor
-        //        cmb2Vendor.DataSource = dtEdit;
-        //        cmb2Vendor.ValueMember = "Commodity_Vendor";
-        //    }
-        //}
+                txt2NewCommodity.Text = cmb2Commodities.Text;
+
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_URL, Commodity_Barcode FROM dbo.tblCommodity WHERE Commodity_Name = '"
+                    + cmb2Commodities.Text + "' AND Commodity_Category = '" + cmb2Category.Text + "';");
+
+                while (dataReader.Read())
+                {
+                    strBarcode = dataReader["Commodity_Barcode"].ToString();
+                    strURL = dataReader["Vendor_URL"].ToString();
+                }
+
+                dataReader.Close();
+
+                txt2Barcode.Text = strBarcode;
+                txt2VendorURL.Text = strURL;
+            }
+            else
+            {
+                MessageBox.Show("Please fill out all the fields");
+            }
+        }
+
+        private void cmb2Commodities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //First, clear any data from beneath
+            cmb2NewCategory.DataSource = null;
+            cmb2NewCategory.Items.Clear();
+            cmb2NewVendor.DataSource = null;
+            cmb2NewVendor.Items.Clear();
+            txt2Barcode.Text = "";
+            txt2NewCommodity.Text = "";
+            txt2VendorURL.Text = "";
+            nud2Qty.Value = 1;
+            chk2Qty.Checked = false;
+        }
     }
 }

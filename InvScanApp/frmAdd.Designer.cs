@@ -51,6 +51,7 @@ namespace InvScanApp
             this.nud1Qty = new System.Windows.Forms.NumericUpDown();
             this.txt1Commodity = new System.Windows.Forms.TextBox();
             this.tbpEditCommodity = new System.Windows.Forms.TabPage();
+            this.cmb2NewCategory = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.txt2NewCommodity = new System.Windows.Forms.TextBox();
@@ -59,8 +60,8 @@ namespace InvScanApp
             this.nud2Qty = new System.Windows.Forms.NumericUpDown();
             this.chk2Qty = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txtVendor2URL = new System.Windows.Forms.TextBox();
-            this.cmb2Vendor = new System.Windows.Forms.ComboBox();
+            this.txt2VendorURL = new System.Windows.Forms.TextBox();
+            this.cmb2NewVendor = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txt2Barcode = new System.Windows.Forms.TextBox();
@@ -77,7 +78,7 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
-            this.cmb2NewCategory = new System.Windows.Forms.ComboBox();
+            this.btn2Lookup = new System.Windows.Forms.Button();
             this.tbcAdd.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud0Qty)).BeginInit();
@@ -333,6 +334,7 @@ namespace InvScanApp
             // 
             // tbpEditCommodity
             // 
+            this.tbpEditCommodity.Controls.Add(this.btn2Lookup);
             this.tbpEditCommodity.Controls.Add(this.cmb2NewCategory);
             this.tbpEditCommodity.Controls.Add(this.label20);
             this.tbpEditCommodity.Controls.Add(this.label19);
@@ -342,8 +344,8 @@ namespace InvScanApp
             this.tbpEditCommodity.Controls.Add(this.nud2Qty);
             this.tbpEditCommodity.Controls.Add(this.chk2Qty);
             this.tbpEditCommodity.Controls.Add(this.label16);
-            this.tbpEditCommodity.Controls.Add(this.txtVendor2URL);
-            this.tbpEditCommodity.Controls.Add(this.cmb2Vendor);
+            this.tbpEditCommodity.Controls.Add(this.txt2VendorURL);
+            this.tbpEditCommodity.Controls.Add(this.cmb2NewVendor);
             this.tbpEditCommodity.Controls.Add(this.label15);
             this.tbpEditCommodity.Controls.Add(this.label14);
             this.tbpEditCommodity.Controls.Add(this.txt2Barcode);
@@ -358,15 +360,24 @@ namespace InvScanApp
             this.tbpEditCommodity.Text = "Edit Commodity";
             this.tbpEditCommodity.UseVisualStyleBackColor = true;
             // 
+            // cmb2NewCategory
+            // 
+            this.cmb2NewCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb2NewCategory.FormattingEnabled = true;
+            this.cmb2NewCategory.Location = new System.Drawing.Point(227, 165);
+            this.cmb2NewCategory.Name = "cmb2NewCategory";
+            this.cmb2NewCategory.Size = new System.Drawing.Size(412, 33);
+            this.cmb2NewCategory.TabIndex = 29;
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(34, 108);
+            this.label20.Location = new System.Drawing.Point(3, 106);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(567, 25);
+            this.label20.Size = new System.Drawing.Size(403, 25);
             this.label20.TabIndex = 7;
-            this.label20.Text = "Change the commodity (listed above) to (edit below):";
+            this.label20.Text = "Change the commodity (listed above)";
             // 
             // label19
             // 
@@ -448,21 +459,21 @@ namespace InvScanApp
             this.label16.TabIndex = 21;
             this.label16.Text = "Vendor URL:";
             // 
-            // txtVendor2URL
+            // txt2VendorURL
             // 
-            this.txtVendor2URL.Location = new System.Drawing.Point(227, 317);
-            this.txtVendor2URL.Name = "txtVendor2URL";
-            this.txtVendor2URL.Size = new System.Drawing.Size(412, 31);
-            this.txtVendor2URL.TabIndex = 20;
+            this.txt2VendorURL.Location = new System.Drawing.Point(227, 317);
+            this.txt2VendorURL.Name = "txt2VendorURL";
+            this.txt2VendorURL.Size = new System.Drawing.Size(412, 31);
+            this.txt2VendorURL.TabIndex = 20;
             // 
-            // cmb2Vendor
+            // cmb2NewVendor
             // 
-            this.cmb2Vendor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb2Vendor.FormattingEnabled = true;
-            this.cmb2Vendor.Location = new System.Drawing.Point(227, 278);
-            this.cmb2Vendor.Name = "cmb2Vendor";
-            this.cmb2Vendor.Size = new System.Drawing.Size(412, 33);
-            this.cmb2Vendor.TabIndex = 19;
+            this.cmb2NewVendor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb2NewVendor.FormattingEnabled = true;
+            this.cmb2NewVendor.Location = new System.Drawing.Point(227, 278);
+            this.cmb2NewVendor.Name = "cmb2NewVendor";
+            this.cmb2NewVendor.Size = new System.Drawing.Size(412, 33);
+            this.cmb2NewVendor.TabIndex = 19;
             // 
             // label15
             // 
@@ -612,14 +623,15 @@ namespace InvScanApp
             this.lblResult.TabIndex = 6;
             this.lblResult.Text = "label";
             // 
-            // cmb2NewCategory
+            // btn2Lookup
             // 
-            this.cmb2NewCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb2NewCategory.FormattingEnabled = true;
-            this.cmb2NewCategory.Location = new System.Drawing.Point(227, 165);
-            this.cmb2NewCategory.Name = "cmb2NewCategory";
-            this.cmb2NewCategory.Size = new System.Drawing.Size(412, 33);
-            this.cmb2NewCategory.TabIndex = 29;
+            this.btn2Lookup.Location = new System.Drawing.Point(412, 92);
+            this.btn2Lookup.Name = "btn2Lookup";
+            this.btn2Lookup.Size = new System.Drawing.Size(190, 53);
+            this.btn2Lookup.TabIndex = 30;
+            this.btn2Lookup.Text = "Lookup Item";
+            this.btn2Lookup.UseVisualStyleBackColor = true;
+            this.btn2Lookup.Click += new System.EventHandler(this.btn2Lookup_Click);
             // 
             // frmAdd
             // 
@@ -692,15 +704,16 @@ namespace InvScanApp
         private System.Windows.Forms.TextBox txt2Barcode;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtVendor2URL;
+        private System.Windows.Forms.TextBox txt2VendorURL;
         private System.Windows.Forms.Label lblNewQty;
         private System.Windows.Forms.NumericUpDown nud2Qty;
         private System.Windows.Forms.CheckBox chk2Qty;
-        private System.Windows.Forms.ComboBox cmb2Vendor;
+        private System.Windows.Forms.ComboBox cmb2NewVendor;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txt2NewCommodity;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cmb2NewCategory;
+        private System.Windows.Forms.Button btn2Lookup;
     }
 }
