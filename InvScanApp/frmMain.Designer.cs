@@ -29,29 +29,30 @@ namespace InvScanApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAddEdit = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.btnHandOut = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnAdd
+            // btnAddEdit
             // 
-            this.btnAdd.Location = new System.Drawing.Point(668, 20);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(120, 100);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Add/Edit Inventory";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddEdit.Location = new System.Drawing.Point(668, 19);
+            this.btnAddEdit.Name = "btnAddEdit";
+            this.btnAddEdit.Size = new System.Drawing.Size(120, 79);
+            this.btnAddEdit.TabIndex = 0;
+            this.btnAddEdit.Text = "Add/Edit Inventory";
+            this.btnAddEdit.UseVisualStyleBackColor = true;
+            this.btnAddEdit.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(668, 232);
+            this.btnSettings.Location = new System.Drawing.Point(668, 274);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(120, 100);
+            this.btnSettings.Size = new System.Drawing.Size(120, 79);
             this.btnSettings.TabIndex = 2;
             this.btnSettings.Text = "Administration";
             this.btnSettings.UseVisualStyleBackColor = true;
@@ -59,9 +60,9 @@ namespace InvScanApp
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(668, 338);
+            this.btnQuit.Location = new System.Drawing.Point(668, 359);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(120, 100);
+            this.btnQuit.Size = new System.Drawing.Size(120, 79);
             this.btnQuit.TabIndex = 3;
             this.btnQuit.Text = "Quit";
             this.btnQuit.UseVisualStyleBackColor = true;
@@ -84,24 +85,35 @@ namespace InvScanApp
             // 
             // btnHandOut
             // 
-            this.btnHandOut.Location = new System.Drawing.Point(668, 126);
+            this.btnHandOut.Location = new System.Drawing.Point(668, 189);
             this.btnHandOut.Name = "btnHandOut";
-            this.btnHandOut.Size = new System.Drawing.Size(120, 100);
+            this.btnHandOut.Size = new System.Drawing.Size(120, 79);
             this.btnHandOut.TabIndex = 6;
             this.btnHandOut.Text = "Hand Out Item(s)";
             this.btnHandOut.UseVisualStyleBackColor = true;
             this.btnHandOut.Click += new System.EventHandler(this.btnHandOut_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(668, 104);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(120, 79);
+            this.btnRemove.TabIndex = 7;
+            this.btnRemove.Text = "Remove Inventory";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnHandOut);
             this.Controls.Add(this.dgvMain);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnAddEdit);
             this.Name = "frmMain";
             this.Text = "Main Page";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -112,11 +124,12 @@ namespace InvScanApp
 
         #endregion
 
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnAddEdit;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.Button btnHandOut;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
 

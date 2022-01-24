@@ -1,7 +1,7 @@
 ﻿
 namespace InvScanApp
 {
-    partial class frmAdd
+    partial class frmAddEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -76,14 +76,14 @@ namespace InvScanApp
             this.tbpCreateVendor = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.txt4Vendor = new System.Windows.Forms.TextBox();
+            this.tbpCreateStaff = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txt5StaffID = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txt5Staff = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
-            this.tbpCreateStaff = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txt5Staff = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txt5StaffID = new System.Windows.Forms.TextBox();
             this.tbcAdd.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud0Qty)).BeginInit();
@@ -611,6 +611,51 @@ namespace InvScanApp
             this.txt4Vendor.Size = new System.Drawing.Size(427, 31);
             this.txt4Vendor.TabIndex = 12;
             // 
+            // tbpCreateStaff
+            // 
+            this.tbpCreateStaff.Controls.Add(this.label21);
+            this.tbpCreateStaff.Controls.Add(this.txt5StaffID);
+            this.tbpCreateStaff.Controls.Add(this.label17);
+            this.tbpCreateStaff.Controls.Add(this.txt5Staff);
+            this.tbpCreateStaff.Location = new System.Drawing.Point(4, 34);
+            this.tbpCreateStaff.Name = "tbpCreateStaff";
+            this.tbpCreateStaff.Size = new System.Drawing.Size(642, 388);
+            this.tbpCreateStaff.TabIndex = 5;
+            this.tbpCreateStaff.Text = "Create Staff";
+            this.tbpCreateStaff.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 54);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(136, 25);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "New Staff ID:";
+            // 
+            // txt5StaffID
+            // 
+            this.txt5StaffID.Location = new System.Drawing.Point(187, 51);
+            this.txt5StaffID.Name = "txt5StaffID";
+            this.txt5StaffID.Size = new System.Drawing.Size(452, 31);
+            this.txt5StaffID.TabIndex = 16;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 17);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(172, 25);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "New Staff Name:";
+            // 
+            // txt5Staff
+            // 
+            this.txt5Staff.Location = new System.Drawing.Point(187, 14);
+            this.txt5Staff.Name = "txt5Staff";
+            this.txt5Staff.Size = new System.Drawing.Size(452, 31);
+            this.txt5Staff.TabIndex = 14;
+            // 
             // btnBack
             // 
             this.btnBack.Location = new System.Drawing.Point(668, 338);
@@ -640,52 +685,7 @@ namespace InvScanApp
             this.lblResult.TabIndex = 6;
             this.lblResult.Text = "label";
             // 
-            // tbpCreateStaff
-            // 
-            this.tbpCreateStaff.Controls.Add(this.label21);
-            this.tbpCreateStaff.Controls.Add(this.txt5StaffID);
-            this.tbpCreateStaff.Controls.Add(this.label17);
-            this.tbpCreateStaff.Controls.Add(this.txt5Staff);
-            this.tbpCreateStaff.Location = new System.Drawing.Point(4, 34);
-            this.tbpCreateStaff.Name = "tbpCreateStaff";
-            this.tbpCreateStaff.Size = new System.Drawing.Size(642, 388);
-            this.tbpCreateStaff.TabIndex = 5;
-            this.tbpCreateStaff.Text = "Create Staff";
-            this.tbpCreateStaff.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(9, 17);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(172, 25);
-            this.label17.TabIndex = 15;
-            this.label17.Text = "New Staff Name:";
-            // 
-            // txt5Staff
-            // 
-            this.txt5Staff.Location = new System.Drawing.Point(187, 14);
-            this.txt5Staff.Name = "txt5Staff";
-            this.txt5Staff.Size = new System.Drawing.Size(452, 31);
-            this.txt5Staff.TabIndex = 14;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(9, 54);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(136, 25);
-            this.label21.TabIndex = 17;
-            this.label21.Text = "New Staff ID:";
-            // 
-            // txt5StaffID
-            // 
-            this.txt5StaffID.Location = new System.Drawing.Point(187, 51);
-            this.txt5StaffID.Name = "txt5StaffID";
-            this.txt5StaffID.Size = new System.Drawing.Size(452, 31);
-            this.txt5StaffID.TabIndex = 16;
-            // 
-            // frmAdd
+            // frmAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -694,7 +694,7 @@ namespace InvScanApp
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tbcAdd);
-            this.Name = "frmAdd";
+            this.Name = "frmAddEdit";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmAdd_Load);
             this.tbcAdd.ResumeLayout(false);

@@ -70,7 +70,7 @@ namespace InvScanApp
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //Show settings form
-            Form f = new frmAdd();
+            Form f = new frmAddEdit();
             f.Show();
             f.Location = Location;
 
@@ -82,6 +82,17 @@ namespace InvScanApp
         {
             //Show settings form
             Form f = new frmHandOut();
+            f.Show();
+            f.Location = Location;
+
+            //Hide main form
+            Hide();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            //Show settings form
+            Form f = new frmRemove();
             f.Show();
             f.Location = Location;
 

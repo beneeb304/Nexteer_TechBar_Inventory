@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace InvScanApp
 {
-    public partial class frmAdd : Form
+    public partial class frmAddEdit : Form
     {
-        public frmAdd()
+        public frmAddEdit()
         {
             InitializeComponent();
         }
