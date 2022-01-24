@@ -118,10 +118,12 @@ namespace InvScanApp
                 sbSQL.Append(" CREATE TABLE tblLog (");
                 sbSQL.Append(" Log_TUID INT IDENTITY(1,1) PRIMARY KEY,");
                 sbSQL.Append(" Staff_Name VARCHAR(100),");
-                sbSQL.Append(" User_Name VARCHAR(100) NOT NULL,");
+                sbSQL.Append(" Recipient_Name VARCHAR(100),");
                 sbSQL.Append(" Commodity_Category VARCHAR(100),");
                 sbSQL.Append(" Commodity_Name VARCHAR(100),");
-                sbSQL.Append(" Qty_Action INT);");
+                sbSQL.Append(" Staff_Action BIT NOT NULL,");
+                sbSQL.Append(" Qty_Action INT NOT NULL,");
+                sbSQL.Append(" Action_Time DATETIME NOT NULL);");
                 sbSQL.Append(" END;");
 
                 //Execute

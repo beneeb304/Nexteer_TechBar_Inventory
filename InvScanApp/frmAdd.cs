@@ -66,6 +66,16 @@ namespace InvScanApp
                                 " WHERE Commodity_Category = '" + cmb0Category.Text + "' AND Commodity_Name = '" + cmb0Commodities.Text + "'"))
                             {
                                 lblResult.Text = "Added " + nud0Qty.Value + " of " + cmb0Commodities.Text + " to the inventory!";
+
+                                //Add transaction to Log table
+                                clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
+                                    "''," + //staff name
+                                    "''," + //user name
+                                    "'" + cmb0Commodities.Text + "'," +
+                                    "'" + cmb0Category.Text + "'," +
+                                    "1," +  //staff action (1 = adding, 0 = subtracting)
+                                    nud0Qty.Value + "," +
+                                    "'" + DateTime.Now.ToString() + "');");
                             }
                             else
                             {
@@ -93,6 +103,16 @@ namespace InvScanApp
                                 nud1Qty.Value + ");"))
                             {
                                 lblResult.Text = "Added " + txt1Commodity.Text + " as a new commodity!";
+
+                                //Add transaction to Log table
+                                clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
+                                    "''," + //staff name
+                                    "''," + //user name
+                                    "'" + txt1Commodity.Text + "'," +
+                                    "'" + cmb1Category.Text + "'," +
+                                    "1," +  //staff action (1 = adding, 0 = subtracting)
+                                    nud1Qty.Value + "," +
+                                    "'" + DateTime.Now.ToString() + "');");
                             }
                             else
                             {
@@ -183,6 +203,28 @@ namespace InvScanApp
                         }
                     }
 
+                    break;
+
+                case 5:
+                    //Make sure all fields are filled out
+                    if (txt5Staff.Text.Length > 0 && txt5StaffID.Text.Length > 0)
+                    {
+                        //Make sure the user wants to make this addition
+                        DialogResult dialogResult = MessageBox.Show("Are you sure you want to add " + txt5Staff.Text +
+                            " as a new staff member?", "Confirmation", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblStaff VALUES ('" + txt5StaffID.Text + "', '" + txt5Staff.Text + "');"))
+                            {
+                                lblResult.Text = "Added " + txt5Staff.Text + " as a new staff member!";
+                            }
+                            else
+                            {
+                                lblResult.Text = "Failed to add " + txt5Staff.Text + " as a new staff member!";
+                            }
+                        }
+                    }
+                    
                     break;
             }
 

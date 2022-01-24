@@ -84,46 +84,76 @@ namespace InvScanApp
             }
             else
             {
-                //Make sure there is enough quantity available to subtract
-                int intQty = 0;
-                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Name = '" + cmbItemName.Text + "';");
-
-                while (dataReader.Read())
+                try
                 {
-                    intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
+                    //Make sure there is enough quantity available to subtract
+                    int intQty = 0;
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Name = '" + cmbItemName.Text + "';");
+
+                    while (dataReader.Read())
+                    {
+                        intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
+                    }
+
+                    dataReader.Close();
+
+                    if (nudQty.Value > intQty)
+                    {
+                        MessageBox.Show("There are not enough items in inventory for this transaction!", "Error");
+                    }
+                    else
+                    {
+                        //Get staff
+                        string strStaff = cmbStaffName.Text;
+
+                        if (strStaff.Length == 0)
+                        {
+                            dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + txtStaffID.Text + ";");
+
+                            while (dataReader.Read())
+                            {
+                                strStaff = dataReader["Staff_Name"].ToString();
+                            }
+
+                            dataReader.Close();
+                        }
+
+                        //Get user
+                        string strRecipient = txtRecipientName.Text;
+
+                        if (strRecipient.Length == 0)
+                        {
+                            strRecipient = txtRecipientID.Text;
+                        }
+
+                        //Add transaction to Log table
+                        if(clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
+                            "'" + strStaff + "'," +
+                            "'" + strRecipient + "'," +
+                            "'" + cmbItemCategory.Text + "'," +
+                            "'" + cmbItemName.Text + "'," +
+                            "0," +  //staff action (1 = adding, 0 = subtracting)
+                            nudQty.Value + "," +
+                            "'" + DateTime.Now.ToString() + "');"))
+                        {
+                            //Remove items from Commodity table
+                            if(clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
+                                (intQty - nudQty.Value) +
+                                " WHERE Commodity_Category = '" + cmbItemCategory.Text + "' AND Commodity_Name = '" + cmbItemName.Text + "'"))
+                            {
+                                MessageBox.Show("Successfully Handed-Out!");
+                            }
+                        }
+                    }
                 }
-
-                dataReader.Close();
-
-                if(nudQty.Value > intQty)
+                catch
                 {
-                    MessageBox.Show("There are not enough items in inventory for this transaction!", "Error");
-                }
-                else
-                {
-                    //Add transaction to Log table
-                    clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
-                        "'" + cmbStaffName.Text + "'" +
-                        "'" + txtRecipientName.Text + "'" +
-                        "'" + cmbItemCategory.Text + "'" +
-                        "'" + cmbItemName.Text + "'" +
-                        nudQty.Value + ");");
-
-                    Console.WriteLine("INSERT INTO dbo.tblLog VALUES(" +
-                        "'" + cmbStaffName.Text + "'" +
-                        "'" + txtRecipientName.Text + "'" +
-                        "'" + cmbItemCategory.Text + "'" +
-                        "'" + cmbItemName.Text + "'" +
-                        nudQty.Value + ");");
-
-                    //Remove items from Commodity table
-                    clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
-                        (intQty - nudQty.Value) +
-                        " WHERE Commodity_Category = '" + cmbItemCategory.Text + "' AND Commodity_Name = '" + cmbItemName.Text + "'");
-
-                    MessageBox.Show("Successfully Handed-Out!");
+                    MessageBox.Show("Something went wrong handing this item out!");
                 }
             }
+
+            //Back to home
+            btnBack_Click(sender, e);
         }
 
         private void cmbStaffName_SelectedIndexChanged(object sender, EventArgs e)

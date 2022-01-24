@@ -51,6 +51,7 @@ namespace InvScanApp
             this.nud1Qty = new System.Windows.Forms.NumericUpDown();
             this.txt1Commodity = new System.Windows.Forms.TextBox();
             this.tbpEditCommodity = new System.Windows.Forms.TabPage();
+            this.btn2Lookup = new System.Windows.Forms.Button();
             this.cmb2NewCategory = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -78,7 +79,11 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
-            this.btn2Lookup = new System.Windows.Forms.Button();
+            this.tbpCreateStaff = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txt5Staff = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txt5StaffID = new System.Windows.Forms.TextBox();
             this.tbcAdd.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud0Qty)).BeginInit();
@@ -88,6 +93,7 @@ namespace InvScanApp
             ((System.ComponentModel.ISupportInitialize)(this.nud2Qty)).BeginInit();
             this.tbpCreateCategory.SuspendLayout();
             this.tbpCreateVendor.SuspendLayout();
+            this.tbpCreateStaff.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbcAdd
@@ -97,6 +103,7 @@ namespace InvScanApp
             this.tbcAdd.Controls.Add(this.tbpEditCommodity);
             this.tbcAdd.Controls.Add(this.tbpCreateCategory);
             this.tbcAdd.Controls.Add(this.tbpCreateVendor);
+            this.tbcAdd.Controls.Add(this.tbpCreateStaff);
             this.tbcAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbcAdd.Location = new System.Drawing.Point(12, 12);
             this.tbcAdd.Name = "tbcAdd";
@@ -359,6 +366,16 @@ namespace InvScanApp
             this.tbpEditCommodity.TabIndex = 2;
             this.tbpEditCommodity.Text = "Edit Commodity";
             this.tbpEditCommodity.UseVisualStyleBackColor = true;
+            // 
+            // btn2Lookup
+            // 
+            this.btn2Lookup.Location = new System.Drawing.Point(412, 92);
+            this.btn2Lookup.Name = "btn2Lookup";
+            this.btn2Lookup.Size = new System.Drawing.Size(190, 53);
+            this.btn2Lookup.TabIndex = 30;
+            this.btn2Lookup.Text = "Lookup Item";
+            this.btn2Lookup.UseVisualStyleBackColor = true;
+            this.btn2Lookup.Click += new System.EventHandler(this.btn2Lookup_Click);
             // 
             // cmb2NewCategory
             // 
@@ -623,15 +640,50 @@ namespace InvScanApp
             this.lblResult.TabIndex = 6;
             this.lblResult.Text = "label";
             // 
-            // btn2Lookup
+            // tbpCreateStaff
             // 
-            this.btn2Lookup.Location = new System.Drawing.Point(412, 92);
-            this.btn2Lookup.Name = "btn2Lookup";
-            this.btn2Lookup.Size = new System.Drawing.Size(190, 53);
-            this.btn2Lookup.TabIndex = 30;
-            this.btn2Lookup.Text = "Lookup Item";
-            this.btn2Lookup.UseVisualStyleBackColor = true;
-            this.btn2Lookup.Click += new System.EventHandler(this.btn2Lookup_Click);
+            this.tbpCreateStaff.Controls.Add(this.label21);
+            this.tbpCreateStaff.Controls.Add(this.txt5StaffID);
+            this.tbpCreateStaff.Controls.Add(this.label17);
+            this.tbpCreateStaff.Controls.Add(this.txt5Staff);
+            this.tbpCreateStaff.Location = new System.Drawing.Point(4, 34);
+            this.tbpCreateStaff.Name = "tbpCreateStaff";
+            this.tbpCreateStaff.Size = new System.Drawing.Size(642, 388);
+            this.tbpCreateStaff.TabIndex = 5;
+            this.tbpCreateStaff.Text = "Create Staff";
+            this.tbpCreateStaff.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 17);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(172, 25);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "New Staff Name:";
+            // 
+            // txt5Staff
+            // 
+            this.txt5Staff.Location = new System.Drawing.Point(187, 14);
+            this.txt5Staff.Name = "txt5Staff";
+            this.txt5Staff.Size = new System.Drawing.Size(452, 31);
+            this.txt5Staff.TabIndex = 14;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 54);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(136, 25);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "New Staff ID:";
+            // 
+            // txt5StaffID
+            // 
+            this.txt5StaffID.Location = new System.Drawing.Point(187, 51);
+            this.txt5StaffID.Name = "txt5StaffID";
+            this.txt5StaffID.Size = new System.Drawing.Size(452, 31);
+            this.txt5StaffID.TabIndex = 16;
             // 
             // frmAdd
             // 
@@ -659,6 +711,8 @@ namespace InvScanApp
             this.tbpCreateCategory.PerformLayout();
             this.tbpCreateVendor.ResumeLayout(false);
             this.tbpCreateVendor.PerformLayout();
+            this.tbpCreateStaff.ResumeLayout(false);
+            this.tbpCreateStaff.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -715,5 +769,10 @@ namespace InvScanApp
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cmb2NewCategory;
         private System.Windows.Forms.Button btn2Lookup;
+        private System.Windows.Forms.TabPage tbpCreateStaff;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txt5Staff;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txt5StaffID;
     }
 }
