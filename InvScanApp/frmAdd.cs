@@ -72,18 +72,15 @@ namespace InvScanApp
                                 lblResult.Text = "Failed to add " + nud0Qty.Value + " of " + cmb0Commodities.Text + " to the inventory!";
                             }
                         }
-
-                        //Clear controls
-                        cmb0Category.Text = "";
-                        cmb0Commodities.Text = "";
                     }
+
                     break;
                 case 1:
                     //Make sure all fields are filled out
                     if (txt1Barcode.Text.Length > 0 && txt1Commodity.Text.Length > 0 && cmb1Category.Text.Length > 0 && cmb1Vendor.Text.Length > 0)
                     {
                         //Make sure the user wants to make this addition
-                        DialogResult dialogResult = MessageBox.Show("Are you sure you want to add " + nud0Qty.Value + 
+                        DialogResult dialogResult = MessageBox.Show("Are you sure you want to add " + nud1Qty.Value +
                             " " + txt1Commodity.Text + " to the inventory?", "Confirmation", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
@@ -93,7 +90,7 @@ namespace InvScanApp
                                 "'" + cmb1Category.Text + "'," +
                                 "'" + cmb1Vendor.Text + "'," +
                                 "'" + txt1VendorURL.Text + "'," +
-                                nud0Qty.Value + ");"))
+                                nud1Qty.Value + ");"))
                             {
                                 lblResult.Text = "Added " + txt1Commodity.Text + " as a new commodity!";
                             }
@@ -102,18 +99,12 @@ namespace InvScanApp
                                 lblResult.Text = "Failed to add " + txt1Commodity.Text + " as a new commodity!";
                             }
                         }
-
-                        //Clear controls
-                        txt1Barcode.Text = "";
-                        txt1Commodity.Text = "";
-                        txt1VendorURL.Text = "";
-                        cmb1Category.Text = "";
-                        cmb1Vendor.Text = "";
                     }
                     else
                     {
                         MessageBox.Show("Please fill out all the fields");
                     }
+
                     break;
                 case 2:
                     //Update inventory (with or without quantity)
@@ -160,7 +151,7 @@ namespace InvScanApp
                             " as a new category?", "Confirmation", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            if(clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblCategory VALUES ('" + txt3Category.Text + "');"))
+                            if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblCategory VALUES ('" + txt3Category.Text + "');"))
                             {
                                 lblResult.Text = "Added " + txt3Category.Text + " as a new category!";
                             }
@@ -169,10 +160,8 @@ namespace InvScanApp
                                 lblResult.Text = "Failed to add " + txt3Category.Text + " as a new category!";
                             }
                         }
-
-                        //Clear controls
-                        txt3Category.Text = "";
                     }
+
                     break;
                 case 4:
                     //Make sure all fields are filled out
@@ -192,12 +181,13 @@ namespace InvScanApp
                                 lblResult.Text = "Failed to add " + txt4Vendor.Text + " as a new vendor!";
                             }
                         }
-
-                        //Clear controls
-                        txt4Vendor.Text = "";
                     }
+
                     break;
             }
+
+            //Back to home
+            btnBack_Click(sender, e);
         }
 
         private void tbcAdd_SelectedIndexChanged(object sender, EventArgs e)
@@ -320,24 +310,27 @@ namespace InvScanApp
                 cmb2NewVendor.DataSource = dt2Vendor;
                 cmb2NewVendor.ValueMember = "Vendor_Name";
 
-                //Buttons
+                //Comboboxes and textboxes
                 string strBarcode = "", strURL = "";
+                int intQty = 0;
 
                 txt2NewCommodity.Text = cmb2Commodities.Text;
 
-                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_URL, Commodity_Barcode FROM dbo.tblCommodity WHERE Commodity_Name = '"
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_URL, Commodity_Barcode, Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Name = '"
                     + cmb2Commodities.Text + "' AND Commodity_Category = '" + cmb2Category.Text + "';");
 
                 while (dataReader.Read())
                 {
                     strBarcode = dataReader["Commodity_Barcode"].ToString();
                     strURL = dataReader["Vendor_URL"].ToString();
+                    intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
                 }
 
                 dataReader.Close();
 
                 txt2Barcode.Text = strBarcode;
                 txt2VendorURL.Text = strURL;
+                nud2Qty.Value = intQty;
             }
             else
             {
