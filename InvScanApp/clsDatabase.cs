@@ -77,7 +77,8 @@ namespace InvScanApp
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblCategory')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE dbo.tblCategory (");
-                sbSQL.Append(" Category_Name VARCHAR(100) PRIMARY KEY);");
+                sbSQL.Append(" Category_Name VARCHAR(100) PRIMARY KEY,");
+                sbSQL.Append(" Qty_Alert INT NOT NULL);");
                 sbSQL.Append(" END;");
 
                 //Create Commodity Table
@@ -123,6 +124,7 @@ namespace InvScanApp
                 sbSQL.Append(" Commodity_Name VARCHAR(100),");
                 sbSQL.Append(" Staff_Action BIT NOT NULL,");
                 sbSQL.Append(" Qty_Action INT NOT NULL,");
+                sbSQL.Append(" Qty_New INT NOT NULL,");
                 sbSQL.Append(" Action_Time DATETIME NOT NULL);");
                 sbSQL.Append(" END;");
 

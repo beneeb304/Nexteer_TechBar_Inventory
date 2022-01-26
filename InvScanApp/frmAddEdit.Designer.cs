@@ -84,6 +84,9 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.nud3Qty = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
             this.tbcAdd.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud0Qty)).BeginInit();
@@ -94,6 +97,7 @@ namespace InvScanApp
             this.tbpCreateCategory.SuspendLayout();
             this.tbpCreateVendor.SuspendLayout();
             this.tbpCreateStaff.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud3Qty)).BeginInit();
             this.SuspendLayout();
             // 
             // tbcAdd
@@ -559,6 +563,9 @@ namespace InvScanApp
             // 
             // tbpCreateCategory
             // 
+            this.tbpCreateCategory.Controls.Add(this.label23);
+            this.tbpCreateCategory.Controls.Add(this.label22);
+            this.tbpCreateCategory.Controls.Add(this.nud3Qty);
             this.tbpCreateCategory.Controls.Add(this.label10);
             this.tbpCreateCategory.Controls.Add(this.txt3Category);
             this.tbpCreateCategory.Location = new System.Drawing.Point(4, 34);
@@ -685,6 +692,38 @@ namespace InvScanApp
             this.lblResult.TabIndex = 6;
             this.lblResult.Text = "label";
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(3, 51);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(193, 25);
+            this.label22.TabIndex = 26;
+            this.label22.Text = "Low Alert Quantity:";
+            // 
+            // nud3Qty
+            // 
+            this.nud3Qty.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nud3Qty.Location = new System.Drawing.Point(224, 49);
+            this.nud3Qty.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nud3Qty.Name = "nud3Qty";
+            this.nud3Qty.Size = new System.Drawing.Size(88, 31);
+            this.nud3Qty.TabIndex = 25;
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(318, 51);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(315, 132);
+            this.label23.TabIndex = 27;
+            this.label23.Text = "Note: The program will alert the designated email any time a commodity of this ca" +
+    "tegory hits the low quantity threshold.";
+            // 
             // frmAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -713,6 +752,7 @@ namespace InvScanApp
             this.tbpCreateVendor.PerformLayout();
             this.tbpCreateStaff.ResumeLayout(false);
             this.tbpCreateStaff.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud3Qty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -774,5 +814,8 @@ namespace InvScanApp
         private System.Windows.Forms.TextBox txt5Staff;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txt5StaffID;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.NumericUpDown nud3Qty;
+        private System.Windows.Forms.Label label23;
     }
 }

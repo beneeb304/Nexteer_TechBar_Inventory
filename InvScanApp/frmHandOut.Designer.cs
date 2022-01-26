@@ -36,23 +36,20 @@ namespace InvScanApp
             this.gpbStaff = new System.Windows.Forms.GroupBox();
             this.cmbStaffName = new System.Windows.Forms.ComboBox();
             this.gpbRecipient = new System.Windows.Forms.GroupBox();
-            this.txtRecipientID = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtRecipientName = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbItemCategory = new System.Windows.Forms.ComboBox();
+            this.nudQty = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbCommodityCategory = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.cmbItemName = new System.Windows.Forms.ComboBox();
-            this.txtItemID = new System.Windows.Forms.TextBox();
+            this.cmbCommodityName = new System.Windows.Forms.ComboBox();
+            this.txtCommodityBarcode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.nudQty = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
             this.gpbStaff.SuspendLayout();
             this.gpbRecipient.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -71,14 +68,15 @@ namespace InvScanApp
             // 
             // txtStaffID
             // 
+            this.txtStaffID.AcceptsTab = true;
             this.txtStaffID.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffID.Location = new System.Drawing.Point(182, 83);
             this.txtStaffID.Name = "txtStaffID";
-            this.txtStaffID.ReadOnly = true;
             this.txtStaffID.Size = new System.Drawing.Size(443, 31);
             this.txtStaffID.TabIndex = 25;
             this.txtStaffID.TabStop = false;
-            this.txtStaffID.TextChanged += new System.EventHandler(this.txtStaffID_TextChanged);
+            this.txtStaffID.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtStaffID_KeyUp);
+            this.txtStaffID.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtStaffID_PreviewKeyDown);
             // 
             // label7
             // 
@@ -128,38 +126,15 @@ namespace InvScanApp
             // 
             // gpbRecipient
             // 
-            this.gpbRecipient.Controls.Add(this.txtRecipientID);
-            this.gpbRecipient.Controls.Add(this.label3);
             this.gpbRecipient.Controls.Add(this.label4);
             this.gpbRecipient.Controls.Add(this.txtRecipientName);
-            this.gpbRecipient.Controls.Add(this.label5);
             this.gpbRecipient.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpbRecipient.Location = new System.Drawing.Point(17, 319);
             this.gpbRecipient.Name = "gpbRecipient";
-            this.gpbRecipient.Size = new System.Drawing.Size(634, 120);
+            this.gpbRecipient.Size = new System.Drawing.Size(634, 68);
             this.gpbRecipient.TabIndex = 28;
             this.gpbRecipient.TabStop = false;
             this.gpbRecipient.Text = "Recipient Info";
-            // 
-            // txtRecipientID
-            // 
-            this.txtRecipientID.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRecipientID.Location = new System.Drawing.Point(182, 83);
-            this.txtRecipientID.Name = "txtRecipientID";
-            this.txtRecipientID.ReadOnly = true;
-            this.txtRecipientID.Size = new System.Drawing.Size(443, 31);
-            this.txtRecipientID.TabIndex = 25;
-            this.txtRecipientID.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(177, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 25);
-            this.label3.TabIndex = 26;
-            this.label3.Text = "or";
             // 
             // label4
             // 
@@ -178,17 +153,6 @@ namespace InvScanApp
             this.txtRecipientName.Name = "txtRecipientName";
             this.txtRecipientName.Size = new System.Drawing.Size(443, 31);
             this.txtRecipientName.TabIndex = 23;
-            this.txtRecipientName.TextChanged += new System.EventHandler(this.txtRecipientName_TextChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 86);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(134, 25);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Recipient ID:";
             // 
             // btnBack
             // 
@@ -214,10 +178,10 @@ namespace InvScanApp
             // 
             this.groupBox1.Controls.Add(this.nudQty);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.cmbItemCategory);
+            this.groupBox1.Controls.Add(this.cmbCommodityCategory);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.cmbItemName);
-            this.groupBox1.Controls.Add(this.txtItemID);
+            this.groupBox1.Controls.Add(this.cmbCommodityName);
+            this.groupBox1.Controls.Add(this.txtCommodityBarcode);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label9);
@@ -229,16 +193,43 @@ namespace InvScanApp
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Info";
             // 
-            // cmbItemCategory
+            // nudQty
             // 
-            this.cmbItemCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbItemCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbItemCategory.FormattingEnabled = true;
-            this.cmbItemCategory.Location = new System.Drawing.Point(182, 21);
-            this.cmbItemCategory.Name = "cmbItemCategory";
-            this.cmbItemCategory.Size = new System.Drawing.Size(443, 33);
-            this.cmbItemCategory.TabIndex = 36;
-            this.cmbItemCategory.SelectedIndexChanged += new System.EventHandler(this.cmbItemCategory_SelectedIndexChanged);
+            this.nudQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudQty.Location = new System.Drawing.Point(651, 83);
+            this.nudQty.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudQty.Name = "nudQty";
+            this.nudQty.Size = new System.Drawing.Size(114, 44);
+            this.nudQty.TabIndex = 31;
+            this.nudQty.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(646, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(114, 55);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Item Quantity";
+            // 
+            // cmbCommodityCategory
+            // 
+            this.cmbCommodityCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCommodityCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCommodityCategory.FormattingEnabled = true;
+            this.cmbCommodityCategory.Location = new System.Drawing.Point(182, 21);
+            this.cmbCommodityCategory.Name = "cmbCommodityCategory";
+            this.cmbCommodityCategory.Size = new System.Drawing.Size(443, 33);
+            this.cmbCommodityCategory.TabIndex = 36;
+            this.cmbCommodityCategory.SelectedIndexChanged += new System.EventHandler(this.cmbItemCategory_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -250,27 +241,27 @@ namespace InvScanApp
             this.label10.TabIndex = 35;
             this.label10.Text = "Item Category:";
             // 
-            // cmbItemName
+            // cmbCommodityName
             // 
-            this.cmbItemName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbItemName.FormattingEnabled = true;
-            this.cmbItemName.Location = new System.Drawing.Point(182, 60);
-            this.cmbItemName.Name = "cmbItemName";
-            this.cmbItemName.Size = new System.Drawing.Size(443, 33);
-            this.cmbItemName.TabIndex = 34;
-            this.cmbItemName.SelectedIndexChanged += new System.EventHandler(this.cmbItemName_SelectedIndexChanged);
+            this.cmbCommodityName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCommodityName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCommodityName.FormattingEnabled = true;
+            this.cmbCommodityName.Location = new System.Drawing.Point(182, 60);
+            this.cmbCommodityName.Name = "cmbCommodityName";
+            this.cmbCommodityName.Size = new System.Drawing.Size(443, 33);
+            this.cmbCommodityName.TabIndex = 34;
+            this.cmbCommodityName.SelectedIndexChanged += new System.EventHandler(this.cmbItemName_SelectedIndexChanged);
             // 
-            // txtItemID
+            // txtCommodityBarcode
             // 
-            this.txtItemID.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtItemID.Location = new System.Drawing.Point(182, 122);
-            this.txtItemID.Name = "txtItemID";
-            this.txtItemID.ReadOnly = true;
-            this.txtItemID.Size = new System.Drawing.Size(443, 31);
-            this.txtItemID.TabIndex = 32;
-            this.txtItemID.TabStop = false;
-            this.txtItemID.TextChanged += new System.EventHandler(this.txtItemID_TextChanged);
+            this.txtCommodityBarcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCommodityBarcode.Location = new System.Drawing.Point(182, 122);
+            this.txtCommodityBarcode.Name = "txtCommodityBarcode";
+            this.txtCommodityBarcode.Size = new System.Drawing.Size(443, 31);
+            this.txtCommodityBarcode.TabIndex = 32;
+            this.txtCommodityBarcode.TabStop = false;
+            this.txtCommodityBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCommodityBarcode_KeyUp);
+            this.txtCommodityBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtCommodityBarcode_PreviewKeyDown);
             // 
             // label1
             // 
@@ -301,33 +292,6 @@ namespace InvScanApp
             this.label9.Size = new System.Drawing.Size(84, 25);
             this.label9.TabIndex = 31;
             this.label9.Text = "Item ID:";
-            // 
-            // nudQty
-            // 
-            this.nudQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudQty.Location = new System.Drawing.Point(651, 83);
-            this.nudQty.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudQty.Name = "nudQty";
-            this.nudQty.Size = new System.Drawing.Size(114, 44);
-            this.nudQty.TabIndex = 31;
-            this.nudQty.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(646, 25);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(114, 55);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "Item Quantity";
             // 
             // frmHandOut
             // 
@@ -360,21 +324,18 @@ namespace InvScanApp
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox gpbStaff;
         private System.Windows.Forms.GroupBox gpbRecipient;
-        private System.Windows.Forms.TextBox txtRecipientID;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtRecipientName;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbStaffName;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cmbItemName;
-        private System.Windows.Forms.TextBox txtItemID;
+        private System.Windows.Forms.ComboBox cmbCommodityName;
+        private System.Windows.Forms.TextBox txtCommodityBarcode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cmbItemCategory;
+        private System.Windows.Forms.ComboBox cmbCommodityCategory;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown nudQty;
         private System.Windows.Forms.Label label11;

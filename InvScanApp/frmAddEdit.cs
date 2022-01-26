@@ -75,6 +75,7 @@ namespace InvScanApp
                                     "'" + cmb0Category.Text + "'," +
                                     "1," +  //staff action (1 = adding, 0 = subtracting)
                                     nud0Qty.Value + "," +
+                                    (intQty + nud0Qty.Value) + "," +
                                     "'" + DateTime.Now.ToString() + "');");
                             }
                             else
@@ -111,6 +112,7 @@ namespace InvScanApp
                                     "'" + txt1Commodity.Text + "'," +
                                     "'" + cmb1Category.Text + "'," +
                                     "1," +  //staff action (1 = adding, 0 = subtracting)
+                                    nud1Qty.Value + "," +
                                     nud1Qty.Value + "," +
                                     "'" + DateTime.Now.ToString() + "');");
                             }
@@ -171,7 +173,7 @@ namespace InvScanApp
                             " as a new category?", "Confirmation", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblCategory VALUES ('" + txt3Category.Text + "');"))
+                            if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblCategory VALUES ('" + txt3Category.Text + "'," + nud3Qty.Value + ");"))
                             {
                                 lblResult.Text = "Added " + txt3Category.Text + " as a new category!";
                             }
