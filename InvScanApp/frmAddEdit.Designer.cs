@@ -87,6 +87,9 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.lblResult = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt0Barcode = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.tbcAdd.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud0Qty)).BeginInit();
@@ -118,6 +121,9 @@ namespace InvScanApp
             // 
             // tbpAddCommodity
             // 
+            this.tbpAddCommodity.Controls.Add(this.label25);
+            this.tbpAddCommodity.Controls.Add(this.label24);
+            this.tbpAddCommodity.Controls.Add(this.txt0Barcode);
             this.tbpAddCommodity.Controls.Add(this.label12);
             this.tbpAddCommodity.Controls.Add(this.cmb0Category);
             this.tbpAddCommodity.Controls.Add(this.label6);
@@ -165,7 +171,7 @@ namespace InvScanApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(494, 86);
+            this.label1.Location = new System.Drawing.Point(491, 188);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 25);
             this.label1.TabIndex = 2;
@@ -174,7 +180,7 @@ namespace InvScanApp
             // nud0Qty
             // 
             this.nud0Qty.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nud0Qty.Location = new System.Drawing.Point(551, 84);
+            this.nud0Qty.Location = new System.Drawing.Point(548, 186);
             this.nud0Qty.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -730,6 +736,34 @@ namespace InvScanApp
             this.lblResult.TabIndex = 6;
             this.lblResult.Text = "label";
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 133);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(211, 25);
+            this.label24.TabIndex = 17;
+            this.label24.Text = "Commodity Barcode:";
+            // 
+            // txt0Barcode
+            // 
+            this.txt0Barcode.Location = new System.Drawing.Point(230, 127);
+            this.txt0Barcode.Name = "txt0Barcode";
+            this.txt0Barcode.Size = new System.Drawing.Size(406, 31);
+            this.txt0Barcode.TabIndex = 16;
+            this.txt0Barcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt0Barcode_KeyUp);
+            this.txt0Barcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txt0Barcode_PreviewKeyDown);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(225, 90);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(33, 25);
+            this.label25.TabIndex = 34;
+            this.label25.Text = "or";
+            // 
             // frmAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -823,5 +857,8 @@ namespace InvScanApp
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.NumericUpDown nud3Qty;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox txt0Barcode;
+        private System.Windows.Forms.Label label25;
     }
 }

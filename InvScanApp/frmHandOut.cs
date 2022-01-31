@@ -140,6 +140,8 @@ namespace InvScanApp
                             {
                                 //FIND ME -- Email alert here
                                 MessageBox.Show("low quantity");
+
+                                Console.WriteLine("low quantity");
                             }
                         }
                     }

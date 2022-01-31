@@ -409,7 +409,30 @@ namespace InvScanApp
             chk2Qty.Checked = false;
         }
 
-
+        private void txt0Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //Checking if scanner starts with a TAB and ends with a CR
+            if (e.KeyData == Keys.Tab)
+            {
+                e.IsInputKey = true;
+                blnBarcode = true;
+                txt0Barcode.Text = "";
+            }
+            else
+            {
+                if (blnBarcode)
+                {
+                    if (e.KeyData == Keys.Enter)
+                    {
+                        blnBarcode = false;
+                    }
+                }
+                else
+                {
+                    txt0Barcode.Text = "";
+                }
+            }
+        }
 
         private void txt1Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -482,6 +505,38 @@ namespace InvScanApp
                 else
                 {
                     txt5StaffID.Text = "";
+                }
+            }
+        }
+
+        private void txt0Barcode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txt0Barcode.Text.Length == 1 && blnBarcode == false)
+            {
+                txt0Barcode.Text = "";
+            }
+            else if (txt0Barcode.Text.Length > 2 && blnBarcode == false)
+            {
+                //Lookup staff name
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + txt0Barcode.Text + "';");
+                string strName = "", strCategory = "";
+
+                while (dataReader.Read())
+                {
+                    strCategory = dataReader["Commodity_Category"].ToString();
+                    strName = dataReader["Commodity_Name"].ToString();
+                }
+
+                dataReader.Close();
+
+                cmb0Category.Text = strCategory;
+                cmb0Commodities.Text = strName;
+
+                //Check if barcode was valid
+                if (cmb0Commodities.Text == "")
+                {
+                    txt0Barcode.Text = "";
+                    MessageBox.Show("No commodities with this barcode in inventory", "Invalid Commodity Barcode");
                 }
             }
         }
