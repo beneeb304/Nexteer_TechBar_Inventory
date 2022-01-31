@@ -13,6 +13,10 @@ namespace InvScanApp
 {
     public partial class frmAddEdit : Form
     {
+        //Class vars
+        private bool blnBarcode = false;
+        private bool blnID = false;
+
         public frmAddEdit()
         {
             InitializeComponent();
@@ -130,38 +134,47 @@ namespace InvScanApp
                     break;
                 case 2:
                     //Update inventory (with or without quantity)
-                    string strCmd;
-
-                    if (chk2Qty.Checked)
+                    
+                    if(cmb2Category.Text != "" && cmb2Commodities.Text != "" && cmb2NewCategory.Text != "" && cmb2NewVendor.Text != "" && txt2Barcode.Text != "" && txt2NewCommodity.Text != "")
                     {
-                        strCmd = "UPDATE dbo.tblCommodity SET " +
-                        "Commodity_Barcode = '" + txt2Barcode.Text + "', " +
-                        "Commodity_Name = '" + txt2NewCommodity.Text + "', " +
-                        "Commodity_Category = '" + cmb2NewCategory.Text + "', " +
-                        "Vendor_Name = '" + cmb2NewVendor.Text + "', " +
-                        "Vendor_URL = '" + txt2VendorURL.Text + "', " +
-                        "Commodity_Qty = " + nud2Qty.Value +
-                        " WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';";
+                        string strCmd;
+
+                        if (chk2Qty.Checked)
+                        {
+                            strCmd = "UPDATE dbo.tblCommodity SET " +
+                            "Commodity_Barcode = '" + txt2Barcode.Text + "', " +
+                            "Commodity_Name = '" + txt2NewCommodity.Text + "', " +
+                            "Commodity_Category = '" + cmb2NewCategory.Text + "', " +
+                            "Vendor_Name = '" + cmb2NewVendor.Text + "', " +
+                            "Vendor_URL = '" + txt2VendorURL.Text + "', " +
+                            "Commodity_Qty = " + nud2Qty.Value +
+                            " WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';";
+                        }
+                        else
+                        {
+                            strCmd = "UPDATE dbo.tblCommodity SET " +
+                            "Commodity_Barcode = '" + txt2Barcode.Text + "', " +
+                            "Commodity_Name = '" + txt2NewCommodity.Text + "', " +
+                            "Commodity_Category = '" + cmb2NewCategory.Text + "', " +
+                            "Vendor_Name = '" + cmb2NewVendor.Text + "', " +
+                            "Vendor_URL = '" + txt2VendorURL.Text + "' " +
+                            " WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';";
+                        }
+
+                        if (clsDatabase.ExecuteSQLNonQ(strCmd))
+                        {
+                            lblResult.Text = "Updated inventory!";
+                        }
+                        else
+                        {
+                            lblResult.Text = "Failed to update the inventory!";
+                        }
                     }
                     else
                     {
-                        strCmd = "UPDATE dbo.tblCommodity SET " +
-                        "Commodity_Barcode = '" + txt2Barcode.Text + "', " +
-                        "Commodity_Name = '" + txt2NewCommodity.Text + "', " +
-                        "Commodity_Category = '" + cmb2NewCategory.Text + "', " +
-                        "Vendor_Name = '" + cmb2NewVendor.Text + "', " +
-                        "Vendor_URL = '" + txt2VendorURL.Text + "' " +
-                        " WHERE Commodity_Category = '" + cmb2Category.Text + "' AND Commodity_Name = '" + cmb2Commodities.Text + "';";
+                        MessageBox.Show("Please fill out all the fields");
                     }
-
-                    if (clsDatabase.ExecuteSQLNonQ(strCmd))
-                    {
-                        lblResult.Text = "Updated inventory!";
-                    }
-                    else
-                    {
-                        lblResult.Text = "Failed to update the inventory!";
-                    }
+                                       
 
                     break;
                 case 3:
@@ -394,6 +407,107 @@ namespace InvScanApp
             txt2VendorURL.Text = "";
             nud2Qty.Value = 1;
             chk2Qty.Checked = false;
+        }
+
+
+
+        private void txt1Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //Checking if scanner starts with a TAB and ends with a CR
+            if (e.KeyData == Keys.Tab)
+            {
+                e.IsInputKey = true;
+                blnBarcode = true;
+                txt1Barcode.Text = "";
+            }
+            else
+            {
+                if (blnBarcode)
+                {
+                    if (e.KeyData == Keys.Enter)
+                    {
+                        blnBarcode = false;
+                    }
+                }
+                else
+                {
+                    txt1Barcode.Text = "";
+                }
+            }
+        }
+
+        private void txt2Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //Checking if scanner starts with a TAB and ends with a CR
+            if (e.KeyData == Keys.Tab)
+            {
+                e.IsInputKey = true;
+                blnBarcode = true;
+                txt2Barcode.Text = "";
+            }
+            else
+            {
+                if (blnBarcode)
+                {
+                    if (e.KeyData == Keys.Enter)
+                    {
+                        blnBarcode = false;
+                    }
+                }
+                else
+                {
+                    txt2Barcode.Text = "";
+                }
+            }
+        }
+
+        private void txt5StaffID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //Checking if scanner starts with a TAB and ends with a CR
+            if (e.KeyData == Keys.Tab)
+            {
+                e.IsInputKey = true;
+                blnID = true;
+                txt5StaffID.Text = "";
+            }
+            else
+            {
+                if (blnID)
+                {
+                    if (e.KeyData == Keys.Enter)
+                    {
+                        blnID = false;
+                    }
+                }
+                else
+                {
+                    txt5StaffID.Text = "";
+                }
+            }
+        }
+
+        private void txt1Barcode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txt1Barcode.Text.Length == 1 && blnBarcode == false)
+            {
+                txt1Barcode.Text = "";
+            }
+        }
+
+        private void txt2Barcode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txt2Barcode.Text.Length == 1 && blnBarcode == false)
+            {
+                txt2Barcode.Text = "";
+            }
+        }
+
+        private void txt5StaffID_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txt5StaffID.Text.Length == 1 && blnID == false)
+            {
+                txt5StaffID.Text = "";
+            }
         }
     }
 }
