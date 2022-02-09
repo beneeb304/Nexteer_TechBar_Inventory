@@ -21,9 +21,6 @@ namespace InvScanApp
             InitializeComponent();
         }
 
-        //FIND ME - make this page more of a shopping experience. Add a "add to cart" button and a "checkout" button that 
-        //  will perform the transactions at the end.
-
         private void frmHandOut_Load(object sender, EventArgs e)
         {
             //Make datatables
@@ -91,11 +88,14 @@ namespace InvScanApp
                 {
                     //Make sure there is enough quantity available to subtract
                     int intQty = 0;
-                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Name = '" + cmbCommodityName.Text + "';");
+                    string strVendor = "", strVendorURL = "";
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty, Vendor_Name, Vendor_URL FROM dbo.tblCommodity WHERE Commodity_Name = '" + cmbCommodityName.Text + "';");
 
                     while (dataReader.Read())
                     {
                         intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
+                        strVendor = dataReader["Vendor_Name"].ToString();
+                        strVendorURL = dataReader["Vendor_URL"].ToString();
                     }
 
                     dataReader.Close();
@@ -106,6 +106,8 @@ namespace InvScanApp
                     }
                     else
                     {
+                        intQty = (intQty - (int) nudQty.Value);
+                        
                         //Add transaction to Log table
                         if (clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
                             "'" + cmbStaffName.Text + "'," +
@@ -114,12 +116,12 @@ namespace InvScanApp
                             "'" + cmbCommodityName.Text + "'," +
                             "0," +  //staff action (1 = adding, 0 = subtracting)
                             nudQty.Value + "," +
-                            (intQty - nudQty.Value) + "," +
+                            (intQty) + "," +
                             "'" + DateTime.Now.ToString() + "');"))
                         {
                             //Remove items from Commodity table
                             if(clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
-                                (intQty - nudQty.Value) +
+                                (intQty) +
                                 " WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "' AND Commodity_Name = '" + cmbCommodityName.Text + "'"))
                             {
                                 MessageBox.Show("Successfully Handed-Out!");
@@ -138,10 +140,17 @@ namespace InvScanApp
 
                             if(intQty <= intLowQty)
                             {
-                                //FIND ME -- Email alert here
-                                MessageBox.Show("low quantity");
+                                string strBody = "Low quantity alert triggered for " + cmbCommodityName.Text + ".\r" +
+                                    "The current in-stock quantity is " + intQty + ".\r" +
+                                    "Consider re-ordering these from " + strVendor + ":\r" +
+                                    strVendorURL + "\r\r" +
+                                    "Best,\r" +
+                                    "- Ben Bot\r";
 
-                                Console.WriteLine("low quantity");
+                                if (!clsEmail.SendEmail(strBody, "Tech Bar Inventory - Low Quantity Alert"))
+                                {
+                                    MessageBox.Show("Email failed to send!\r" + strBody, "Tech Bar Inventory - Low Quantity Alert");
+                                }
                             }
                         }
                     }

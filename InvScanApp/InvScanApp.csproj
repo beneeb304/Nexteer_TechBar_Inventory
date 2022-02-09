@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDatabase.cs" />
+    <Compile Include="clsEmail.cs" />
     <Compile Include="frmAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>

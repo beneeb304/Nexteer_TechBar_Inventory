@@ -106,5 +106,65 @@ namespace InvScanApp.Properties {
                 this["dbPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string strEmailUsername {
+            get {
+                return ((string)(this["strEmailUsername"]));
+            }
+            set {
+                this["strEmailUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string strEmailPassword {
+            get {
+                return ((string)(this["strEmailPassword"]));
+            }
+            set {
+                this["strEmailPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string strSMTPClient {
+            get {
+                return ((string)(this["strSMTPClient"]));
+            }
+            set {
+                this["strSMTPClient"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string strToEmail {
+            get {
+                return ((string)(this["strToEmail"]));
+            }
+            set {
+                this["strToEmail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string strSMTPPort {
+            get {
+                return ((string)(this["strSMTPPort"]));
+            }
+            set {
+                this["strSMTPPort"] = value;
+            }
+        }
     }
 }
