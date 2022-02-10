@@ -51,7 +51,7 @@ namespace InvScanApp
                     client.EnableSsl = true;
 
                     // Send our email.
-                    client.Send(Msg);
+                    client.SendMailAsync(Msg);
 
                     return true;
                 }

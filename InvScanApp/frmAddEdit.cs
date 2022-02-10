@@ -49,7 +49,7 @@ namespace InvScanApp
                     {
                         //Make sure the user wants to make this addition
                         DialogResult dialogResult = MessageBox.Show("Are you sure you want to add " + nud0Qty.Value +
-                            " of " + cmb0Commodities.Text + " to the inventory?", "Confirmation", MessageBoxButtons.YesNo);
+                            " " + cmb0Commodities.Text + " to the inventory?", "Confirmation", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
                             //Get current quantity in inventory
@@ -69,7 +69,7 @@ namespace InvScanApp
                                 (intQty + nud0Qty.Value) +
                                 " WHERE Commodity_Category = '" + cmb0Category.Text + "' AND Commodity_Name = '" + cmb0Commodities.Text + "'"))
                             {
-                                lblResult.Text = "Added " + nud0Qty.Value + " of " + cmb0Commodities.Text + " to the inventory!";
+                                MessageBox.Show("Added " + nud0Qty.Value + " " + cmb0Commodities.Text + " to the inventory!", "Success");
 
                                 //Add transaction to Log table
                                 clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
@@ -84,7 +84,7 @@ namespace InvScanApp
                             }
                             else
                             {
-                                lblResult.Text = "Failed to add " + nud0Qty.Value + " of " + cmb0Commodities.Text + " to the inventory!";
+                                MessageBox.Show("Failed to add " + nud0Qty.Value + " " + cmb0Commodities.Text + " to the inventory!", "Error");
                             }
                         }
                     }
@@ -107,7 +107,7 @@ namespace InvScanApp
                                 "'" + txt1VendorURL.Text + "'," +
                                 nud1Qty.Value + ");"))
                             {
-                                lblResult.Text = "Added " + txt1Commodity.Text + " as a new commodity!";
+                                MessageBox.Show("Added " + txt1Commodity.Text + " as a new commodity!", "Success");
 
                                 //Add transaction to Log table
                                 clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
@@ -122,13 +122,13 @@ namespace InvScanApp
                             }
                             else
                             {
-                                lblResult.Text = "Failed to add " + txt1Commodity.Text + " as a new commodity!";
+                                MessageBox.Show("Failed to add " + txt1Commodity.Text + " as a new commodity!", "Error");
                             }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Please fill out all the fields");
+                        MessageBox.Show("Please fill out all the fields", "Alert");
                     }
 
                     break;
@@ -163,16 +163,16 @@ namespace InvScanApp
 
                         if (clsDatabase.ExecuteSQLNonQ(strCmd))
                         {
-                            lblResult.Text = "Updated inventory!";
+                            MessageBox.Show("Updated inventory!", "Success");
                         }
                         else
                         {
-                            lblResult.Text = "Failed to update the inventory!";
+                            MessageBox.Show("Failed to update the inventory!", "Error");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Please fill out all the fields");
+                        MessageBox.Show("Please fill out all the fields", "Alert");
                     }
                                        
 
@@ -188,11 +188,11 @@ namespace InvScanApp
                         {
                             if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblCategory VALUES ('" + txt3Category.Text + "'," + nud3Qty.Value + ");"))
                             {
-                                lblResult.Text = "Added " + txt3Category.Text + " as a new category!";
+                                MessageBox.Show("Added " + txt3Category.Text + " as a new category!", "Success");
                             }
                             else
                             {
-                                lblResult.Text = "Failed to add " + txt3Category.Text + " as a new category!";
+                                MessageBox.Show("Failed to add " + txt3Category.Text + " as a new category!", "Error");
                             }
                         }
                     }
@@ -209,11 +209,11 @@ namespace InvScanApp
                         {
                             if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblVendor VALUES ('" + txt4Vendor.Text + "');"))
                             {
-                                lblResult.Text = "Added " + txt4Vendor.Text + " as a new vendor!";
+                                MessageBox.Show("Added " + txt4Vendor.Text + " as a new vendor!", "Success");
                             }
                             else
                             {
-                                lblResult.Text = "Failed to add " + txt4Vendor.Text + " as a new vendor!";
+                                MessageBox.Show("Failed to add " + txt4Vendor.Text + " as a new vendor!", "Error");
                             }
                         }
                     }
@@ -231,11 +231,11 @@ namespace InvScanApp
                         {
                             if (clsDatabase.ExecuteSQLNonQ("USE TBInvDB; INSERT INTO dbo.tblStaff VALUES ('" + txt5StaffID.Text + "', '" + txt5Staff.Text + "');"))
                             {
-                                lblResult.Text = "Added " + txt5Staff.Text + " as a new staff member!";
+                                MessageBox.Show("Added " + txt5Staff.Text + " as a new staff member!", "Success");
                             }
                             else
                             {
-                                lblResult.Text = "Failed to add " + txt5Staff.Text + " as a new staff member!";
+                                MessageBox.Show("Failed to add " + txt5Staff.Text + " as a new staff member!", "Error");
                             }
                         }
                     }
@@ -249,9 +249,6 @@ namespace InvScanApp
 
         private void tbcAdd_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Reset result label
-            lblResult.Text = "";
-
             switch (tbcAdd.SelectedIndex)
             {
                 case 0:
@@ -391,7 +388,7 @@ namespace InvScanApp
             }
             else
             {
-                MessageBox.Show("Please fill out all the fields");
+                MessageBox.Show("Please fill out all the fields", "Alert");
             }
         }
 
@@ -536,7 +533,7 @@ namespace InvScanApp
                 if (cmb0Commodities.Text == "")
                 {
                     txt0Barcode.Text = "";
-                    MessageBox.Show("No commodities with this barcode in inventory", "Invalid Commodity Barcode");
+                    MessageBox.Show("No commodities with this barcode in inventory", "Alert");
                 }
             }
         }

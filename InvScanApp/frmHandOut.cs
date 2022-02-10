@@ -102,7 +102,7 @@ namespace InvScanApp
 
                     if (nudQty.Value > intQty)
                     {
-                        MessageBox.Show("There are not enough items in inventory for this transaction!", "Error");
+                        MessageBox.Show("There are not enough items in inventory for this transaction!", "Alert");
                     }
                     else
                     {
@@ -124,7 +124,7 @@ namespace InvScanApp
                                 (intQty) +
                                 " WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "' AND Commodity_Name = '" + cmbCommodityName.Text + "'"))
                             {
-                                MessageBox.Show("Successfully Handed-Out!");
+                                MessageBox.Show("Handed-Out " + nudQty.Value + " " + cmbCommodityName.Text + " to " + txtRecipientName.Text, "Success");
                             }
 
                             //Check if we hit the low quantity threshold
@@ -149,7 +149,7 @@ namespace InvScanApp
 
                                 if (!clsEmail.SendEmail(strBody, "Tech Bar Inventory - Low Quantity Alert"))
                                 {
-                                    MessageBox.Show("Email failed to send!\r" + strBody, "Tech Bar Inventory - Low Quantity Alert");
+                                    MessageBox.Show("Email failed to send - here's the alert:\r\r" + strBody, "Error");
                                 }
                             }
                         }
@@ -157,7 +157,7 @@ namespace InvScanApp
                 }
                 catch
                 {
-                    MessageBox.Show("Something went wrong handing this item out!");
+                    MessageBox.Show("Something went wrong handing this item out!", "Error");
                 }
             }
 
@@ -267,7 +267,7 @@ namespace InvScanApp
                 if(cmbStaffName.Text == "")
                 {
                     txtStaffID.Text = "";
-                    MessageBox.Show("No users with this ID", "Invalid Staff ID");
+                    MessageBox.Show("No users with this ID", "Alert");
                 }
             }
         }
@@ -303,7 +303,7 @@ namespace InvScanApp
                 if (cmbCommodityName.Text == "")
                 {
                     txtCommodityBarcode.Text = "";
-                    MessageBox.Show("No commodities with this barcode in inventory", "Invalid Commodity Barcode");
+                    MessageBox.Show("No commodities with this barcode in inventory", "Alert");
                 }
             }
         }

@@ -59,7 +59,7 @@ namespace InvScanApp
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(120, 100);
             this.btnSubmit.TabIndex = 6;
-            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.Text = "Remove";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 

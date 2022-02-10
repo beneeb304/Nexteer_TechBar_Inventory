@@ -30,23 +30,25 @@ namespace InvScanApp
         private void InitializeComponent()
         {
             this.btnBack = new System.Windows.Forms.Button();
-            this.txtSQLString = new System.Windows.Forms.TextBox();
-            this.btnEnter = new System.Windows.Forms.Button();
-            this.cmbString = new System.Windows.Forms.ComboBox();
             this.txtEmailUsername = new System.Windows.Forms.TextBox();
             this.txtEmailPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.gpbEmail = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSMTPPort = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtToEmail = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSMTPClient = new System.Windows.Forms.TextBox();
             this.btnSaveEmail = new System.Windows.Forms.Button();
             this.btnCancelEmail = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtToEmail = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtSMTPPort = new System.Windows.Forms.TextBox();
+            this.gpbSQL = new System.Windows.Forms.GroupBox();
+            this.cmbString = new System.Windows.Forms.ComboBox();
+            this.btnEnter = new System.Windows.Forms.Button();
+            this.txtSQLString = new System.Windows.Forms.TextBox();
             this.gpbEmail.SuspendLayout();
+            this.gpbSQL.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBack
@@ -58,37 +60,6 @@ namespace InvScanApp
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // txtSQLString
-            // 
-            this.txtSQLString.Location = new System.Drawing.Point(12, 101);
-            this.txtSQLString.Name = "txtSQLString";
-            this.txtSQLString.Size = new System.Drawing.Size(351, 20);
-            this.txtSQLString.TabIndex = 5;
-            // 
-            // btnEnter
-            // 
-            this.btnEnter.Location = new System.Drawing.Point(206, 125);
-            this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(157, 23);
-            this.btnEnter.TabIndex = 6;
-            this.btnEnter.Text = "Save SQL String";
-            this.btnEnter.UseVisualStyleBackColor = true;
-            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
-            // 
-            // cmbString
-            // 
-            this.cmbString.FormattingEnabled = true;
-            this.cmbString.Items.AddRange(new object[] {
-            "Data Base Name",
-            "Data Base Path",
-            "Server Name",
-            "User Name",
-            "User Password"});
-            this.cmbString.Location = new System.Drawing.Point(12, 127);
-            this.cmbString.Name = "cmbString";
-            this.cmbString.Size = new System.Drawing.Size(188, 21);
-            this.cmbString.TabIndex = 8;
             // 
             // txtEmailUsername
             // 
@@ -137,12 +108,44 @@ namespace InvScanApp
             this.gpbEmail.Controls.Add(this.label2);
             this.gpbEmail.Controls.Add(this.txtEmailUsername);
             this.gpbEmail.Controls.Add(this.txtEmailPassword);
-            this.gpbEmail.Location = new System.Drawing.Point(29, 173);
+            this.gpbEmail.Location = new System.Drawing.Point(12, 97);
             this.gpbEmail.Name = "gpbEmail";
             this.gpbEmail.Size = new System.Drawing.Size(453, 110);
             this.gpbEmail.TabIndex = 13;
             this.gpbEmail.TabStop = false;
             this.gpbEmail.Text = "Email Credentials";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(245, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "SMTP Port:";
+            // 
+            // txtSMTPPort
+            // 
+            this.txtSMTPPort.Location = new System.Drawing.Point(315, 50);
+            this.txtSMTPPort.Name = "txtSMTPPort";
+            this.txtSMTPPort.Size = new System.Drawing.Size(127, 20);
+            this.txtSMTPPort.TabIndex = 20;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(245, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "To Email:";
+            // 
+            // txtToEmail
+            // 
+            this.txtToEmail.Location = new System.Drawing.Point(315, 24);
+            this.txtToEmail.Name = "txtToEmail";
+            this.txtToEmail.Size = new System.Drawing.Size(127, 20);
+            this.txtToEmail.TabIndex = 17;
             // 
             // label3
             // 
@@ -180,62 +183,69 @@ namespace InvScanApp
             this.btnCancelEmail.UseVisualStyleBackColor = true;
             this.btnCancelEmail.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label4
+            // gpbSQL
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(245, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "To Email:";
+            this.gpbSQL.Controls.Add(this.cmbString);
+            this.gpbSQL.Controls.Add(this.btnEnter);
+            this.gpbSQL.Controls.Add(this.txtSQLString);
+            this.gpbSQL.Location = new System.Drawing.Point(12, 12);
+            this.gpbSQL.Name = "gpbSQL";
+            this.gpbSQL.Size = new System.Drawing.Size(372, 79);
+            this.gpbSQL.TabIndex = 14;
+            this.gpbSQL.TabStop = false;
+            this.gpbSQL.Text = "SQL Server Connection";
             // 
-            // txtToEmail
+            // cmbString
             // 
-            this.txtToEmail.Location = new System.Drawing.Point(315, 24);
-            this.txtToEmail.Name = "txtToEmail";
-            this.txtToEmail.Size = new System.Drawing.Size(127, 20);
-            this.txtToEmail.TabIndex = 17;
+            this.cmbString.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbString.FormattingEnabled = true;
+            this.cmbString.Items.AddRange(new object[] {
+            "Data Base Name",
+            "Data Base Path",
+            "Server Name",
+            "User Name",
+            "User Password"});
+            this.cmbString.Location = new System.Drawing.Point(6, 45);
+            this.cmbString.Name = "cmbString";
+            this.cmbString.Size = new System.Drawing.Size(188, 21);
+            this.cmbString.TabIndex = 11;
             // 
-            // label5
+            // btnEnter
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(245, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "SMTP Port:";
+            this.btnEnter.Location = new System.Drawing.Point(200, 43);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(157, 23);
+            this.btnEnter.TabIndex = 10;
+            this.btnEnter.Text = "Save SQL String";
+            this.btnEnter.UseVisualStyleBackColor = true;
             // 
-            // txtSMTPPort
+            // txtSQLString
             // 
-            this.txtSMTPPort.Location = new System.Drawing.Point(315, 50);
-            this.txtSMTPPort.Name = "txtSMTPPort";
-            this.txtSMTPPort.Size = new System.Drawing.Size(127, 20);
-            this.txtSMTPPort.TabIndex = 20;
+            this.txtSQLString.Location = new System.Drawing.Point(6, 19);
+            this.txtSQLString.Name = "txtSQLString";
+            this.txtSQLString.Size = new System.Drawing.Size(351, 20);
+            this.txtSQLString.TabIndex = 9;
             // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.gpbSQL);
             this.Controls.Add(this.gpbEmail);
-            this.Controls.Add(this.cmbString);
-            this.Controls.Add(this.btnEnter);
-            this.Controls.Add(this.txtSQLString);
             this.Controls.Add(this.btnBack);
             this.Name = "frmSettings";
             this.Text = "frmSettings";
             this.gpbEmail.ResumeLayout(false);
             this.gpbEmail.PerformLayout();
+            this.gpbSQL.ResumeLayout(false);
+            this.gpbSQL.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.TextBox txtSQLString;
-        private System.Windows.Forms.Button btnEnter;
-        private System.Windows.Forms.ComboBox cmbString;
         private System.Windows.Forms.TextBox txtEmailUsername;
         private System.Windows.Forms.TextBox txtEmailPassword;
         private System.Windows.Forms.Label label1;
@@ -249,5 +259,9 @@ namespace InvScanApp
         private System.Windows.Forms.TextBox txtToEmail;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSMTPPort;
+        private System.Windows.Forms.GroupBox gpbSQL;
+        private System.Windows.Forms.ComboBox cmbString;
+        private System.Windows.Forms.Button btnEnter;
+        private System.Windows.Forms.TextBox txtSQLString;
     }
 }

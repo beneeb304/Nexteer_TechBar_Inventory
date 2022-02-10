@@ -196,7 +196,7 @@ namespace InvScanApp
             // nudQty
             // 
             this.nudQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudQty.Location = new System.Drawing.Point(651, 83);
+            this.nudQty.Location = new System.Drawing.Point(651, 106);
             this.nudQty.Minimum = new decimal(new int[] {
             1,
             0,
@@ -216,9 +216,9 @@ namespace InvScanApp
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(646, 25);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(114, 55);
+            this.label11.Size = new System.Drawing.Size(114, 78);
             this.label11.TabIndex = 32;
-            this.label11.Text = "Item Quantity";
+            this.label11.Text = "Quantity to Hand- Out:";
             // 
             // cmbCommodityCategory
             // 

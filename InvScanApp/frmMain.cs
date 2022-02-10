@@ -43,6 +43,47 @@ namespace InvScanApp
                 DataTable dt = new DataTable();
                 dt.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCommodity;"));
                 dgvMain.DataSource = dt;
+
+                //Set column order
+                dgvMain.Columns[2].DisplayIndex = 0;
+                dgvMain.Columns[1].DisplayIndex = 1;
+                dgvMain.Columns[5].DisplayIndex = 2;
+                dgvMain.Columns[3].DisplayIndex = 3;
+                dgvMain.Columns[4].DisplayIndex = 4;
+                dgvMain.Columns[0].DisplayIndex = 5;
+
+                //Set column names
+                dgvMain.Columns[0].HeaderText = "Barcode";
+                dgvMain.Columns[1].HeaderText = "Name";
+                dgvMain.Columns[2].HeaderText = "Category";
+                dgvMain.Columns[3].HeaderText = "Vendor";
+                dgvMain.Columns[4].HeaderText = "URL";
+                dgvMain.Columns[5].HeaderText = "Qty";
+
+                //Set column widths
+                dgvMain.Columns[0].Width = 100;
+                dgvMain.Columns[1].Width = 150;
+                dgvMain.Columns[2].Width = 125;
+                dgvMain.Columns[3].Width = 125;
+                dgvMain.Columns[4].Width = 75;
+                dgvMain.Columns[5].Width = 72;
+
+                //Sort by category
+                dgvMain.Sort(dgvMain.Columns[2], ListSortDirection.Ascending);
+
+                //Highlight zero qty items
+                foreach(DataGridViewRow row in dgvMain.Rows)
+                {
+
+                    Console.WriteLine(row.Cells[5].ToString());
+
+                    //Check quantity cell
+                    if(row.Cells[5].Value.ToString() == "0")
+                    {
+                        //Make row red
+                        row.DefaultCellStyle.BackColor = Color.LightSalmon;
+                    }
+                }
             }
             catch (Exception ex)
             {
