@@ -39,6 +39,7 @@ namespace InvScanApp
             this.cmbField = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtDetails = new System.Windows.Forms.TextBox();
             this.gpbTables.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,6 +137,7 @@ namespace InvScanApp
             this.cmbField.Name = "cmbField";
             this.cmbField.Size = new System.Drawing.Size(409, 33);
             this.cmbField.TabIndex = 12;
+            this.cmbField.SelectedIndexChanged += new System.EventHandler(this.cmbField_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -156,11 +158,22 @@ namespace InvScanApp
             this.label2.TabIndex = 14;
             this.label2.Text = "To delete the Category/Vendor, first remove or modify the affected Commodities!";
             // 
+            // txtDetails
+            // 
+            this.txtDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDetails.Location = new System.Drawing.Point(17, 232);
+            this.txtDetails.Multiline = true;
+            this.txtDetails.Name = "txtDetails";
+            this.txtDetails.ReadOnly = true;
+            this.txtDetails.Size = new System.Drawing.Size(409, 111);
+            this.txtDetails.TabIndex = 15;
+            // 
             // frmRemove
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtDetails);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbField);
@@ -172,6 +185,7 @@ namespace InvScanApp
             this.gpbTables.ResumeLayout(false);
             this.gpbTables.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -187,5 +201,6 @@ namespace InvScanApp
         private System.Windows.Forms.ComboBox cmbField;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDetails;
     }
 }

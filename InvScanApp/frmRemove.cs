@@ -31,6 +31,8 @@ namespace InvScanApp
 
         private void SetControls(object sender, EventArgs e)
         {
+            txtDetails.Text = "";
+            
             //Get the table and field
             string[] strData = GetTableField();
             
@@ -87,7 +89,7 @@ namespace InvScanApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(cmbField.SelectedItem.ToString().Length > 0)
+            if(cmbField.Text.Length > 0)
             {
                 //Get table and field
                 string[] strData = GetTableField();
@@ -100,6 +102,58 @@ namespace InvScanApp
                     //Go through each table and delete where the selected item is the primary key
                     clsDatabase.ExecuteSQLNonQ("USE TBInvDB; DELETE FROM " + strData[1] + " WHERE " + strData[0] + " = '" + cmbField.Text + "';");
                     btnBack_Click(sender, e);
+                }
+            }
+        }
+
+        private void cmbField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Because of how the combobox is populated, this conditional statement is required
+            if (cmbField.Text != "System.Data.DataRowView")
+            {
+                txtDetails.Text = "";
+
+                if (rdoCategory.Checked)
+                {
+                    //Make datatable
+                    DataTable dtName = new DataTable();
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCategory WHERE Category_Name = '" + cmbField.Text + "';");
+
+                    while (dataReader.Read())
+                    {
+                        txtDetails.Text = "Low Quantity Alert: " + dataReader["Qty_Alert"].ToString();
+                    }
+
+                    dataReader.Close();
+                }
+                else if (rdoCommodity.Checked)
+                {
+                    //Make datatable
+                    DataTable dtName = new DataTable();
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + cmbField.Text + "';");
+
+                    while (dataReader.Read())
+                    {
+                        txtDetails.Text = "Commodity Name: " + dataReader["Commodity_Name"].ToString() + "\r\n";
+                        txtDetails.Text += "Commodity Category: " + dataReader["Commodity_Category"].ToString() + "\r\n";
+                        txtDetails.Text += "Commodity Quantity: " + dataReader["Commodity_Qty"].ToString() + "\r\n";
+                        txtDetails.Text += "Vendor Name: " + dataReader["Vendor_Name"].ToString() + "\r\n";
+                    }
+
+                    dataReader.Close();
+                }
+                else if (rdoStaff.Checked)
+                {
+                    //Make datatable
+                    DataTable dtName = new DataTable();
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * FROM dbo.tblStaff WHERE Staff_ID = " + cmbField.Text + ";");
+
+                    while (dataReader.Read())
+                    {
+                        txtDetails.Text = "Staff Name: " + dataReader["Staff_Name"].ToString();
+                    }
+
+                    dataReader.Close();
                 }
             }
         }
