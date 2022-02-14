@@ -27,17 +27,8 @@ namespace InvScanApp
         {
             try
             {
-                //If the database doesn't exist, create it
-                if (!File.Exists(Settings.Default.dbDBPath.ToString()))
-                {
-                    //Create database, build tables, and insert initial data
-                    clsDatabase.InitializeDB();
-                }
-                else
-                {
-                    //Connect to the DB
-                    clsDatabase.ConnectToDB();
-                }
+                //Connect to server
+                clsDatabase.ConnectToServer();
 
                 //Populate DGV
                 DataTable dt = new DataTable();
@@ -71,12 +62,12 @@ namespace InvScanApp
                 //Sort by category
                 dgvMain.Sort(dgvMain.Columns[2], ListSortDirection.Ascending);
 
+                //Unselect row
+                dgvMain.ClearSelection();
+
                 //Highlight zero qty items
                 foreach(DataGridViewRow row in dgvMain.Rows)
                 {
-
-                    Console.WriteLine(row.Cells[5].ToString());
-
                     //Check quantity cell
                     if(row.Cells[5].Value.ToString() == "0")
                     {

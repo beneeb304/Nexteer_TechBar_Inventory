@@ -44,9 +44,9 @@ namespace InvScanApp
             this.btnSaveEmail = new System.Windows.Forms.Button();
             this.btnCancelEmail = new System.Windows.Forms.Button();
             this.gpbSQL = new System.Windows.Forms.GroupBox();
-            this.cmbString = new System.Windows.Forms.ComboBox();
-            this.btnEnter = new System.Windows.Forms.Button();
-            this.txtSQLString = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnSaveSQLServer = new System.Windows.Forms.Button();
+            this.txtSQLServerName = new System.Windows.Forms.TextBox();
             this.gpbEmail.SuspendLayout();
             this.gpbSQL.SuspendLayout();
             this.SuspendLayout();
@@ -108,7 +108,7 @@ namespace InvScanApp
             this.gpbEmail.Controls.Add(this.label2);
             this.gpbEmail.Controls.Add(this.txtEmailUsername);
             this.gpbEmail.Controls.Add(this.txtEmailPassword);
-            this.gpbEmail.Location = new System.Drawing.Point(12, 97);
+            this.gpbEmail.Location = new System.Drawing.Point(12, 68);
             this.gpbEmail.Name = "gpbEmail";
             this.gpbEmail.Size = new System.Drawing.Size(453, 110);
             this.gpbEmail.TabIndex = 13;
@@ -185,46 +185,41 @@ namespace InvScanApp
             // 
             // gpbSQL
             // 
-            this.gpbSQL.Controls.Add(this.cmbString);
-            this.gpbSQL.Controls.Add(this.btnEnter);
-            this.gpbSQL.Controls.Add(this.txtSQLString);
+            this.gpbSQL.Controls.Add(this.label6);
+            this.gpbSQL.Controls.Add(this.btnSaveSQLServer);
+            this.gpbSQL.Controls.Add(this.txtSQLServerName);
             this.gpbSQL.Location = new System.Drawing.Point(12, 12);
             this.gpbSQL.Name = "gpbSQL";
-            this.gpbSQL.Size = new System.Drawing.Size(372, 79);
+            this.gpbSQL.Size = new System.Drawing.Size(372, 50);
             this.gpbSQL.TabIndex = 14;
             this.gpbSQL.TabStop = false;
             this.gpbSQL.Text = "SQL Server Connection";
             // 
-            // cmbString
+            // label6
             // 
-            this.cmbString.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbString.FormattingEnabled = true;
-            this.cmbString.Items.AddRange(new object[] {
-            "Data Base Name",
-            "Data Base Path",
-            "Server Name",
-            "User Name",
-            "User Password"});
-            this.cmbString.Location = new System.Drawing.Point(6, 45);
-            this.cmbString.Name = "cmbString";
-            this.cmbString.Size = new System.Drawing.Size(188, 21);
-            this.cmbString.TabIndex = 11;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Server Name";
             // 
-            // btnEnter
+            // btnSaveSQLServer
             // 
-            this.btnEnter.Location = new System.Drawing.Point(200, 43);
-            this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(157, 23);
-            this.btnEnter.TabIndex = 10;
-            this.btnEnter.Text = "Save SQL String";
-            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnSaveSQLServer.Location = new System.Drawing.Point(254, 17);
+            this.btnSaveSQLServer.Name = "btnSaveSQLServer";
+            this.btnSaveSQLServer.Size = new System.Drawing.Size(112, 23);
+            this.btnSaveSQLServer.TabIndex = 10;
+            this.btnSaveSQLServer.Text = "Save SQL String";
+            this.btnSaveSQLServer.UseVisualStyleBackColor = true;
+            this.btnSaveSQLServer.Click += new System.EventHandler(this.btnSaveSQLServer_Click);
             // 
-            // txtSQLString
+            // txtSQLServerName
             // 
-            this.txtSQLString.Location = new System.Drawing.Point(6, 19);
-            this.txtSQLString.Name = "txtSQLString";
-            this.txtSQLString.Size = new System.Drawing.Size(351, 20);
-            this.txtSQLString.TabIndex = 9;
+            this.txtSQLServerName.Location = new System.Drawing.Point(78, 19);
+            this.txtSQLServerName.Name = "txtSQLServerName";
+            this.txtSQLServerName.Size = new System.Drawing.Size(170, 20);
+            this.txtSQLServerName.TabIndex = 9;
             // 
             // frmSettings
             // 
@@ -260,8 +255,8 @@ namespace InvScanApp
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSMTPPort;
         private System.Windows.Forms.GroupBox gpbSQL;
-        private System.Windows.Forms.ComboBox cmbString;
-        private System.Windows.Forms.Button btnEnter;
-        private System.Windows.Forms.TextBox txtSQLString;
+        private System.Windows.Forms.Button btnSaveSQLServer;
+        private System.Windows.Forms.TextBox txtSQLServerName;
+        private System.Windows.Forms.Label label6;
     }
 }

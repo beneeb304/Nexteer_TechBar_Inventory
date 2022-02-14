@@ -17,14 +17,20 @@ namespace InvScanApp
 
         private static string GetConnectionString()
         {
-            //Build connection string
-            return "server=" + Settings.Default.dbServerName + 
-                ";database=" + Settings.Default.dbServerName + 
-                "; UID=" + Settings.Default.dbUser + 
-                ";password=" + Settings.Default.dbPassword;
+            while(Settings.Default.dbServerName == "")
+            {
+                //Ask user for server name
+                Settings.Default.dbServerName = Microsoft.VisualBasic.Interaction.InputBox
+                    ("Check SSMS to obtain server name", "Enter SQL Server Name", "localhost\\SQLExpress");
+
+                //Save
+                Settings.Default.Save();
+            }
+
+            return "Server=" + Settings.Default.dbServerName + ";Database=master;Trusted_Connection=True;";
         }
 
-        public static SqlConnection ConnectToDB()
+        public static void ConnectToServer()
         {
             DBConn = new SqlConnection();
 
@@ -39,22 +45,14 @@ namespace InvScanApp
                 MessageBox.Show("Error Connecting to DB.");
             }
 
-            return DBConn;
+            //If the database doesn't exist, create it
+            InitializeDB();
         }
 
         public static void InitializeDB()
         {
-            //Make connection to DB
-            DBConn = new SqlConnection("Server=" + Settings.Default.dbServerName.ToString());
-
             try
             {
-                //NOTE: if the client fails to connect, nothing beyond this line of this method will execute!!!
-                //It will instead go right to the Catch().
-
-                //Connect to database
-                DBConn.Open();
-
                 //Use a string builder to help simplify some of the SQL
                 StringBuilder sbSQL = new StringBuilder();
 
@@ -188,9 +186,6 @@ namespace InvScanApp
 
         public static DataTable PopulateDGV()
         {
-            //Make connection to DB
-            SqlConnection DBConn = ConnectToDB();
-
             SqlCommand DBCmd = new SqlCommand();
 
             try

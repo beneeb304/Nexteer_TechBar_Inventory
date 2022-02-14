@@ -18,39 +18,6 @@ namespace InvScanApp
             InitializeComponent();
         }
 
-        private void btnEnter_Click(object sender, EventArgs e)
-        {
-            if (txtSQLString.Text.Length > 0)
-            {
-                string strTemp = txtSQLString.Text;
-                    
-                switch (cmbString.SelectedItem)
-                { 
-                    case "Data Base Name":
-                        Settings.Default.dbDBName = strTemp;
-                        break;
-                    case "Data Base Path":
-                        Settings.Default.dbDBPath = strTemp;
-                        break;
-                    case "Server Name":
-                        Settings.Default.dbServerName = strTemp;
-                        break;
-                    case "User Name":
-                        Settings.Default.dbUser= strTemp;
-                        break;
-                    case "User Password":
-                        Settings.Default.dbPassword= strTemp;
-                        break;
-                }
-
-                //Save
-                Settings.Default.Save();
-            } else
-            {
-                MessageBox.Show("Fill out textbox first!");
-            }
-        }
-
         private void btnBack_Click(object sender, EventArgs e)
         {
             //Show main form
@@ -87,6 +54,22 @@ namespace InvScanApp
                 //my.inbox.com - Inbox
 
                 Settings.Default.Save();
+            }
+        }
+
+        private void btnSaveSQLServer_Click(object sender, EventArgs e)
+        {
+            if (txtSQLServerName.Text.Length > 0)
+            {
+                //Set value
+                Settings.Default.dbServerName = txtSQLServerName.Text;
+
+                //Save
+                Settings.Default.Save();
+            }
+            else
+            {
+                MessageBox.Show("Fill out textbox first!");
             }
         }
     }

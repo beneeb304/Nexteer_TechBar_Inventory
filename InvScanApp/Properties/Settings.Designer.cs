@@ -26,84 +26,12 @@ namespace InvScanApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbDBPath {
-            get {
-                return ((string)(this["dbDBPath"]));
-            }
-            set {
-                this["dbDBPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbDBName {
-            get {
-                return ((string)(this["dbDBName"]));
-            }
-            set {
-                this["dbDBName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string strConnection {
-            get {
-                return ((string)(this["strConnection"]));
-            }
-            set {
-                this["strConnection"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string dbServerName {
             get {
                 return ((string)(this["dbServerName"]));
             }
             set {
                 this["dbServerName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbIP {
-            get {
-                return ((string)(this["dbIP"]));
-            }
-            set {
-                this["dbIP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbUser {
-            get {
-                return ((string)(this["dbUser"]));
-            }
-            set {
-                this["dbUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string dbPassword {
-            get {
-                return ((string)(this["dbPassword"]));
-            }
-            set {
-                this["dbPassword"] = value;
             }
         }
         
