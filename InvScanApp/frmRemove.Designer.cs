@@ -173,6 +173,7 @@ namespace InvScanApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.txtDetails);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -180,8 +181,11 @@ namespace InvScanApp
             this.Controls.Add(this.gpbTables);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSubmit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmRemove";
-            this.Text = "frmRemove";
+            this.Text = "Remove";
             this.gpbTables.ResumeLayout(false);
             this.gpbTables.PerformLayout();
             this.ResumeLayout(false);

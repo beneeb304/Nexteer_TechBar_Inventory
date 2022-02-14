@@ -226,11 +226,15 @@ namespace InvScanApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.gpbSQL);
             this.Controls.Add(this.gpbEmail);
             this.Controls.Add(this.btnBack);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmSettings";
-            this.Text = "frmSettings";
+            this.Text = "Settings";
             this.gpbEmail.ResumeLayout(false);
             this.gpbEmail.PerformLayout();
             this.gpbSQL.ResumeLayout(false);

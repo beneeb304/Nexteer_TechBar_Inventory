@@ -759,11 +759,15 @@ namespace InvScanApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tbcAdd);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddEdit";
-            this.Text = "Form1";
+            this.Text = "Add/Edit";
             this.Load += new System.EventHandler(this.frmAdd_Load);
             this.tbcAdd.ResumeLayout(false);
             this.tbpAddCommodity.ResumeLayout(false);
