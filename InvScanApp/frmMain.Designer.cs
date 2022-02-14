@@ -36,7 +36,7 @@ namespace InvScanApp
             this.btnQuit = new System.Windows.Forms.Button();
             this.dgvMain = new System.Windows.Forms.DataGridView();
             this.btnHandOut = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +46,7 @@ namespace InvScanApp
             this.btnAddEdit.Name = "btnAddEdit";
             this.btnAddEdit.Size = new System.Drawing.Size(120, 79);
             this.btnAddEdit.TabIndex = 0;
-            this.btnAddEdit.Text = "Add/Edit Inventory";
+            this.btnAddEdit.Text = "Manage Inventory";
             this.btnAddEdit.UseVisualStyleBackColor = true;
             this.btnAddEdit.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -103,7 +103,7 @@ namespace InvScanApp
             // 
             // btnHandOut
             // 
-            this.btnHandOut.Location = new System.Drawing.Point(668, 189);
+            this.btnHandOut.Location = new System.Drawing.Point(668, 104);
             this.btnHandOut.Name = "btnHandOut";
             this.btnHandOut.Size = new System.Drawing.Size(120, 79);
             this.btnHandOut.TabIndex = 6;
@@ -111,15 +111,15 @@ namespace InvScanApp
             this.btnHandOut.UseVisualStyleBackColor = true;
             this.btnHandOut.Click += new System.EventHandler(this.btnHandOut_Click);
             // 
-            // btnRemove
+            // btnReports
             // 
-            this.btnRemove.Location = new System.Drawing.Point(668, 104);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(120, 79);
-            this.btnRemove.TabIndex = 7;
-            this.btnRemove.Text = "Remove Inventory";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnReports.Location = new System.Drawing.Point(668, 189);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(120, 79);
+            this.btnReports.TabIndex = 7;
+            this.btnReports.Text = "View Reports";
+            this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // frmMain
             // 
@@ -127,7 +127,7 @@ namespace InvScanApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnHandOut);
             this.Controls.Add(this.dgvMain);
             this.Controls.Add(this.btnQuit);
@@ -152,7 +152,7 @@ namespace InvScanApp
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.DataGridView dgvMain;
         private System.Windows.Forms.Button btnHandOut;
-        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnReports;
     }
 }
 

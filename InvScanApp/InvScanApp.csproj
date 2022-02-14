@@ -78,11 +78,17 @@
   <ItemGroup>
     <Compile Include="clsDatabase.cs" />
     <Compile Include="clsEmail.cs" />
-    <Compile Include="frmAddEdit.cs">
+    <Compile Include="frmReports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddEdit.Designer.cs">
-      <DependentUpon>frmAddEdit.cs</DependentUpon>
+    <Compile Include="frmReports.Designer.cs">
+      <DependentUpon>frmReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageInventory.Designer.cs">
+      <DependentUpon>frmManageInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -96,12 +102,6 @@
     <Compile Include="frmHandOut.Designer.cs">
       <DependentUpon>frmHandOut.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRemove.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmRemove.Designer.cs">
-      <DependentUpon>frmRemove.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,8 +110,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmAddEdit.resx">
-      <DependentUpon>frmAddEdit.cs</DependentUpon>
+    <EmbeddedResource Include="frmManageInventory.resx">
+      <DependentUpon>frmManageInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHandOut.resx">
       <DependentUpon>frmHandOut.cs</DependentUpon>
@@ -119,8 +119,8 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRemove.resx">
-      <DependentUpon>frmRemove.cs</DependentUpon>
+    <EmbeddedResource Include="frmReports.resx">
+      <DependentUpon>frmReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
