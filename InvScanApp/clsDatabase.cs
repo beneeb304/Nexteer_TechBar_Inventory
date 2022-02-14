@@ -17,11 +17,11 @@ namespace InvScanApp
 
         private static string GetConnectionString()
         {
-            while(Settings.Default.dbServerName == "")
+            while (Settings.Default.dbServerName == "")
             {
                 //Ask user for server name
                 Settings.Default.dbServerName = Microsoft.VisualBasic.Interaction.InputBox
-                    ("Check SSMS to obtain server name", "Enter SQL Server Name", "localhost\\SQLExpress");
+                    ("Check SSMS to obtain server name. This is usually:\r\r(LocalDB)\\MSSQLLocalDB\r   or\rlocalhost\\SQLEXPRESS", "Enter SQL Server Name", "(LocalDB)\\MSSQLLocalD");
 
                 //Save
                 Settings.Default.Save();

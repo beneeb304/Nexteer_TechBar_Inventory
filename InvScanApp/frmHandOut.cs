@@ -144,7 +144,7 @@ namespace InvScanApp
                                     "The current in-stock quantity is " + intQty + ".\r" +
                                     "Consider re-ordering these from " + strVendor + ":\r" +
                                     strVendorURL + "\r\r" +
-                                    "Best,\r" +
+                                    "Regards,\r" +
                                     "- Ben Bot\r";
 
                                 if (!clsEmail.SendEmail(strBody, "Tech Bar Inventory - Low Quantity Alert"))

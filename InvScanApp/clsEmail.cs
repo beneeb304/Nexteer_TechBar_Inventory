@@ -13,6 +13,13 @@ namespace InvScanApp
     {
         public static bool SendEmail(string strBody, string strSubject)
         {
+            /*
+             * techbarinventory@gmail.com
+             * Technology_Bar2022!
+             * 587
+             * smtp.gmail.com
+             */
+
             string strUsername = Settings.Default.strEmailUsername;
             string strPassword =  Settings.Default.strEmailPassword;
             string strToEmail = Settings.Default.strToEmail;

@@ -68,7 +68,7 @@ namespace InvScanApp
                 //Highlight zero qty items
                 foreach(DataGridViewRow row in dgvMain.Rows)
                 {
-                    //Check quantity cell
+                    //Check for zero quantity
                     if(row.Cells[5].Value.ToString() == "0")
                     {
                         //Make row red
@@ -83,7 +83,7 @@ namespace InvScanApp
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
-        {
+        {           
             //Close the program
             Application.Exit();
         }
