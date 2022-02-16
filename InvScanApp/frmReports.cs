@@ -38,7 +38,7 @@ namespace InvScanApp
 
         private void cmbAddCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbAddCategory.SelectedIndex > 1)
+            if(cmbAddCategory.SelectedIndex > 0)
             {
                 lblLast.Visible = true;
                 lblDays.Visible = true;
@@ -98,43 +98,7 @@ namespace InvScanApp
                         dgvReport.ClearSelection();
                         break;
                     case 1:
-                        strSQL += "SELECT Category_Name FROM dbo.tblCategory";
-
-                        Dictionary<string, string> dctCategories = new Dictionary<string, string>();
-
-                        SqlDataReader dataReader;
-
-                        //Load the datatable
-                        dt.Load(clsDatabase.ExecuteSqlReader(strSQL));
-
-                        foreach(DataRow row in dt.Rows)
-                        {
-                            dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT SUM(Qty_Action) AS Quantity FROM dbo.tblLog " +
-                            "WHERE Staff_Action = 'Hand-Out' AND Commodity_Category = '" + row[0].ToString() + "'");
-
-                            while (dataReader.Read())
-                            {
-                                dctCategories.Add(row[0].ToString(), dataReader["Quantity"].ToString());
-                            }
-
-                            dataReader.Close();
-                        }
-
-                        var dctCategoriesLINQ = from row in dctCategories select new { Item = row.Key, Price = row.Value };
-
-                        dgvReport.DataSource = dctCategoriesLINQ.ToArray();
-
-                        //Set column names
-                        dgvReport.Columns[0].HeaderText = "Category";
-                        dgvReport.Columns[1].HeaderText = "Qty Handed Out";
-
-                        //Set column widths
-                        dgvReport.Columns[0].Width = 125;
-                        dgvReport.Columns[1].Width = 200;
-
-                        //Unselect row
-                        dgvReport.ClearSelection();
-
+                        CategoryBreakdown();
                         break;
                     case 2:
                         LogDays();
@@ -151,6 +115,48 @@ namespace InvScanApp
             {
                 MessageBox.Show(ex.Message, "Error with Database connections");
             }
+        }
+
+        private void CategoryBreakdown()
+        {
+            Dictionary<string, string> dctCategories = new Dictionary<string, string>();
+
+            SqlDataReader dataReader;
+
+            DataTable dt = new DataTable();
+
+            //Load the datatable
+            dt.Load(clsDatabase.ExecuteSqlReader("SELECT Category_Name FROM dbo.tblCategory"));
+
+            foreach (DataRow row in dt.Rows)
+            {
+                dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT SUM(Qty_Action) AS Quantity FROM dbo.tblLog " +
+                "WHERE Staff_Action = 'Hand-Out' AND " +
+                "Commodity_Category = '" + row[0].ToString() + "' AND " +
+                "Action_Time > GETDATE() - " + nudDays.Value + ";");
+
+                while (dataReader.Read())
+                {
+                    dctCategories.Add(row[0].ToString(), dataReader["Quantity"].ToString());
+                }
+
+                dataReader.Close();
+            }
+
+            var dctCategoriesLINQ = from row in dctCategories select new { Item = row.Key, Price = row.Value };
+
+            dgvReport.DataSource = dctCategoriesLINQ.ToArray();
+
+            //Set column names
+            dgvReport.Columns[0].HeaderText = "Category";
+            dgvReport.Columns[1].HeaderText = "Qty Handed Out";
+
+            //Set column widths
+            dgvReport.Columns[0].Width = 125;
+            dgvReport.Columns[1].Width = 200;
+
+            //Unselect row
+            dgvReport.ClearSelection();
         }
 
         private void StaffList()
@@ -280,18 +286,18 @@ namespace InvScanApp
             dgvReport.Columns[3].HeaderText = "Category";
             dgvReport.Columns[4].HeaderText = "Commodity";
             dgvReport.Columns[5].HeaderText = "Action";
-            dgvReport.Columns[6].HeaderText = "Qty of Action";
+            dgvReport.Columns[6].HeaderText = "Qty";
             dgvReport.Columns[7].HeaderText = "New Qty";
             dgvReport.Columns[8].HeaderText = "Date/Time";
 
             //Set column widths
             dgvReport.Columns[1].Width = 150;
             dgvReport.Columns[2].Width = 150;
-            dgvReport.Columns[3].Width = 125;
-            dgvReport.Columns[4].Width = 150;
-            dgvReport.Columns[5].Width = 150;
-            dgvReport.Columns[6].Width = 125;
-            dgvReport.Columns[7].Width = 150;
+            dgvReport.Columns[3].Width = 110;
+            dgvReport.Columns[4].Width = 125;
+            dgvReport.Columns[5].Width = 80;
+            dgvReport.Columns[6].Width = 50;
+            dgvReport.Columns[7].Width = 120;
             dgvReport.Columns[8].Width = 150;
 
             //Unselect row
@@ -310,6 +316,9 @@ namespace InvScanApp
         {
             switch (cmbAddCategory.SelectedIndex)
             {
+                case 1:
+                    CategoryBreakdown();
+                    break;
                 case 2:
                     LogDays();
                     break;
@@ -320,6 +329,18 @@ namespace InvScanApp
                     StaffList();
                     break;
             }
+        }
+
+        private void btnEmail_Click(object sender, EventArgs e)
+        {
+            //Make CSV file
+            
+
+            //Send email with attachment
+            clsEmail.SendEmail("Body", "Message", true);
+
+            //Delete CSV file
+
         }
     }
 }

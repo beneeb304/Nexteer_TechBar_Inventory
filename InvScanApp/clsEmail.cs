@@ -11,7 +11,13 @@ namespace InvScanApp
 {
     class clsEmail
     {
-        public static bool SendEmail(string strBody, string strSubject)
+        private static string strUsername;
+        private static string strPassword;
+        private static string strToEmail;
+        private static string strSMTPPort;
+        private static string strSMTPClient;
+        
+        private static void GetCreds()
         {
             /*
              * techbarinventory@gmail.com
@@ -20,13 +26,19 @@ namespace InvScanApp
              * smtp.gmail.com
              */
 
-            string strUsername = Settings.Default.strEmailUsername;
-            string strPassword =  Settings.Default.strEmailPassword;
-            string strToEmail = Settings.Default.strToEmail;
-            string strSMTPPort = Settings.Default.strSMTPPort;
-            string strSMTPClient = Settings.Default.strSMTPClient;
+            strUsername = Settings.Default.strEmailUsername;
+            strPassword = Settings.Default.strEmailPassword;
+            strToEmail = Settings.Default.strToEmail;
+            strSMTPPort = Settings.Default.strSMTPPort;
+            strSMTPClient = Settings.Default.strSMTPClient;
+        }
 
-            if(strUsername.Length > 0 && strPassword.Length > 0 && strToEmail.Length > 0 && strSMTPPort.Length > 0 && strSMTPClient.Length > 0)
+        public static bool SendEmail(string strBody, string strSubject, bool blnAttachments)
+        {
+            //Get email credentials
+            GetCreds();
+
+            if (strUsername.Length > 0 && strPassword.Length > 0 && strToEmail.Length > 0 && strSMTPPort.Length > 0 && strSMTPClient.Length > 0)
             {
                 try
                 {
@@ -50,6 +62,12 @@ namespace InvScanApp
 
                     //Create the content(body) of our message.
                     Msg.Body = strBody;
+
+                    //Check if we should attach any files
+                    if (blnAttachments)
+                    {
+
+                    }
 
                     // Send our account login details to the client.
                     client.Credentials = cred;

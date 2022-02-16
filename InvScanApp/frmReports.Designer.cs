@@ -32,7 +32,6 @@ namespace InvScanApp
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnGenerate = new System.Windows.Forms.Button();
             this.cmbAddCategory = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.nudDays = new System.Windows.Forms.NumericUpDown();
@@ -54,17 +53,6 @@ namespace InvScanApp
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnGenerate
-            // 
-            this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerate.Location = new System.Drawing.Point(668, 189);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(120, 79);
-            this.btnGenerate.TabIndex = 31;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // cmbAddCategory
             // 
@@ -149,6 +137,7 @@ namespace InvScanApp
             this.btnEmail.TabIndex = 38;
             this.btnEmail.Text = "Email";
             this.btnEmail.UseVisualStyleBackColor = true;
+            this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
             // 
             // dgvReport
             // 
@@ -200,7 +189,6 @@ namespace InvScanApp
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbAddCategory);
             this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.btnGenerate);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmReports";
@@ -215,7 +203,6 @@ namespace InvScanApp
 
         #endregion
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.ComboBox cmbAddCategory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nudDays;
