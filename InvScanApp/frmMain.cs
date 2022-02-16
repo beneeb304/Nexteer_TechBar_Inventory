@@ -123,7 +123,13 @@ namespace InvScanApp
 
         private void btnReports_Click(object sender, EventArgs e)
         {
+            //Show reports form
+            Form f = new frmReports();
+            f.Show();
+            f.Location = Location;
 
+            //Hide main form
+            Hide();
         }
     }
 }

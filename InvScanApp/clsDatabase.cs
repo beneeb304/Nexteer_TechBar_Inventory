@@ -120,7 +120,7 @@ namespace InvScanApp
                 sbSQL.Append(" Recipient_Name VARCHAR(100),");
                 sbSQL.Append(" Commodity_Category VARCHAR(100),");
                 sbSQL.Append(" Commodity_Name VARCHAR(100),");
-                sbSQL.Append(" Staff_Action BIT NOT NULL,");
+                sbSQL.Append(" Staff_Action VARCHAR(10) NOT NULL,");
                 sbSQL.Append(" Qty_Action INT NOT NULL,");
                 sbSQL.Append(" Qty_New INT NOT NULL,");
                 sbSQL.Append(" Action_Time DATETIME NOT NULL);");

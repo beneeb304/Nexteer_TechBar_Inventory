@@ -114,7 +114,7 @@ namespace InvScanApp
                             "'" + txtRecipientName.Text + "'," +
                             "'" + cmbCommodityCategory.Text + "'," +
                             "'" + cmbCommodityName.Text + "'," +
-                            "0," +  //staff action (1 = adding, 0 = subtracting)
+                            "'Hand-Out'," +
                             nudQty.Value + "," +
                             (intQty) + "," +
                             "'" + DateTime.Now.ToString() + "');"))

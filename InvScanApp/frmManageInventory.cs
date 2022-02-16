@@ -76,7 +76,7 @@ namespace InvScanApp
                                     "''," + //user name
                                     "'" + cmbAddCommodities.Text + "'," +
                                     "'" + cmbAddCategory.Text + "'," +
-                                    "1," +  //staff action (1 = adding, 0 = subtracting)
+                                    "'Add'," +
                                     nudAddQty.Value + "," +
                                     (intQty + nudAddQty.Value) + "," +
                                     "'" + DateTime.Now.ToString() + "');");
@@ -114,7 +114,7 @@ namespace InvScanApp
                                     "''," + //user name
                                     "'" + txtCreateCommodity.Text + "'," +
                                     "'" + cmbCreateCategory.Text + "'," +
-                                    "1," +  //staff action (1 = adding, 0 = subtracting)
+                                    "'Add'," +
                                     nudCreateQty.Value + "," +
                                     nudCreateQty.Value + "," +
                                     "'" + DateTime.Now.ToString() + "');");
