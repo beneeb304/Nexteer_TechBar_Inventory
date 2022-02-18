@@ -282,14 +282,6 @@ namespace InvScanApp
             dgvReport.ClearSelection();
         }
 
-        private void btnGenerate_Click(object sender, EventArgs e)
-        {
-            if(cmbReportType.SelectedIndex > -1)
-            {
-
-            }
-        }
-
         private void nudDays_ValueChanged(object sender, EventArgs e)
         {
             switch (cmbReportType.SelectedIndex)

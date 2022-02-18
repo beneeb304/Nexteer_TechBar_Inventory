@@ -26,7 +26,12 @@ namespace InvScanApp
              * techbarinventory@gmail.com
              * Technology_Bar2022!
              * 587
-             * smtp.gmail.com
+             * 
+             * smtp.gmail.com - Gmail
+             * smtp.live.com - Windows live / Hotmail
+             * smtp.mail.yahoo.com - Yahoo
+             * smtp.aim.com - AIM
+             * my.inbox.com - Inbox
              */
 
             strUsername = Settings.Default.strEmailUsername;

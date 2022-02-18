@@ -33,16 +33,7 @@ namespace InvScanApp
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            txtEmailUsername.Text = "";
-            txtEmailPassword.Text = "";
-            txtSMTPClient.Text = "";
-            txtToEmail.Text = "";
-            txtSMTPPort.Text = "";
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             switch (tbcSettings.SelectedIndex)
             {
@@ -131,18 +122,22 @@ namespace InvScanApp
 
                     break;
                 case 4:
-                    if (txtEmailUsername.Text.Length > 0 && txtEmailPassword.Text.Length > 0 && txtSMTPClient.Text.Length > 0 && txtToEmail.Text.Length > 0 && txtSMTPPort.Text.Length > 0)
+                    try
                     {
+                        var fromEmail = new System.Net.Mail.MailAddress(txtEmailUsername.Text);
+                        var toEmail = new System.Net.Mail.MailAddress(txtToEmail.Text);
+                        int intSMTP = int.Parse(txtSMTPPort.Text);
+
+                        if (txtEmailPassword.Text.Length == 0 || txtSMTPClient.Text.Length == 0)
+                        {
+                            throw new Exception();
+                        }
+
                         Settings.Default.strEmailUsername = txtEmailUsername.Text;
                         Settings.Default.strEmailPassword = txtEmailPassword.Text;
                         Settings.Default.strToEmail = txtToEmail.Text;
                         Settings.Default.strSMTPPort = txtSMTPPort.Text;
                         Settings.Default.strSMTPClient = txtSMTPClient.Text;
-                        //smtp.gmail.com - Gmail
-                        //smtp.live.com - Windows live / Hotmail
-                        //smtp.mail.yahoo.com - Yahoo
-                        //smtp.aim.com - AIM
-                        //my.inbox.com - Inbox
 
                         Settings.Default.Save();
 
@@ -151,7 +146,12 @@ namespace InvScanApp
 
                         btnBack_Click(sender, e);
                     }
-                    
+                    catch (Exception)
+                    {
+                        //Alert user
+                        MessageBox.Show("Make sure to fill out all fields with valid data!", "Error");
+                    }
+
                     break;
                 case 5:
                     //Make sure all fields are filled out

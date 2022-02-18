@@ -22,63 +22,51 @@ namespace InvScanApp
         }
 
         private void frmHandOut_Load(object sender, EventArgs e)
-        {
+        {            
             //Make datatables
             DataTable dtCat = new DataTable();
             DataTable dtStaff = new DataTable();
-
-            //Get list of categories and populate combobox
-            dtCat.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
-            cmbCommodityCategory.DataSource = dtCat;
-            cmbCommodityCategory.ValueMember = "Category_Name";
-            cmbCommodityCategory.SelectedIndex = -1;
 
             //Get list of staff names and populate combobox
             dtStaff.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff;"));
             cmbStaffName.DataSource = dtStaff;
             cmbStaffName.ValueMember = "Staff_Name";
             cmbStaffName.SelectedIndex = -1;
+
+            //Get list of categories and populate combobox
+            dtCat.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
+            cmbCommodityCategory.DataSource = dtCat;
+            cmbCommodityCategory.ValueMember = "Category_Name";
+            cmbCommodityCategory.SelectedIndex = -1;
         }
 
-        private void cmbItemCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Make datatable
-            DataTable dtName = new DataTable();
-
-            //Get list of item names for selected category and populate combobox
-            dtName.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "';"));
-            cmbCommodityName.DataSource = dtName;
-            cmbCommodityName.ValueMember = "Commodity_Name";
-            cmbCommodityName.SelectedIndex = -1;
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void btnHandOut_Click(object sender, EventArgs e)
         {
             string strError = "Please fill out the following information before continuing!\n\n";
 
             //Make sure Item info is filled out
-            if((cmbCommodityCategory.Text == "" || cmbCommodityName.Text == "") && txtCommodityBarcode.Text == "")
+            if ((cmbCommodityCategory.Text == "" || cmbCommodityName.Text == "") && txtCommodityBarcode.Text == "")
             {
                 //Something isn't filled out, so inform user
                 strError += "Item Category, Item Name OR Item ID (barcode)\n";
             }
 
             //Make sure Staff info is filled out
-            if(cmbStaffName.Text == "" && txtStaffID.Text == "")
+            if (cmbStaffName.Text == "" && txtStaffID.Text == "")
             {
                 //Something isn't filled out, so inform user
                 strError += "Staff Name OR Staff ID (QR code)\n";
             }
 
             //Make sure Recipient info is filled out
-            if(txtRecipientName.Text == "")
+            if (txtRecipientName.Text == "")
             {
                 //Something isn't filled out, so inform user
                 strError += "Recipient Name\n";
             }
 
             //Check if we had any errors
-            if(strError.Contains("Item") || strError.Contains("Staff") || strError.Contains("Recipient"))
+            if (strError.Contains("Item") || strError.Contains("Staff") || strError.Contains("Recipient"))
             {
                 MessageBox.Show(strError, "Error");
             }
@@ -106,8 +94,8 @@ namespace InvScanApp
                     }
                     else
                     {
-                        intQty = (intQty - (int) nudQty.Value);
-                        
+                        intQty = (intQty - (int)nudQty.Value);
+
                         //Add transaction to Log table
                         if (clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
                             "'" + cmbStaffName.Text + "'," +
@@ -120,7 +108,7 @@ namespace InvScanApp
                             "'" + DateTime.Now.ToString() + "');"))
                         {
                             //Remove items from Commodity table
-                            if(clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
+                            if (clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
                                 (intQty) +
                                 " WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "' AND Commodity_Name = '" + cmbCommodityName.Text + "'"))
                             {
@@ -138,7 +126,7 @@ namespace InvScanApp
 
                             dataReader.Close();
 
-                            if(intQty <= intLowQty)
+                            if (intQty <= intLowQty)
                             {
                                 string strBody = "Low quantity alert triggered for " + cmbCommodityName.Text + ".\r" +
                                     "The current in-stock quantity is " + intQty + ".\r" +
@@ -160,6 +148,18 @@ namespace InvScanApp
 
             //Back to home
             btnBack_Click(sender, e);
+        }
+
+        private void cmbItemCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Make datatable
+            DataTable dtName = new DataTable();
+
+            //Get list of item names for selected category and populate combobox
+            dtName.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "';"));
+            cmbCommodityName.DataSource = dtName;
+            cmbCommodityName.ValueMember = "Commodity_Name";
+            cmbCommodityName.SelectedIndex = -1;
         }
 
         private void cmbStaffName_SelectedIndexChanged(object sender, EventArgs e)
