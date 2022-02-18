@@ -322,5 +322,17 @@ namespace InvScanApp
                 }
             }
         }
+
+        private void tbcSettings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tbcSettings.SelectedTab == tbpEmail)
+            {
+                txtEmailPassword.Text = Settings.Default.strEmailPassword;
+                txtEmailUsername.Text = Settings.Default.strEmailUsername;
+                txtToEmail.Text = Settings.Default.strToEmail;
+                txtSMTPClient.Text = Settings.Default.strSMTPClient;
+                txtSMTPPort.Text = Settings.Default.strSMTPPort;
+            }
+        }
     }
 }

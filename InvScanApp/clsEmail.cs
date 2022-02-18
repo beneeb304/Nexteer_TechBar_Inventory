@@ -1,11 +1,14 @@
 ﻿using InvScanApp.Properties;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InvScanApp
 {
@@ -16,7 +19,7 @@ namespace InvScanApp
         private static string strToEmail;
         private static string strSMTPPort;
         private static string strSMTPClient;
-        
+
         private static void GetCreds()
         {
             /*
@@ -33,7 +36,7 @@ namespace InvScanApp
             strSMTPClient = Settings.Default.strSMTPClient;
         }
 
-        public static bool SendEmail(string strBody, string strSubject, bool blnAttachments)
+        public static void SendEmail(string strBody, string strSubject, string strAttachment)
         {
             //Get email credentials
             GetCreds();
@@ -64,9 +67,9 @@ namespace InvScanApp
                     Msg.Body = strBody;
 
                     //Check if we should attach any files
-                    if (blnAttachments)
+                    if (strAttachment != "")
                     {
-
+                        Msg.Attachments.Add(new Attachment(strAttachment));
                     }
 
                     // Send our account login details to the client.
@@ -75,19 +78,31 @@ namespace InvScanApp
                     //Enabling SSL(Secure Sockets Layer, encyription) is reqiured by most email providers to send mail
                     client.EnableSsl = true;
 
+                    //Add callback
+                    client.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
+
                     // Send our email.
                     client.SendMailAsync(Msg);
-
-                    return true;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    return false;
+                    MessageBox.Show("Error sending email. Please ensure proper email credentials are saved to the system in Settings\r\r" +
+                        "Specific Error:\r" + ex.Message, "Error");
                 }   
             }
+        }
 
-            return false;
+        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            if(e.Error != null)
+            {
+                MessageBox.Show("Error sending email. Please ensure proper email credentials are saved to the system in Settings\r\r" +
+                        "Specific Error:\r" + e.Error, "Error");
+            }
+            else
+            {
+                MessageBox.Show("Email Sent. Report will appear in your inbox shortly.", "Success");
+            }
         }
     }
 }

@@ -147,10 +147,7 @@ namespace InvScanApp
                                     "Regards,\r" +
                                     "- Ben Bot\r";
 
-                                if (!clsEmail.SendEmail(strBody, "Tech Bar Inventory - Low Quantity Alert", false))
-                                {
-                                    MessageBox.Show("Email failed to send - here's the alert:\r\r" + strBody, "Error");
-                                }
+                                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Low Quantity Alert", "");
                             }
                         }
                     }

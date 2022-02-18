@@ -1,11 +1,13 @@
 ﻿using InvScanApp.Properties;
 using Microsoft.Reporting.WinForms;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +22,6 @@ namespace InvScanApp
             InitializeComponent();
         }
 
-        private void frmReports_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnBack_Click(object sender, EventArgs e)
         {
             //Show main form
@@ -34,25 +31,6 @@ namespace InvScanApp
 
             //Hide hand-out form
             Close();
-        }
-
-        private void cmbAddCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cmbAddCategory.SelectedIndex > 0)
-            {
-                lblLast.Visible = true;
-                lblDays.Visible = true;
-                nudDays.Visible = true;
-            }
-            else
-            {
-                lblLast.Visible = false;
-                lblDays.Visible = false;
-                nudDays.Visible = false;
-            }
-
-            //Set the data
-            PopulateDGV();
         }
 
         private void PopulateDGV()
@@ -68,7 +46,7 @@ namespace InvScanApp
                 //SQL query
                 string strSQL = "USE TBInvDB; ";
 
-                switch (cmbAddCategory.SelectedIndex)
+                switch (cmbReportType.SelectedIndex)
                 {
                     case 0:
                         //Set SQL query
@@ -306,7 +284,7 @@ namespace InvScanApp
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            if(cmbAddCategory.SelectedIndex > -1)
+            if(cmbReportType.SelectedIndex > -1)
             {
 
             }
@@ -314,7 +292,7 @@ namespace InvScanApp
 
         private void nudDays_ValueChanged(object sender, EventArgs e)
         {
-            switch (cmbAddCategory.SelectedIndex)
+            switch (cmbReportType.SelectedIndex)
             {
                 case 1:
                     CategoryBreakdown();
@@ -333,14 +311,85 @@ namespace InvScanApp
 
         private void btnEmail_Click(object sender, EventArgs e)
         {
-            //Make CSV file
-            
+            //Only continue if there is data to email
+            if(dgvReport.Rows.Count > 0)
+            {
+                //Allow user to send to a different email
+                string strEmail = Interaction.InputBox("To what address should I email the report?", "Confirm Email", Settings.Default.strToEmail);
+                string strFile = "report" + DateTimeOffset.Now.ToUnixTimeSeconds() + ".csv";
+                string strFilePath = "Reports\\" + strFile;
+                string strPath = "\\Reports";
+                Directory.CreateDirectory(strPath);
 
-            //Send email with attachment
-            clsEmail.SendEmail("Body", "Message", true);
+                try
+                {
+                    //See if valid email
+                    var addEmail = new System.Net.Mail.MailAddress(strEmail);
+                    strEmail = addEmail.ToString();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("You must enter a valid address before emailing the report", "Error");
+                    return;
+                }
 
-            //Delete CSV file
+                try
+                {
+                    //Make CSV file
+                    var sb = new StringBuilder();
 
+                    var headers = dgvReport.Columns.Cast<DataGridViewColumn>();
+                    sb.AppendLine(string.Join(",", headers.Select(column => "\"" + column.HeaderText + "\"").ToArray()));
+
+                    foreach (DataGridViewRow row in dgvReport.Rows)
+                    {
+                        var cells = row.Cells.Cast<DataGridViewCell>();
+                        sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
+                    }
+
+                    File.WriteAllText(strFilePath, sb.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error exporting report\r\n" + ex.Message, "Error");
+                    return;
+                }
+
+                //Send email
+                string strWhichReport = cmbReportType.Text;
+
+                if(cmbReportType.SelectedIndex > 0)
+                {
+                    strWhichReport += " for the last " + nudDays.Value + " days";
+                }
+
+                string strBody = "A Tech Bar Inventory report has been generated for " + strWhichReport + ".\r" +
+                    "Please reference '" + strFile + "' (attached to this email) using Excel to view the report.\r\r" +
+                    "Regards,\r" +
+                    "- Ben Bot\r";
+
+                //Send email with attachment
+                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strFilePath);
+            }
+        }
+
+        private void cmbReportType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbReportType.SelectedIndex > 0)
+            {
+                lblLast.Visible = true;
+                lblDays.Visible = true;
+                nudDays.Visible = true;
+            }
+            else
+            {
+                lblLast.Visible = false;
+                lblDays.Visible = false;
+                nudDays.Visible = false;
+            }
+
+            //Set the data
+            PopulateDGV();
         }
     }
 }

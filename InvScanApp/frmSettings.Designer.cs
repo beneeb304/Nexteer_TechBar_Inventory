@@ -41,11 +41,22 @@ namespace InvScanApp
             this.label29 = new System.Windows.Forms.Label();
             this.txtVendor = new System.Windows.Forms.TextBox();
             this.tbpStaff = new System.Windows.Forms.TabPage();
+            this.rdoType = new System.Windows.Forms.RadioButton();
+            this.rdoScan = new System.Windows.Forms.RadioButton();
             this.label30 = new System.Windows.Forms.Label();
             this.txtStaffID = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.txtStaff = new System.Windows.Forms.TextBox();
-            this.tbpSQL = new System.Windows.Forms.TabPage();
+            this.tbpRemove = new System.Windows.Forms.TabPage();
+            this.txtDetails = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbField = new System.Windows.Forms.ComboBox();
+            this.gpbTables = new System.Windows.Forms.GroupBox();
+            this.rdoStaff = new System.Windows.Forms.RadioButton();
+            this.rdoVendor = new System.Windows.Forms.RadioButton();
+            this.rdoCommodity = new System.Windows.Forms.RadioButton();
+            this.rdoCategory = new System.Windows.Forms.RadioButton();
             this.tbpEmail = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSMTPPort = new System.Windows.Forms.TextBox();
@@ -57,30 +68,19 @@ namespace InvScanApp
             this.label2 = new System.Windows.Forms.Label();
             this.txtEmailUsername = new System.Windows.Forms.TextBox();
             this.txtEmailPassword = new System.Windows.Forms.TextBox();
+            this.tbpSQL = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.txtSQLServerName = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.rdoScan = new System.Windows.Forms.RadioButton();
-            this.rdoType = new System.Windows.Forms.RadioButton();
-            this.tbpRemove = new System.Windows.Forms.TabPage();
-            this.txtDetails = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmbField = new System.Windows.Forms.ComboBox();
-            this.gpbTables = new System.Windows.Forms.GroupBox();
-            this.rdoStaff = new System.Windows.Forms.RadioButton();
-            this.rdoVendor = new System.Windows.Forms.RadioButton();
-            this.rdoCommodity = new System.Windows.Forms.RadioButton();
-            this.rdoCategory = new System.Windows.Forms.RadioButton();
             this.tbcSettings.SuspendLayout();
             this.tbpCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).BeginInit();
             this.tbpVendor.SuspendLayout();
             this.tbpStaff.SuspendLayout();
-            this.tbpSQL.SuspendLayout();
-            this.tbpEmail.SuspendLayout();
             this.tbpRemove.SuspendLayout();
             this.gpbTables.SuspendLayout();
+            this.tbpEmail.SuspendLayout();
+            this.tbpSQL.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBack
@@ -107,6 +107,7 @@ namespace InvScanApp
             this.tbcSettings.SelectedIndex = 0;
             this.tbcSettings.Size = new System.Drawing.Size(650, 426);
             this.tbcSettings.TabIndex = 19;
+            this.tbcSettings.SelectedIndexChanged += new System.EventHandler(this.tbcSettings_SelectedIndexChanged);
             // 
             // tbpCategory
             // 
@@ -217,6 +218,30 @@ namespace InvScanApp
             this.tbpStaff.Text = "Create Staff";
             this.tbpStaff.UseVisualStyleBackColor = true;
             // 
+            // rdoType
+            // 
+            this.rdoType.AutoSize = true;
+            this.rdoType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoType.Location = new System.Drawing.Point(535, 88);
+            this.rdoType.Name = "rdoType";
+            this.rdoType.Size = new System.Drawing.Size(104, 29);
+            this.rdoType.TabIndex = 20;
+            this.rdoType.Text = "Type ID";
+            this.rdoType.UseVisualStyleBackColor = true;
+            // 
+            // rdoScan
+            // 
+            this.rdoScan.AutoSize = true;
+            this.rdoScan.Checked = true;
+            this.rdoScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdoScan.Location = new System.Drawing.Point(424, 88);
+            this.rdoScan.Name = "rdoScan";
+            this.rdoScan.Size = new System.Drawing.Size(105, 29);
+            this.rdoScan.TabIndex = 19;
+            this.rdoScan.TabStop = true;
+            this.rdoScan.Text = "Scan ID";
+            this.rdoScan.UseVisualStyleBackColor = true;
+            // 
             // label30
             // 
             this.label30.AutoSize = true;
@@ -254,179 +279,6 @@ namespace InvScanApp
             this.txtStaff.Name = "txtStaff";
             this.txtStaff.Size = new System.Drawing.Size(452, 31);
             this.txtStaff.TabIndex = 14;
-            // 
-            // tbpSQL
-            // 
-            this.tbpSQL.Controls.Add(this.label6);
-            this.tbpSQL.Controls.Add(this.txtSQLServerName);
-            this.tbpSQL.Location = new System.Drawing.Point(4, 33);
-            this.tbpSQL.Name = "tbpSQL";
-            this.tbpSQL.Size = new System.Drawing.Size(642, 389);
-            this.tbpSQL.TabIndex = 6;
-            this.tbpSQL.Text = "SQL";
-            this.tbpSQL.UseVisualStyleBackColor = true;
-            // 
-            // tbpEmail
-            // 
-            this.tbpEmail.Controls.Add(this.label5);
-            this.tbpEmail.Controls.Add(this.txtSMTPPort);
-            this.tbpEmail.Controls.Add(this.label4);
-            this.tbpEmail.Controls.Add(this.txtToEmail);
-            this.tbpEmail.Controls.Add(this.label3);
-            this.tbpEmail.Controls.Add(this.txtSMTPClient);
-            this.tbpEmail.Controls.Add(this.label1);
-            this.tbpEmail.Controls.Add(this.label2);
-            this.tbpEmail.Controls.Add(this.txtEmailUsername);
-            this.tbpEmail.Controls.Add(this.txtEmailPassword);
-            this.tbpEmail.Location = new System.Drawing.Point(4, 33);
-            this.tbpEmail.Name = "tbpEmail";
-            this.tbpEmail.Size = new System.Drawing.Size(642, 389);
-            this.tbpEmail.TabIndex = 7;
-            this.tbpEmail.Text = "Email";
-            this.tbpEmail.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 144);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(122, 25);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "SMTP Port:";
-            // 
-            // txtSMTPPort
-            // 
-            this.txtSMTPPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSMTPPort.Location = new System.Drawing.Point(202, 138);
-            this.txtSMTPPort.Name = "txtSMTPPort";
-            this.txtSMTPPort.Size = new System.Drawing.Size(75, 31);
-            this.txtSMTPPort.TabIndex = 32;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 181);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 25);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "To Email:";
-            // 
-            // txtToEmail
-            // 
-            this.txtToEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtToEmail.Location = new System.Drawing.Point(202, 175);
-            this.txtToEmail.Name = "txtToEmail";
-            this.txtToEmail.Size = new System.Drawing.Size(270, 31);
-            this.txtToEmail.TabIndex = 30;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 104);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(193, 25);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "From SMTP Client:";
-            // 
-            // txtSMTPClient
-            // 
-            this.txtSMTPClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSMTPClient.Location = new System.Drawing.Point(202, 101);
-            this.txtSMTPClient.Name = "txtSMTPClient";
-            this.txtSMTPClient.Size = new System.Drawing.Size(270, 31);
-            this.txtSMTPClient.TabIndex = 28;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 25);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "From Username:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 25);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "From Password:";
-            // 
-            // txtEmailUsername
-            // 
-            this.txtEmailUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmailUsername.Location = new System.Drawing.Point(202, 27);
-            this.txtEmailUsername.Name = "txtEmailUsername";
-            this.txtEmailUsername.Size = new System.Drawing.Size(270, 31);
-            this.txtEmailUsername.TabIndex = 22;
-            // 
-            // txtEmailPassword
-            // 
-            this.txtEmailPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmailPassword.Location = new System.Drawing.Point(202, 64);
-            this.txtEmailPassword.Name = "txtEmailPassword";
-            this.txtEmailPassword.PasswordChar = '*';
-            this.txtEmailPassword.Size = new System.Drawing.Size(270, 31);
-            this.txtEmailPassword.TabIndex = 23;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(3, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(137, 25);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Server Name";
-            // 
-            // txtSQLServerName
-            // 
-            this.txtSQLServerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSQLServerName.Location = new System.Drawing.Point(146, 25);
-            this.txtSQLServerName.Name = "txtSQLServerName";
-            this.txtSQLServerName.Size = new System.Drawing.Size(294, 31);
-            this.txtSQLServerName.TabIndex = 21;
-            // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Location = new System.Drawing.Point(668, 232);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(120, 100);
-            this.btnSubmit.TabIndex = 20;
-            this.btnSubmit.Text = "Submit";
-            this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
-            // rdoScan
-            // 
-            this.rdoScan.AutoSize = true;
-            this.rdoScan.Checked = true;
-            this.rdoScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoScan.Location = new System.Drawing.Point(424, 88);
-            this.rdoScan.Name = "rdoScan";
-            this.rdoScan.Size = new System.Drawing.Size(105, 29);
-            this.rdoScan.TabIndex = 19;
-            this.rdoScan.TabStop = true;
-            this.rdoScan.Text = "Scan ID";
-            this.rdoScan.UseVisualStyleBackColor = true;
-            // 
-            // rdoType
-            // 
-            this.rdoType.AutoSize = true;
-            this.rdoType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdoType.Location = new System.Drawing.Point(535, 88);
-            this.rdoType.Name = "rdoType";
-            this.rdoType.Size = new System.Drawing.Size(104, 29);
-            this.rdoType.TabIndex = 20;
-            this.rdoType.Text = "Type ID";
-            this.rdoType.UseVisualStyleBackColor = true;
             // 
             // tbpRemove
             // 
@@ -547,6 +399,155 @@ namespace InvScanApp
             this.rdoCategory.UseVisualStyleBackColor = true;
             this.rdoCategory.Click += new System.EventHandler(this.SetControls);
             // 
+            // tbpEmail
+            // 
+            this.tbpEmail.Controls.Add(this.label5);
+            this.tbpEmail.Controls.Add(this.txtSMTPPort);
+            this.tbpEmail.Controls.Add(this.label4);
+            this.tbpEmail.Controls.Add(this.txtToEmail);
+            this.tbpEmail.Controls.Add(this.label3);
+            this.tbpEmail.Controls.Add(this.txtSMTPClient);
+            this.tbpEmail.Controls.Add(this.label1);
+            this.tbpEmail.Controls.Add(this.label2);
+            this.tbpEmail.Controls.Add(this.txtEmailUsername);
+            this.tbpEmail.Controls.Add(this.txtEmailPassword);
+            this.tbpEmail.Location = new System.Drawing.Point(4, 33);
+            this.tbpEmail.Name = "tbpEmail";
+            this.tbpEmail.Size = new System.Drawing.Size(642, 389);
+            this.tbpEmail.TabIndex = 7;
+            this.tbpEmail.Text = "Email";
+            this.tbpEmail.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(122, 25);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "SMTP Port:";
+            // 
+            // txtSMTPPort
+            // 
+            this.txtSMTPPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSMTPPort.Location = new System.Drawing.Point(202, 138);
+            this.txtSMTPPort.Name = "txtSMTPPort";
+            this.txtSMTPPort.Size = new System.Drawing.Size(75, 31);
+            this.txtSMTPPort.TabIndex = 32;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 181);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 25);
+            this.label4.TabIndex = 31;
+            this.label4.Text = "To Email:";
+            // 
+            // txtToEmail
+            // 
+            this.txtToEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtToEmail.Location = new System.Drawing.Point(202, 175);
+            this.txtToEmail.Name = "txtToEmail";
+            this.txtToEmail.Size = new System.Drawing.Size(270, 31);
+            this.txtToEmail.TabIndex = 30;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 104);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(193, 25);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "From SMTP Client:";
+            // 
+            // txtSMTPClient
+            // 
+            this.txtSMTPClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSMTPClient.Location = new System.Drawing.Point(202, 101);
+            this.txtSMTPClient.Name = "txtSMTPClient";
+            this.txtSMTPClient.Size = new System.Drawing.Size(270, 31);
+            this.txtSMTPClient.TabIndex = 28;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(171, 25);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "From Username:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(167, 25);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "From Password:";
+            // 
+            // txtEmailUsername
+            // 
+            this.txtEmailUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmailUsername.Location = new System.Drawing.Point(202, 27);
+            this.txtEmailUsername.Name = "txtEmailUsername";
+            this.txtEmailUsername.Size = new System.Drawing.Size(270, 31);
+            this.txtEmailUsername.TabIndex = 22;
+            // 
+            // txtEmailPassword
+            // 
+            this.txtEmailPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmailPassword.Location = new System.Drawing.Point(202, 64);
+            this.txtEmailPassword.Name = "txtEmailPassword";
+            this.txtEmailPassword.PasswordChar = '*';
+            this.txtEmailPassword.Size = new System.Drawing.Size(270, 31);
+            this.txtEmailPassword.TabIndex = 23;
+            // 
+            // tbpSQL
+            // 
+            this.tbpSQL.Controls.Add(this.label6);
+            this.tbpSQL.Controls.Add(this.txtSQLServerName);
+            this.tbpSQL.Location = new System.Drawing.Point(4, 33);
+            this.tbpSQL.Name = "tbpSQL";
+            this.tbpSQL.Size = new System.Drawing.Size(642, 389);
+            this.tbpSQL.TabIndex = 6;
+            this.tbpSQL.Text = "SQL";
+            this.tbpSQL.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(3, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(137, 25);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Server Name";
+            // 
+            // txtSQLServerName
+            // 
+            this.txtSQLServerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSQLServerName.Location = new System.Drawing.Point(146, 25);
+            this.txtSQLServerName.Name = "txtSQLServerName";
+            this.txtSQLServerName.Size = new System.Drawing.Size(294, 31);
+            this.txtSQLServerName.TabIndex = 21;
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(668, 232);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(120, 100);
+            this.btnSubmit.TabIndex = 20;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,14 +570,14 @@ namespace InvScanApp
             this.tbpVendor.PerformLayout();
             this.tbpStaff.ResumeLayout(false);
             this.tbpStaff.PerformLayout();
-            this.tbpSQL.ResumeLayout(false);
-            this.tbpSQL.PerformLayout();
-            this.tbpEmail.ResumeLayout(false);
-            this.tbpEmail.PerformLayout();
             this.tbpRemove.ResumeLayout(false);
             this.tbpRemove.PerformLayout();
             this.gpbTables.ResumeLayout(false);
             this.gpbTables.PerformLayout();
+            this.tbpEmail.ResumeLayout(false);
+            this.tbpEmail.PerformLayout();
+            this.tbpSQL.ResumeLayout(false);
+            this.tbpSQL.PerformLayout();
             this.ResumeLayout(false);
 
         }
