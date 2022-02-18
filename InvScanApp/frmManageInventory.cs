@@ -21,10 +21,10 @@ namespace InvScanApp
             InitializeComponent();
         }
 
-        private void frmAdd_Load(object sender, EventArgs e)
+        private void frmManageInventory_Load(object sender, EventArgs e)
         {
             //Click the tab control to populate combo boxes
-            tbcAdd_SelectedIndexChanged(sender, e);
+            tbcManage_SelectedIndexChanged(sender, e);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -199,7 +199,7 @@ namespace InvScanApp
             btnBack_Click(sender, e);
         }
 
-        private void tbcAdd_SelectedIndexChanged(object sender, EventArgs e)
+        private void tbcManage_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (tbcManage.SelectedIndex)
             {
@@ -233,11 +233,11 @@ namespace InvScanApp
                     break;
                 case 2:
                     //Make datatable
-                    DataTable dt2OldCategory = new DataTable();
+                    DataTable dtOldCategory = new DataTable();
 
                     //Get list of commodities
-                    dt2OldCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
-                    cmbEditCategory.DataSource = dt2OldCategory;
+                    dtOldCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
+                    cmbEditCategory.DataSource = dtOldCategory;
                     cmbEditCategory.ValueMember = "Category_Name";
                     cmbEditCategory.SelectedIndex = -1;
                     break;
@@ -254,7 +254,7 @@ namespace InvScanApp
             }
         }
 
-        private void cmb0Category_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbAddCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Make datatable
             DataTable dtCommodity = new DataTable();
@@ -267,7 +267,7 @@ namespace InvScanApp
             cmbAddCommodities.SelectedIndex = -1;
         }
 
-        private void cmb2Category_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbEditCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             //First, clear any data from beneath
             cmbEditNewCategory.DataSource = null;
@@ -291,7 +291,7 @@ namespace InvScanApp
             cmbEditCommodities.SelectedIndex = -1;
         }
 
-        private void chk2Qty_CheckedChanged(object sender, EventArgs e)
+        private void chkEditQty_CheckedChanged(object sender, EventArgs e)
         {
             if (chkEditQty.Checked)
             {
@@ -305,23 +305,23 @@ namespace InvScanApp
             }
         }
 
-        private void btn2Lookup_Click(object sender, EventArgs e)
+        private void btnEditLookup_Click(object sender, EventArgs e)
         {
             //Make sure all fields are filled out
             if (cmbEditCategory.Text.Length > 0 && cmbEditCommodities.Text.Length > 0)
             {
                 //Comboboxes
-                DataTable dt2NewCategory = new DataTable();
-                DataTable dt2Vendor = new DataTable();
+                DataTable dtNewCategory = new DataTable();
+                DataTable dtVendor = new DataTable();
 
                 //Get list of commodities
-                dt2NewCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
-                cmbEditNewCategory.DataSource = dt2NewCategory;
+                dtNewCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
+                cmbEditNewCategory.DataSource = dtNewCategory;
                 cmbEditNewCategory.ValueMember = "Category_Name";
 
                 //Get list of vendors
-                dt2Vendor.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_Name FROM dbo.tblVendor;"));
-                cmbEditNewVendor.DataSource = dt2Vendor;
+                dtVendor.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_Name FROM dbo.tblVendor;"));
+                cmbEditNewVendor.DataSource = dtVendor;
                 cmbEditNewVendor.ValueMember = "Vendor_Name";
 
                 //Comboboxes and textboxes
@@ -352,7 +352,7 @@ namespace InvScanApp
             }
         }
 
-        private void cmb2Commodities_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbEditCommodities_SelectedIndexChanged(object sender, EventArgs e)
         {
             //First, clear any data from beneath
             cmbEditNewCategory.DataSource = null;
@@ -389,7 +389,7 @@ namespace InvScanApp
             }
         }
 
-        private void txt0Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void txtAddBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //Checking if scanner starts with a TAB and ends with a CR
             if (e.KeyData == Keys.Tab)
@@ -414,7 +414,7 @@ namespace InvScanApp
             }
         }
 
-        private void txt1Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void txtCreateBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //Checking if scanner starts with a TAB and ends with a CR
             if (e.KeyData == Keys.Tab)
@@ -439,7 +439,7 @@ namespace InvScanApp
             }
         }
 
-        private void txt2Barcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void txtEditBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //Checking if scanner starts with a TAB and ends with a CR
             if (e.KeyData == Keys.Tab)
@@ -464,7 +464,7 @@ namespace InvScanApp
             }
         }
 
-        private void txt0Barcode_KeyUp(object sender, KeyEventArgs e)
+        private void txtAddBarcode_KeyUp(object sender, KeyEventArgs e)
         {
             if (txtAddBarcode.Text.Length == 1 && blnBarcode == false)
             {
@@ -496,7 +496,7 @@ namespace InvScanApp
             }
         }
 
-        private void txt1Barcode_KeyUp(object sender, KeyEventArgs e)
+        private void txtCreateBarcode_KeyUp(object sender, KeyEventArgs e)
         {
             if (txtCreateBarcode.Text.Length == 1 && blnBarcode == false)
             {
@@ -504,7 +504,7 @@ namespace InvScanApp
             }
         }
 
-        private void txt2Barcode_KeyUp(object sender, KeyEventArgs e)
+        private void txtEditBarcode_KeyUp(object sender, KeyEventArgs e)
         {
             if (txtEditBarcode.Text.Length == 1 && blnBarcode == false)
             {

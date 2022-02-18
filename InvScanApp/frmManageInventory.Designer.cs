@@ -108,7 +108,7 @@ namespace InvScanApp
             this.tbcManage.SelectedIndex = 0;
             this.tbcManage.Size = new System.Drawing.Size(650, 426);
             this.tbcManage.TabIndex = 0;
-            this.tbcManage.SelectedIndexChanged += new System.EventHandler(this.tbcAdd_SelectedIndexChanged);
+            this.tbcManage.SelectedIndexChanged += new System.EventHandler(this.tbcManage_SelectedIndexChanged);
             // 
             // tbpAddCommodity
             // 
@@ -157,8 +157,8 @@ namespace InvScanApp
             this.txtAddBarcode.Size = new System.Drawing.Size(406, 33);
             this.txtAddBarcode.TabIndex = 16;
             this.txtAddBarcode.TabStop = false;
-            this.txtAddBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt0Barcode_KeyUp);
-            this.txtAddBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txt0Barcode_PreviewKeyDown);
+            this.txtAddBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAddBarcode_KeyUp);
+            this.txtAddBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtAddBarcode_PreviewKeyDown);
             // 
             // label12
             // 
@@ -179,7 +179,7 @@ namespace InvScanApp
             this.cmbAddCategory.Name = "cmbAddCategory";
             this.cmbAddCategory.Size = new System.Drawing.Size(409, 34);
             this.cmbAddCategory.TabIndex = 1;
-            this.cmbAddCategory.SelectedIndexChanged += new System.EventHandler(this.cmb0Category_SelectedIndexChanged);
+            this.cmbAddCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCategory_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -332,8 +332,8 @@ namespace InvScanApp
             this.txtCreateBarcode.Size = new System.Drawing.Size(406, 33);
             this.txtCreateBarcode.TabIndex = 14;
             this.txtCreateBarcode.TabStop = false;
-            this.txtCreateBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt1Barcode_KeyUp);
-            this.txtCreateBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txt1Barcode_PreviewKeyDown);
+            this.txtCreateBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCreateBarcode_KeyUp);
+            this.txtCreateBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtCreateBarcode_PreviewKeyDown);
             // 
             // label4
             // 
@@ -423,7 +423,7 @@ namespace InvScanApp
             this.btnEditLookup.TabIndex = 3;
             this.btnEditLookup.Text = "Lookup Item";
             this.btnEditLookup.UseVisualStyleBackColor = true;
-            this.btnEditLookup.Click += new System.EventHandler(this.btn2Lookup_Click);
+            this.btnEditLookup.Click += new System.EventHandler(this.btnEditLookup_Click);
             // 
             // cmbEditNewCategory
             // 
@@ -518,7 +518,7 @@ namespace InvScanApp
             this.chkEditQty.TabIndex = 7;
             this.chkEditQty.Text = "Change Quantity?";
             this.chkEditQty.UseVisualStyleBackColor = true;
-            this.chkEditQty.CheckedChanged += new System.EventHandler(this.chk2Qty_CheckedChanged);
+            this.chkEditQty.CheckedChanged += new System.EventHandler(this.chkEditQty_CheckedChanged);
             // 
             // label16
             // 
@@ -577,8 +577,8 @@ namespace InvScanApp
             this.txtEditBarcode.Size = new System.Drawing.Size(412, 33);
             this.txtEditBarcode.TabIndex = 6;
             this.txtEditBarcode.TabStop = false;
-            this.txtEditBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt2Barcode_KeyUp);
-            this.txtEditBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txt2Barcode_PreviewKeyDown);
+            this.txtEditBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEditBarcode_KeyUp);
+            this.txtEditBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtEditBarcode_PreviewKeyDown);
             // 
             // label13
             // 
@@ -599,7 +599,7 @@ namespace InvScanApp
             this.cmbEditCommodities.Name = "cmbEditCommodities";
             this.cmbEditCommodities.Size = new System.Drawing.Size(412, 34);
             this.cmbEditCommodities.TabIndex = 2;
-            this.cmbEditCommodities.SelectedIndexChanged += new System.EventHandler(this.cmb2Commodities_SelectedIndexChanged);
+            this.cmbEditCommodities.SelectedIndexChanged += new System.EventHandler(this.cmbEditCommodities_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -620,7 +620,7 @@ namespace InvScanApp
             this.cmbEditCategory.Name = "cmbEditCategory";
             this.cmbEditCategory.Size = new System.Drawing.Size(412, 34);
             this.cmbEditCategory.TabIndex = 1;
-            this.cmbEditCategory.SelectedIndexChanged += new System.EventHandler(this.cmb2Category_SelectedIndexChanged);
+            this.cmbEditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbEditCategory_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -757,7 +757,7 @@ namespace InvScanApp
             this.MinimizeBox = false;
             this.Name = "frmManageInventory";
             this.Text = "Tech Bar Inventory | Manage Inventory";
-            this.Load += new System.EventHandler(this.frmAdd_Load);
+            this.Load += new System.EventHandler(this.frmManageInventory_Load);
             this.tbcManage.ResumeLayout(false);
             this.tbpAddCommodity.ResumeLayout(false);
             this.tbpAddCommodity.PerformLayout();

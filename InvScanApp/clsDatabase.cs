@@ -84,11 +84,11 @@ namespace InvScanApp
                 sbSQL.Append(" SELECT 1 FROM sys.tables WHERE name = 'tblCommodity')");
                 sbSQL.Append(" BEGIN");
                 sbSQL.Append(" CREATE TABLE tblCommodity (");
-                sbSQL.Append(" Commodity_Barcode VARCHAR(100) PRIMARY KEY,");
+                sbSQL.Append(" Commodity_Barcode VARCHAR(200) PRIMARY KEY,");
                 sbSQL.Append(" Commodity_Name VARCHAR(100) NOT NULL,");
                 sbSQL.Append(" Commodity_Category VARCHAR(100) NOT NULL FOREIGN KEY REFERENCES tblCategory(Category_Name),");
                 sbSQL.Append(" Vendor_Name VARCHAR(100),");
-                sbSQL.Append(" Vendor_URL VARCHAR(100),");
+                sbSQL.Append(" Vendor_URL VARCHAR(MAX),");
                 sbSQL.Append(" Commodity_Qty INT CHECK (Commodity_Qty >= 0));");
                 sbSQL.Append(" END;");
 
