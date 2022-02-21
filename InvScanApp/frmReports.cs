@@ -308,11 +308,16 @@ namespace InvScanApp
             {
                 //Allow user to send to a different email
                 string strEmail = Interaction.InputBox("To what address should I email the report?", "Confirm Email", Settings.Default.strToEmail);
-                string strFile = "report" + DateTimeOffset.Now.ToUnixTimeSeconds() + ".csv";
-                string strFilePath = "Reports\\" + strFile;
-                string strPath = "\\Reports";
+
+                //Set path
+                string strPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\TechBarReports\\";
+
+                //Create directory if needed
                 Directory.CreateDirectory(strPath);
 
+                //Set file name
+                string strFile = "report" + DateTimeOffset.Now.ToUnixTimeSeconds() + ".csv";
+                
                 try
                 {
                     //See if valid email
@@ -339,7 +344,7 @@ namespace InvScanApp
                         sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
                     }
 
-                    File.WriteAllText(strFilePath, sb.ToString());
+                    File.WriteAllText(strPath + strFile, sb.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -361,7 +366,7 @@ namespace InvScanApp
                     "- Ben Bot\r";
 
                 //Send email with attachment
-                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strFilePath);
+                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strPath + strFile);
             }
         }
 
