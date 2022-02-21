@@ -41,7 +41,7 @@ namespace InvScanApp
             strSMTPClient = Settings.Default.strSMTPClient;
         }
 
-        public static void SendEmail(string strBody, string strSubject, string strAttachment)
+        public static void SendEmail(string strBody, string strSubject, string strTo, string strAttachment)
         {
             //Get email credentials
             GetCreds();
@@ -63,6 +63,11 @@ namespace InvScanApp
                     Msg.From = new MailAddress(strUsername);
 
                     //Recipient e-mail address.
+                    if (strTo != "")
+                    {
+                        strToEmail = strTo;
+                    }
+
                     Msg.To.Add(strToEmail);
 
                     //Assign the subject of our message.
@@ -104,10 +109,10 @@ namespace InvScanApp
                 MessageBox.Show("Error sending email. Please ensure proper email credentials are saved to the system in Settings\r\r" +
                         "Specific Error:\r" + e.Error, "Error");
             }
-            else
-            {
-                MessageBox.Show("Email Sent. Report will appear in your inbox shortly.", "Success");
-            }
+            //else
+            //{
+            //    MessageBox.Show("Email Sent. Report will appear in your inbox shortly.", "Success");
+            //}
         }
     }
 }

@@ -366,7 +366,7 @@ namespace InvScanApp
                     "- Ben Bot\r";
 
                 //Send email with attachment
-                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strPath + strFile);
+                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strEmail, strPath + strFile);
             }
         }
 
