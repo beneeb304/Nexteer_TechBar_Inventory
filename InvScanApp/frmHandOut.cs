@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,7 +25,7 @@ namespace InvScanApp
         }
 
         private void frmHandOut_Load(object sender, EventArgs e)
-        {            
+        {
             //Make datatables
             DataTable dtCat = new DataTable();
             DataTable dtStaff = new DataTable();
@@ -59,7 +62,7 @@ namespace InvScanApp
             }
 
             //Make sure Recipient info is filled out
-            if (txtRecipientName.Text == "")
+            if (cmbRecipientName.Text == "")
             {
                 //Something isn't filled out, so inform user
                 strError += "Recipient Name\n";
@@ -99,7 +102,7 @@ namespace InvScanApp
                         //Add transaction to Log table
                         if (clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
                             "'" + cmbStaffName.Text + "'," +
-                            "'" + txtRecipientName.Text + "'," +
+                            "'" + cmbRecipientName.Text + "'," +
                             "'" + cmbCommodityCategory.Text + "'," +
                             "'" + cmbCommodityName.Text + "'," +
                             "'Hand-Out'," +
@@ -112,7 +115,7 @@ namespace InvScanApp
                                 (intQty) +
                                 " WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "' AND Commodity_Name = '" + cmbCommodityName.Text + "'"))
                             {
-                                MessageBox.Show("Handed-Out " + nudQty.Value + " " + cmbCommodityName.Text + " to " + txtRecipientName.Text, "Success");
+                                MessageBox.Show("Handed-Out " + nudQty.Value + " " + cmbCommodityName.Text + " to " + cmbRecipientName.Text, "Success");
                             }
 
                             //Check if we hit the low quantity threshold
@@ -144,10 +147,10 @@ namespace InvScanApp
                 {
                     MessageBox.Show("Something went wrong handing this item out!", "Error");
                 }
-            }
 
-            //Back to home
-            btnBack_Click(sender, e);
+                //Back to home
+                btnBack_Click(sender, e);
+            }
         }
 
         private void cmbItemCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,7 +204,7 @@ namespace InvScanApp
                 if (blnStaffID)
                 {
                     //If it's the enter key, we're done
-                    if(e.KeyData == Keys.Enter)
+                    if (e.KeyData == Keys.Enter)
                     {
                         //Stop reading data
                         blnStaffID = false;
@@ -248,7 +251,7 @@ namespace InvScanApp
             {
                 txtStaffID.Text = "";
             }
-            else if(txtStaffID.Text.Length == 5 && blnStaffID == false)
+            else if (txtStaffID.Text.Length == 5 && blnStaffID == false)
             {
                 //Lookup staff name
                 SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + txtStaffID.Text + ";");
@@ -261,7 +264,7 @@ namespace InvScanApp
                 dataReader.Close();
 
                 //Check if barcode was valid
-                if(cmbStaffName.Text == "")
+                if (cmbStaffName.Text == "")
                 {
                     txtStaffID.Text = "";
                     MessageBox.Show("No users with this ID", "Alert");
@@ -302,6 +305,56 @@ namespace InvScanApp
                     txtCommodityBarcode.Text = "";
                     MessageBox.Show("No commodities with this barcode in inventory", "Alert");
                 }
+            }
+        }
+
+        private void txtRecipientName_TextChanged(object sender, EventArgs e)
+        {
+            if(txtRecipientName.Text.Length > 2)
+            {
+                List<string> lstUsers = GetADUsers(txtRecipientName.Text);
+                cmbRecipientName.Enabled = true;
+                cmbRecipientName.DataSource = lstUsers;
+            }
+            else
+            {
+                cmbRecipientName.SelectedIndex = -1;
+                cmbRecipientName.Enabled = false;
+            }
+        }
+
+        public List<string> GetADUsers(string searchQuery)
+        {
+            try
+            {
+                List<string> lstADUsers = new List<string>();
+                DirectoryEntry searchRoot = new DirectoryEntry();
+                DirectorySearcher search = new DirectorySearcher(searchRoot);
+                search.Filter = "(&(objectClass=User)(objectCategory=person)(anr=" + searchQuery + "))";
+                search.PropertiesToLoad.Add("samaccountname");
+                search.PropertiesToLoad.Add("mail");
+                search.PropertiesToLoad.Add("usergroup");
+                search.PropertiesToLoad.Add("displayname");
+                SearchResult result;
+                SearchResultCollection resultCol = search.FindAll();
+                if (resultCol != null)
+                {
+                    for (int counter = 0; counter < resultCol.Count; counter++)
+                    {
+                        result = resultCol[counter];
+                        if (result.Properties.Contains("samaccountname") &&
+                                 result.Properties.Contains("mail") &&
+                            result.Properties.Contains("displayname"))
+                        {
+                            lstADUsers.Add((string)result.Properties["mail"][0]);
+                        }
+                    }
+                }
+                return lstADUsers;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }

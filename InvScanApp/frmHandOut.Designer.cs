@@ -50,6 +50,7 @@ namespace InvScanApp
             this.btnBack = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.cmbRecipientName = new System.Windows.Forms.ComboBox();
             this.txtRecipientName = new System.Windows.Forms.TextBox();
             this.gpbStaff.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -291,13 +292,25 @@ namespace InvScanApp
             this.label4.TabIndex = 37;
             this.label4.Text = "Recipient Name:";
             // 
+            // cmbRecipientName
+            // 
+            this.cmbRecipientName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRecipientName.Enabled = false;
+            this.cmbRecipientName.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbRecipientName.FormattingEnabled = true;
+            this.cmbRecipientName.Location = new System.Drawing.Point(374, 12);
+            this.cmbRecipientName.Name = "cmbRecipientName";
+            this.cmbRecipientName.Size = new System.Drawing.Size(277, 34);
+            this.cmbRecipientName.TabIndex = 36;
+            // 
             // txtRecipientName
             // 
             this.txtRecipientName.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRecipientName.Location = new System.Drawing.Point(194, 12);
             this.txtRecipientName.Name = "txtRecipientName";
-            this.txtRecipientName.Size = new System.Drawing.Size(457, 33);
+            this.txtRecipientName.Size = new System.Drawing.Size(174, 33);
             this.txtRecipientName.TabIndex = 1;
+            this.txtRecipientName.TextChanged += new System.EventHandler(this.txtRecipientName_TextChanged);
             // 
             // frmHandOut
             // 
@@ -307,6 +320,7 @@ namespace InvScanApp
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.cmbRecipientName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtRecipientName);
             this.Controls.Add(this.pictureBox1);
@@ -322,7 +336,7 @@ namespace InvScanApp
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmHandOut";
-            this.Text = "Tech Bar Inventory | Hand Out Item(s)";
+            this.Text = "Tech Bar Inventory | Hand Out Item";
             this.Load += new System.EventHandler(this.frmHandOut_Load);
             this.gpbStaff.ResumeLayout(false);
             this.gpbStaff.PerformLayout();
@@ -356,6 +370,7 @@ namespace InvScanApp
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbRecipientName;
         private System.Windows.Forms.TextBox txtRecipientName;
     }
 }

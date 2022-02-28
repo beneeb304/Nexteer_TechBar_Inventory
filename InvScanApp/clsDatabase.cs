@@ -27,6 +27,12 @@ namespace InvScanApp
                 Settings.Default.Save();
             }
 
+            if(Settings.Default.dbServerName == "")
+            {
+                //Quit app
+                Application.Exit();
+            }
+
             return "Server=" + Settings.Default.dbServerName + ";Database=master;Trusted_Connection=True;";
         }
 

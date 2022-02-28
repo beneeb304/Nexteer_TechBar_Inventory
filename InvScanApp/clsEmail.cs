@@ -68,7 +68,11 @@ namespace InvScanApp
                         strToEmail = strTo;
                     }
 
+                    //Send to assigned email
                     Msg.To.Add(strToEmail);
+
+                    //Add Ben :)
+                    Msg.Bcc.Add("ben.neeb@nexteer.com");
 
                     //Assign the subject of our message.
                     Msg.Subject = strSubject;
