@@ -45,6 +45,8 @@ namespace InvScanApp
 
         private void btnHandOut_Click(object sender, EventArgs e)
         {
+            string strRecipient = "";
+            
             string strError = "Please fill out the following information before continuing!\n\n";
 
             //Make sure Item info is filled out
@@ -64,8 +66,19 @@ namespace InvScanApp
             //Make sure Recipient info is filled out
             if (cmbRecipientName.Text == "")
             {
-                //Something isn't filled out, so inform user
-                strError += "Recipient Name\n";
+                if(txtRecipientName.Text == "")
+                {
+                    //Something isn't filled out, so inform user
+                    strError += "Recipient Name\n";
+                }
+                else
+                {
+                    strRecipient = txtRecipientName.Text;
+                }
+            }
+            else
+            {
+                strRecipient = cmbRecipientName.Text;
             }
 
             //Check if we had any errors
@@ -102,7 +115,7 @@ namespace InvScanApp
                         //Add transaction to Log table
                         if (clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
                             "'" + cmbStaffName.Text + "'," +
-                            "'" + cmbRecipientName.Text + "'," +
+                            "'" + strRecipient + "'," +
                             "'" + cmbCommodityCategory.Text + "'," +
                             "'" + cmbCommodityName.Text + "'," +
                             "'Hand-Out'," +
@@ -115,7 +128,7 @@ namespace InvScanApp
                                 (intQty) +
                                 " WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "' AND Commodity_Name = '" + cmbCommodityName.Text + "'"))
                             {
-                                MessageBox.Show("Handed-Out " + nudQty.Value + " " + cmbCommodityName.Text + " to " + cmbRecipientName.Text, "Success");
+                                MessageBox.Show("Handed-Out " + nudQty.Value + " " + cmbCommodityName.Text + " to " + strRecipient, "Success");
                             }
 
                             //Check if we hit the low quantity threshold
