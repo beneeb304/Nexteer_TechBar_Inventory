@@ -74,6 +74,8 @@ namespace InvScanApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.chkSSL = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tbcSettings.SuspendLayout();
             this.tbpCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).BeginInit();
@@ -397,6 +399,8 @@ namespace InvScanApp
             // 
             // tbpEmail
             // 
+            this.tbpEmail.Controls.Add(this.label9);
+            this.tbpEmail.Controls.Add(this.chkSSL);
             this.tbpEmail.Controls.Add(this.label5);
             this.tbpEmail.Controls.Add(this.txtSMTPPort);
             this.tbpEmail.Controls.Add(this.label4);
@@ -567,6 +571,26 @@ namespace InvScanApp
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // chkSSL
+            // 
+            this.chkSSL.AutoSize = true;
+            this.chkSSL.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSSL.Location = new System.Drawing.Point(202, 214);
+            this.chkSSL.Name = "chkSSL";
+            this.chkSSL.Size = new System.Drawing.Size(110, 27);
+            this.chkSSL.TabIndex = 34;
+            this.chkSSL.Text = "Enable SSL";
+            this.chkSSL.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(260, 312);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(379, 78);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "Note: To send emails on the Nexteer network, use smtp.nexteer.com on port 25.";
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -651,5 +675,7 @@ namespace InvScanApp
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.CheckBox chkSSL;
+        private System.Windows.Forms.Label label9;
     }
 }

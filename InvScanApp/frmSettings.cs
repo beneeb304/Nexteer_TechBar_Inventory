@@ -133,12 +133,15 @@ namespace InvScanApp
                             throw new Exception();
                         }
 
+                        //Set settings
                         Settings.Default.strEmailUsername = txtEmailUsername.Text;
                         Settings.Default.strEmailPassword = txtEmailPassword.Text;
                         Settings.Default.strToEmail = txtToEmail.Text;
                         Settings.Default.strSMTPPort = txtSMTPPort.Text;
                         Settings.Default.strSMTPClient = txtSMTPClient.Text;
+                        Settings.Default.blnSSL = chkSSL.Checked;
 
+                        //Save settings
                         Settings.Default.Save();
 
                         //Alert user
@@ -332,6 +335,7 @@ namespace InvScanApp
                 txtToEmail.Text = Settings.Default.strToEmail;
                 txtSMTPClient.Text = Settings.Default.strSMTPClient;
                 txtSMTPPort.Text = Settings.Default.strSMTPPort;
+                chkSSL.Checked = Settings.Default.blnSSL;
             }
         }
     }

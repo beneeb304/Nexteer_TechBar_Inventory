@@ -146,7 +146,7 @@ namespace InvScanApp
                             {
                                 string strBody = "Low quantity alert triggered for " + cmbCommodityName.Text + ".\r" +
                                     "The current in-stock quantity is " + intQty + ".\r" +
-                                    "Consider re-ordering these from " + strVendor + ":\r" +
+                                    "Consider re-ordering these from " + strVendor + ".\r" +
                                     strVendorURL + "\r\r" +
                                     "Regards,\r" +
                                     "- Ben Bot\r";
