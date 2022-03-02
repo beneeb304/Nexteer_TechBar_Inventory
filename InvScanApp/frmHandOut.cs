@@ -16,8 +16,8 @@ namespace InvScanApp
 {
     public partial class frmHandOut : Form
     {
-        bool blnStaffID = false;
-        bool blnCommodityID = false;
+        bool blnBarcode = false;
+        string strBarcode = "";
 
         public frmHandOut()
         {
@@ -50,14 +50,14 @@ namespace InvScanApp
             string strError = "Please fill out the following information before continuing!\n\n";
 
             //Make sure Item info is filled out
-            if ((cmbCommodityCategory.Text == "" || cmbCommodityName.Text == "") && txtCommodityBarcode.Text == "")
+            if (cmbCommodityCategory.Text == "" || cmbCommodityName.Text == "")
             {
                 //Something isn't filled out, so inform user
                 strError += "Item Category, Item Name OR Item ID (barcode)\n";
             }
 
             //Make sure Staff info is filled out
-            if (cmbStaffName.Text == "" && txtStaffID.Text == "")
+            if (cmbStaffName.Text == "")
             {
                 //Something isn't filled out, so inform user
                 strError += "Staff Name OR Staff ID (QR code)\n";
@@ -178,18 +178,6 @@ namespace InvScanApp
             cmbCommodityName.SelectedIndex = -1;
         }
 
-        private void cmbStaffName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Clear textbox
-            txtStaffID.Text = "";
-        }
-
-        private void cmbItemName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Clear textbox
-            txtCommodityBarcode.Text = "";
-        }
-
         private void btnBack_Click(object sender, EventArgs e)
         {
             //Show main form
@@ -201,125 +189,71 @@ namespace InvScanApp
             Close();
         }
 
-        private void txtStaffID_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //Checking if scanner starts with a TAB and ends with a CR
-            if (e.KeyData == Keys.Tab)
-            {
-                //Get ready to read barcode data
-                e.IsInputKey = true;
-                blnStaffID = true;
-                txtStaffID.Text = "";
-            }
-            else
-            {
-                //If we are expecting barcode data
-                if (blnStaffID)
-                {
-                    //If it's the enter key, we're done
-                    if (e.KeyData == Keys.Enter)
-                    {
-                        //Stop reading data
-                        blnStaffID = false;
-                    }
-                }
-                else
-                {
-                    txtStaffID.Text = "";
-                }
-            }
-        }
+        //private void txtStaffID_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    //Set name combobox back to blank
+        //    cmbStaffName.SelectedIndex = -1;
 
-        private void txtCommodityBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //Checking if scanner starts with a TAB and ends with a CR
-            if (e.KeyData == Keys.Tab)
-            {
-                e.IsInputKey = true;
-                blnCommodityID = true;
-                txtCommodityBarcode.Text = "";
-            }
-            else
-            {
-                if (blnCommodityID)
-                {
-                    if (e.KeyData == Keys.Enter)
-                    {
-                        blnCommodityID = false;
-                    }
-                }
-                else
-                {
-                    txtCommodityBarcode.Text = "";
-                }
-            }
-        }
+        //    if (txtStaffID.Text.Length == 1 && blnStaffID == false)
+        //    {
+        //        txtStaffID.Text = "";
+        //    }
+        //    else if (txtStaffID.Text.Length == 5 && blnStaffID == false)
+        //    {
+        //        //Lookup staff name
+        //        SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + txtStaffID.Text + ";");
 
-        private void txtStaffID_KeyUp(object sender, KeyEventArgs e)
-        {
-            //Set name combobox back to blank
-            cmbStaffName.SelectedIndex = -1;
+        //        while (dataReader.Read())
+        //        {
+        //            cmbStaffName.Text = dataReader["Staff_Name"].ToString();
+        //        }
 
-            if (txtStaffID.Text.Length == 1 && blnStaffID == false)
-            {
-                txtStaffID.Text = "";
-            }
-            else if (txtStaffID.Text.Length == 5 && blnStaffID == false)
-            {
-                //Lookup staff name
-                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + txtStaffID.Text + ";");
+        //        dataReader.Close();
 
-                while (dataReader.Read())
-                {
-                    cmbStaffName.Text = dataReader["Staff_Name"].ToString();
-                }
+        //        //Check if barcode was valid
+        //        if (cmbStaffName.Text == "")
+        //        {
+        //            txtStaffID.Text = "";
+        //            MessageBox.Show("No users with this ID", "Alert");
+        //        }
+        //    }
+        //}
 
-                dataReader.Close();
+        //private void txtCommodityBarcode_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    //Set name combobox back to blank
+        //    cmbCommodityCategory.SelectedIndex = -1;
+        //    cmbCommodityName.SelectedIndex = -1;
 
-                //Check if barcode was valid
-                if (cmbStaffName.Text == "")
-                {
-                    txtStaffID.Text = "";
-                    MessageBox.Show("No users with this ID", "Alert");
-                }
-            }
-        }
+        //    if (txtCommodityBarcode.Text.Length == 1 && blnCommodityID == false)
+        //    {
+        //        txtCommodityBarcode.Text = "";
+        //    }
+        //    else if (txtCommodityBarcode.Text.Length > 2 && blnCommodityID == false)
+        //    {
+        //        //Lookup staff name
+        //        SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + txtCommodityBarcode.Text + "';");
+        //        string strName = "", strCategory = "";
 
-        private void txtCommodityBarcode_KeyUp(object sender, KeyEventArgs e)
-        {
-            //Set name combobox back to blank
-            cmbCommodityCategory.SelectedIndex = -1;
-            cmbCommodityName.SelectedIndex = -1;
+        //        while (dataReader.Read())
+        //        {
+        //            strCategory = dataReader["Commodity_Category"].ToString();
+        //            strName = dataReader["Commodity_Name"].ToString();
+        //        }
 
-            if (txtCommodityBarcode.Text.Length == 1 && blnCommodityID == false)
-            {
-                txtCommodityBarcode.Text = "";
-            }
-            else if (txtCommodityBarcode.Text.Length > 2 && blnCommodityID == false)
-            {
-                //Lookup staff name
-                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + txtCommodityBarcode.Text + "';");
-                string strName = "", strCategory = "";
+        //        dataReader.Close();
 
-                while (dataReader.Read())
-                {
-                    strCategory = dataReader["Commodity_Category"].ToString();
-                    strName = dataReader["Commodity_Name"].ToString();
-                }
+        //        cmbCommodityCategory.Text = strCategory;
+        //        cmbCommodityName.Text = strName;
 
-                dataReader.Close();
-
-                cmbCommodityCategory.Text = strCategory;
-                cmbCommodityName.Text = strName;
-
-                //Check if barcode was valid
-                if (cmbCommodityName.Text == "")
-                {
-                    txtCommodityBarcode.Text = "";
-                    MessageBox.Show("No commodities with this barcode in inventory", "Alert");
-                }
-            }
-        }
+        //        //Check if barcode was valid
+        //        if (cmbCommodityName.Text == "")
+        //        {
+        //            txtCommodityBarcode.Text = "";
+        //            MessageBox.Show("No commodities with this barcode in inventory", "Alert");
+        //        }
+        //    }
+        //}
 
         private void txtRecipientName_TextChanged(object sender, EventArgs e)
         {
@@ -368,6 +302,88 @@ namespace InvScanApp
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        void BarcodeKeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Assume this is barcode data
+            e.Handled = true;
+            
+            if(e.KeyChar == 2)
+            {
+                //Set flag to start scanning
+                blnBarcode = true;
+            }
+            else if(e.KeyChar == 3)
+            {
+                //Set flag to stop scanning
+                blnBarcode = false;
+
+                //Determine if ID or commodity
+                if(strBarcode.Length == 5 && !strBarcode.Any(x => char.IsLetter(x)))
+                {
+                    //Lookup staff name
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + strBarcode + ";");
+
+                    while (dataReader.Read())
+                    {
+                        cmbStaffName.Text = dataReader["Staff_Name"].ToString();
+                    }
+
+                    dataReader.Close();
+
+                    //Check if barcode was valid
+                    if (cmbStaffName.Text == "")
+                    {
+                        MessageBox.Show("No users with this ID", "Alert");
+                    }
+                }
+                else
+                {
+                    //Lookup category and commodity
+                    SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + strBarcode + "';");
+                    string strName = "", strCategory = "";
+
+                    while (dataReader.Read())
+                    {
+                        strCategory = dataReader["Commodity_Category"].ToString();
+                        strName = dataReader["Commodity_Name"].ToString();
+                    }
+
+                    dataReader.Close();
+
+                    cmbCommodityCategory.Text = strCategory;
+                    cmbCommodityName.Text = strName;
+
+                    //Check if barcode was valid
+                    if (cmbCommodityName.Text == "")
+                    {
+                        MessageBox.Show("No commodities with this barcode in inventory", "Alert");
+                    }
+
+                    dataReader.Close();
+                }
+
+                //Empty barcode string
+                strBarcode = "";
+            }
+            else if (blnBarcode)
+            {
+                //Only allow if ascii a letter or number
+                if ((e.KeyChar >= 48 && e.KeyChar <= 57) || (e.KeyChar >= 65 && e.KeyChar <= 90) || (e.KeyChar >= 97 && e.KeyChar <= 122))
+                {
+                    //Get char
+                    char c = e.KeyChar;
+
+                    //Add char to string
+                    strBarcode += c;
+                }
+            }
+            else
+            {
+                //If not barcode data, pass it through
+                e.Handled = false;
             }
         }
     }
