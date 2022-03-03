@@ -32,9 +32,6 @@ namespace InvScanApp
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageInventory));
             this.tbcManage = new System.Windows.Forms.TabControl();
             this.tbpAddCommodity = new System.Windows.Forms.TabPage();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txtAddBarcode = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbAddCategory = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -84,6 +81,7 @@ namespace InvScanApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.tbcManage.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddQty)).BeginInit();
@@ -113,9 +111,7 @@ namespace InvScanApp
             // 
             // tbpAddCommodity
             // 
-            this.tbpAddCommodity.Controls.Add(this.label25);
-            this.tbpAddCommodity.Controls.Add(this.label24);
-            this.tbpAddCommodity.Controls.Add(this.txtAddBarcode);
+            this.tbpAddCommodity.Controls.Add(this.label21);
             this.tbpAddCommodity.Controls.Add(this.label12);
             this.tbpAddCommodity.Controls.Add(this.cmbAddCategory);
             this.tbpAddCommodity.Controls.Add(this.label6);
@@ -130,42 +126,11 @@ namespace InvScanApp
             this.tbpAddCommodity.Text = "Add Commodities";
             this.tbpAddCommodity.UseVisualStyleBackColor = true;
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(225, 90);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(30, 26);
-            this.label25.TabIndex = 34;
-            this.label25.Text = "or";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(6, 133);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(194, 26);
-            this.label24.TabIndex = 17;
-            this.label24.Text = "Commodity Barcode:";
-            // 
-            // txtAddBarcode
-            // 
-            this.txtAddBarcode.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddBarcode.Location = new System.Drawing.Point(230, 127);
-            this.txtAddBarcode.Name = "txtAddBarcode";
-            this.txtAddBarcode.ReadOnly = true;
-            this.txtAddBarcode.Size = new System.Drawing.Size(406, 33);
-            this.txtAddBarcode.TabIndex = 16;
-            this.txtAddBarcode.TabStop = false;
-            this.txtAddBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(6, 9);
+            this.label12.Location = new System.Drawing.Point(3, 110);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(200, 26);
             this.label12.TabIndex = 12;
@@ -176,7 +141,7 @@ namespace InvScanApp
             this.cmbAddCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAddCategory.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAddCategory.FormattingEnabled = true;
-            this.cmbAddCategory.Location = new System.Drawing.Point(230, 6);
+            this.cmbAddCategory.Location = new System.Drawing.Point(227, 107);
             this.cmbAddCategory.Name = "cmbAddCategory";
             this.cmbAddCategory.Size = new System.Drawing.Size(409, 34);
             this.cmbAddCategory.TabIndex = 1;
@@ -187,7 +152,7 @@ namespace InvScanApp
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 48);
+            this.label6.Location = new System.Drawing.Point(3, 149);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(175, 26);
             this.label6.TabIndex = 10;
@@ -232,7 +197,7 @@ namespace InvScanApp
             this.cmbAddCommodities.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAddCommodities.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAddCommodities.FormattingEnabled = true;
-            this.cmbAddCommodities.Location = new System.Drawing.Point(230, 45);
+            this.cmbAddCommodities.Location = new System.Drawing.Point(227, 146);
             this.cmbAddCommodities.Name = "cmbAddCommodities";
             this.cmbAddCommodities.Size = new System.Drawing.Size(409, 34);
             this.cmbAddCommodities.TabIndex = 2;
@@ -759,6 +724,16 @@ namespace InvScanApp
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             this.btnSubmit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(628, 58);
+            this.label21.TabIndex = 13;
+            this.label21.Text = "Select the category and commodity from the drop downs or scan a code to perform a" +
+    " quick lookup";
+            // 
             // frmManageInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -839,9 +814,6 @@ namespace InvScanApp
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cmbEditNewCategory;
         private System.Windows.Forms.Button btnEditLookup;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox txtAddBarcode;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label10;
@@ -853,5 +825,6 @@ namespace InvScanApp
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Label label21;
     }
 }

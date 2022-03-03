@@ -409,13 +409,39 @@ namespace InvScanApp
                 switch (tbcManage.SelectedIndex)
                 {
                     case 0:
-                        txtAddBarcode.Text = strBarcode;
+                        //Lookup category and commodity
+                        SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + strBarcode + "';");
+                        string strName = "", strCategory = "";
+
+                        while (dataReader.Read())
+                        {
+                            strCategory = dataReader["Commodity_Category"].ToString();
+                            strName = dataReader["Commodity_Name"].ToString();
+                        }
+
+                        dataReader.Close();
+
+                        cmbAddCategory.Text = strCategory;
+                        cmbAddCommodities.Text = strName;
+
+                        //Check if barcode was valid
+                        if (cmbAddCommodities.Text == "")
+                        {
+                            MessageBox.Show("No commodities with this barcode exist in inventory", "Alert");
+                        }
+
+                        dataReader.Close();
+
                         break;
                     case 1:
+                        //Fill textbox with barcode
                         txtCreateBarcode.Text = strBarcode;
+
                         break;
                     case 2:
+                        //Fill textbox with barcode
                         txtEditBarcode.Text = strBarcode;
+
                         break;
                 }
                 

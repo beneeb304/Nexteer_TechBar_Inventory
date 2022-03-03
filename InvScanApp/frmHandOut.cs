@@ -189,72 +189,6 @@ namespace InvScanApp
             Close();
         }
 
-        //private void txtStaffID_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    //Set name combobox back to blank
-        //    cmbStaffName.SelectedIndex = -1;
-
-        //    if (txtStaffID.Text.Length == 1 && blnStaffID == false)
-        //    {
-        //        txtStaffID.Text = "";
-        //    }
-        //    else if (txtStaffID.Text.Length == 5 && blnStaffID == false)
-        //    {
-        //        //Lookup staff name
-        //        SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff WHERE Staff_ID = " + txtStaffID.Text + ";");
-
-        //        while (dataReader.Read())
-        //        {
-        //            cmbStaffName.Text = dataReader["Staff_Name"].ToString();
-        //        }
-
-        //        dataReader.Close();
-
-        //        //Check if barcode was valid
-        //        if (cmbStaffName.Text == "")
-        //        {
-        //            txtStaffID.Text = "";
-        //            MessageBox.Show("No users with this ID", "Alert");
-        //        }
-        //    }
-        //}
-
-        //private void txtCommodityBarcode_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    //Set name combobox back to blank
-        //    cmbCommodityCategory.SelectedIndex = -1;
-        //    cmbCommodityName.SelectedIndex = -1;
-
-        //    if (txtCommodityBarcode.Text.Length == 1 && blnCommodityID == false)
-        //    {
-        //        txtCommodityBarcode.Text = "";
-        //    }
-        //    else if (txtCommodityBarcode.Text.Length > 2 && blnCommodityID == false)
-        //    {
-        //        //Lookup staff name
-        //        SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + txtCommodityBarcode.Text + "';");
-        //        string strName = "", strCategory = "";
-
-        //        while (dataReader.Read())
-        //        {
-        //            strCategory = dataReader["Commodity_Category"].ToString();
-        //            strName = dataReader["Commodity_Name"].ToString();
-        //        }
-
-        //        dataReader.Close();
-
-        //        cmbCommodityCategory.Text = strCategory;
-        //        cmbCommodityName.Text = strName;
-
-        //        //Check if barcode was valid
-        //        if (cmbCommodityName.Text == "")
-        //        {
-        //            txtCommodityBarcode.Text = "";
-        //            MessageBox.Show("No commodities with this barcode in inventory", "Alert");
-        //        }
-        //    }
-        //}
-
         private void txtRecipientName_TextChanged(object sender, EventArgs e)
         {
             if(txtRecipientName.Text.Length > 2)
@@ -359,7 +293,7 @@ namespace InvScanApp
                     //Check if barcode was valid
                     if (cmbCommodityName.Text == "")
                     {
-                        MessageBox.Show("No commodities with this barcode in inventory", "Alert");
+                        MessageBox.Show("No commodities with this barcode exist in inventory", "Alert");
                     }
 
                     dataReader.Close();
