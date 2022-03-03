@@ -14,7 +14,8 @@ namespace InvScanApp
     public partial class frmManageInventory : Form
     {
         //Class vars
-        private bool blnBarcode = false;
+        bool blnBarcode = false;
+        string strBarcode = "";
 
         public frmManageInventory()
         {
@@ -389,127 +390,56 @@ namespace InvScanApp
             }
         }
 
-        private void txtAddBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        void BarcodeKeyPress(object sender, KeyPressEventArgs e)
         {
-            //Checking if scanner starts with a TAB and ends with a CR
-            if (e.KeyData == Keys.Tab)
+            //Assume this is barcode data
+            e.Handled = true;
+
+            if (e.KeyChar == 2)
             {
-                e.IsInputKey = true;
+                //Set flag to start scanning
                 blnBarcode = true;
-                txtAddBarcode.Text = "";
+            }
+            else if (e.KeyChar == 3)
+            {
+                //Set flag to stop scanning
+                blnBarcode = false;
+
+                //Determine which barcode we're reading
+                switch (tbcManage.SelectedIndex)
+                {
+                    case 0:
+                        txtAddBarcode.Text = strBarcode;
+                        break;
+                    case 1:
+                        txtCreateBarcode.Text = strBarcode;
+                        break;
+                    case 2:
+                        txtEditBarcode.Text = strBarcode;
+                        break;
+                }
+                
+                //Empty barcode string
+                strBarcode = "";
+            }
+            else if (blnBarcode)
+            {
+                //Only allow if ascii a letter or number
+                if ((e.KeyChar >= 48 && e.KeyChar <= 57) || (e.KeyChar >= 65 && e.KeyChar <= 90) || (e.KeyChar >= 97 && e.KeyChar <= 122))
+                {
+                    //Get char
+                    char c = e.KeyChar;
+
+                    //Add char to string
+                    strBarcode += c;
+                }
             }
             else
             {
-                if (blnBarcode)
-                {
-                    if (e.KeyData == Keys.Enter)
-                    {
-                        blnBarcode = false;
-                    }
-                }
-                else
-                {
-                    txtAddBarcode.Text = "";
-                }
+                //If not barcode data, pass it through
+                e.Handled = false;
             }
         }
 
-        private void txtCreateBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //Checking if scanner starts with a TAB and ends with a CR
-            if (e.KeyData == Keys.Tab)
-            {
-                e.IsInputKey = true;
-                blnBarcode = true;
-                txtCreateBarcode.Text = "";
-            }
-            else
-            {
-                if (blnBarcode)
-                {
-                    if (e.KeyData == Keys.Enter)
-                    {
-                        blnBarcode = false;
-                    }
-                }
-                else
-                {
-                    txtCreateBarcode.Text = "";
-                }
-            }
-        }
-
-        private void txtEditBarcode_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //Checking if scanner starts with a TAB and ends with a CR
-            if (e.KeyData == Keys.Tab)
-            {
-                e.IsInputKey = true;
-                blnBarcode = true;
-                txtEditBarcode.Text = "";
-            }
-            else
-            {
-                if (blnBarcode)
-                {
-                    if (e.KeyData == Keys.Enter)
-                    {
-                        blnBarcode = false;
-                    }
-                }
-                else
-                {
-                    txtEditBarcode.Text = "";
-                }
-            }
-        }
-
-        private void txtAddBarcode_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (txtAddBarcode.Text.Length == 1 && blnBarcode == false)
-            {
-                txtAddBarcode.Text = "";
-            }
-            else if (txtAddBarcode.Text.Length > 2 && blnBarcode == false)
-            {
-                //Lookup staff name
-                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name, Commodity_Category FROM dbo.tblCommodity WHERE Commodity_Barcode = '" + txtAddBarcode.Text + "';");
-                string strName = "", strCategory = "";
-
-                while (dataReader.Read())
-                {
-                    strCategory = dataReader["Commodity_Category"].ToString();
-                    strName = dataReader["Commodity_Name"].ToString();
-                }
-
-                dataReader.Close();
-
-                cmbAddCategory.Text = strCategory;
-                cmbAddCommodities.Text = strName;
-
-                //Check if barcode was valid
-                if (cmbAddCommodities.Text == "")
-                {
-                    txtAddBarcode.Text = "";
-                    MessageBox.Show("No commodities with this barcode in inventory", "Alert");
-                }
-            }
-        }
-
-        private void txtCreateBarcode_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (txtCreateBarcode.Text.Length == 1 && blnBarcode == false)
-            {
-                txtCreateBarcode.Text = "";
-            }
-        }
-
-        private void txtEditBarcode_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (txtEditBarcode.Text.Length == 1 && blnBarcode == false)
-            {
-                txtEditBarcode.Text = "";
-            }
-        }
     }
 }

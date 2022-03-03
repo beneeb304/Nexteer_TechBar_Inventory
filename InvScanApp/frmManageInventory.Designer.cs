@@ -109,6 +109,7 @@ namespace InvScanApp
             this.tbcManage.Size = new System.Drawing.Size(650, 426);
             this.tbcManage.TabIndex = 0;
             this.tbcManage.SelectedIndexChanged += new System.EventHandler(this.tbcManage_SelectedIndexChanged);
+            this.tbcManage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // tbpAddCommodity
             // 
@@ -154,11 +155,11 @@ namespace InvScanApp
             this.txtAddBarcode.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddBarcode.Location = new System.Drawing.Point(230, 127);
             this.txtAddBarcode.Name = "txtAddBarcode";
+            this.txtAddBarcode.ReadOnly = true;
             this.txtAddBarcode.Size = new System.Drawing.Size(406, 33);
             this.txtAddBarcode.TabIndex = 16;
             this.txtAddBarcode.TabStop = false;
-            this.txtAddBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAddBarcode_KeyUp);
-            this.txtAddBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtAddBarcode_PreviewKeyDown);
+            this.txtAddBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label12
             // 
@@ -180,6 +181,7 @@ namespace InvScanApp
             this.cmbAddCategory.Size = new System.Drawing.Size(409, 34);
             this.cmbAddCategory.TabIndex = 1;
             this.cmbAddCategory.SelectedIndexChanged += new System.EventHandler(this.cmbAddCategory_SelectedIndexChanged);
+            this.cmbAddCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label6
             // 
@@ -223,6 +225,7 @@ namespace InvScanApp
             0,
             0,
             0});
+            this.nudAddQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // cmbAddCommodities
             // 
@@ -233,6 +236,7 @@ namespace InvScanApp
             this.cmbAddCommodities.Name = "cmbAddCommodities";
             this.cmbAddCommodities.Size = new System.Drawing.Size(409, 34);
             this.cmbAddCommodities.TabIndex = 2;
+            this.cmbAddCommodities.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // tbpCreateCommodity
             // 
@@ -283,6 +287,7 @@ namespace InvScanApp
             this.txtCreateVendorURL.Name = "txtCreateVendorURL";
             this.txtCreateVendorURL.Size = new System.Drawing.Size(406, 33);
             this.txtCreateVendorURL.TabIndex = 4;
+            this.txtCreateVendorURL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // cmbCreateCategory
             // 
@@ -293,6 +298,7 @@ namespace InvScanApp
             this.cmbCreateCategory.Name = "cmbCreateCategory";
             this.cmbCreateCategory.Size = new System.Drawing.Size(406, 34);
             this.cmbCreateCategory.TabIndex = 2;
+            this.cmbCreateCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label5
             // 
@@ -313,6 +319,7 @@ namespace InvScanApp
             this.cmbCreateVendor.Name = "cmbCreateVendor";
             this.cmbCreateVendor.Size = new System.Drawing.Size(406, 34);
             this.cmbCreateVendor.TabIndex = 3;
+            this.cmbCreateVendor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label8
             // 
@@ -329,11 +336,11 @@ namespace InvScanApp
             this.txtCreateBarcode.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCreateBarcode.Location = new System.Drawing.Point(230, 164);
             this.txtCreateBarcode.Name = "txtCreateBarcode";
+            this.txtCreateBarcode.ReadOnly = true;
             this.txtCreateBarcode.Size = new System.Drawing.Size(406, 33);
             this.txtCreateBarcode.TabIndex = 14;
             this.txtCreateBarcode.TabStop = false;
-            this.txtCreateBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCreateBarcode_KeyUp);
-            this.txtCreateBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtCreateBarcode_PreviewKeyDown);
+            this.txtCreateBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label4
             // 
@@ -377,6 +384,7 @@ namespace InvScanApp
             0,
             0,
             0});
+            this.nudCreateQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // txtCreateCommodity
             // 
@@ -385,6 +393,7 @@ namespace InvScanApp
             this.txtCreateCommodity.Name = "txtCreateCommodity";
             this.txtCreateCommodity.Size = new System.Drawing.Size(406, 33);
             this.txtCreateCommodity.TabIndex = 1;
+            this.txtCreateCommodity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // tbpEditCommodity
             // 
@@ -424,6 +433,7 @@ namespace InvScanApp
             this.btnEditLookup.Text = "Lookup Item";
             this.btnEditLookup.UseVisualStyleBackColor = true;
             this.btnEditLookup.Click += new System.EventHandler(this.btnEditLookup_Click);
+            this.btnEditLookup.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // cmbEditNewCategory
             // 
@@ -434,6 +444,7 @@ namespace InvScanApp
             this.cmbEditNewCategory.Name = "cmbEditNewCategory";
             this.cmbEditNewCategory.Size = new System.Drawing.Size(412, 34);
             this.cmbEditNewCategory.TabIndex = 4;
+            this.cmbEditNewCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label20
             // 
@@ -462,6 +473,7 @@ namespace InvScanApp
             this.txtEditNewCommodity.Name = "txtEditNewCommodity";
             this.txtEditNewCommodity.Size = new System.Drawing.Size(412, 33);
             this.txtEditNewCommodity.TabIndex = 5;
+            this.txtEditNewCommodity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label18
             // 
@@ -507,6 +519,7 @@ namespace InvScanApp
             0,
             0,
             0});
+            this.nudEditQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // chkEditQty
             // 
@@ -519,6 +532,7 @@ namespace InvScanApp
             this.chkEditQty.Text = "Change Quantity?";
             this.chkEditQty.UseVisualStyleBackColor = true;
             this.chkEditQty.CheckedChanged += new System.EventHandler(this.chkEditQty_CheckedChanged);
+            this.chkEditQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label16
             // 
@@ -538,6 +552,7 @@ namespace InvScanApp
             this.txtEditVendorURL.Size = new System.Drawing.Size(412, 33);
             this.txtEditVendorURL.TabIndex = 207;
             this.txtEditVendorURL.TabStop = false;
+            this.txtEditVendorURL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // cmbEditNewVendor
             // 
@@ -548,6 +563,7 @@ namespace InvScanApp
             this.cmbEditNewVendor.Name = "cmbEditNewVendor";
             this.cmbEditNewVendor.Size = new System.Drawing.Size(412, 34);
             this.cmbEditNewVendor.TabIndex = 6;
+            this.cmbEditNewVendor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label15
             // 
@@ -574,11 +590,11 @@ namespace InvScanApp
             this.txtEditBarcode.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEditBarcode.Location = new System.Drawing.Point(227, 241);
             this.txtEditBarcode.Name = "txtEditBarcode";
+            this.txtEditBarcode.ReadOnly = true;
             this.txtEditBarcode.Size = new System.Drawing.Size(412, 33);
             this.txtEditBarcode.TabIndex = 6;
             this.txtEditBarcode.TabStop = false;
-            this.txtEditBarcode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEditBarcode_KeyUp);
-            this.txtEditBarcode.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.txtEditBarcode_PreviewKeyDown);
+            this.txtEditBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label13
             // 
@@ -600,6 +616,7 @@ namespace InvScanApp
             this.cmbEditCommodities.Size = new System.Drawing.Size(412, 34);
             this.cmbEditCommodities.TabIndex = 2;
             this.cmbEditCommodities.SelectedIndexChanged += new System.EventHandler(this.cmbEditCommodities_SelectedIndexChanged);
+            this.cmbEditCommodities.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label7
             // 
@@ -621,6 +638,7 @@ namespace InvScanApp
             this.cmbEditCategory.Size = new System.Drawing.Size(412, 34);
             this.cmbEditCategory.TabIndex = 1;
             this.cmbEditCategory.SelectedIndexChanged += new System.EventHandler(this.cmbEditCategory_SelectedIndexChanged);
+            this.cmbEditCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // tabPage1
             // 
@@ -726,6 +744,7 @@ namespace InvScanApp
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // btnSubmit
             // 
@@ -738,6 +757,7 @@ namespace InvScanApp
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            this.btnSubmit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // frmManageInventory
             // 
@@ -758,6 +778,7 @@ namespace InvScanApp
             this.Name = "frmManageInventory";
             this.Text = "Tech Bar Inventory | Manage Inventory";
             this.Load += new System.EventHandler(this.frmManageInventory_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             this.tbcManage.ResumeLayout(false);
             this.tbpAddCommodity.ResumeLayout(false);
             this.tbpAddCommodity.PerformLayout();
