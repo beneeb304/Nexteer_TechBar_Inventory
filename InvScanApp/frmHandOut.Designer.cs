@@ -30,9 +30,13 @@ namespace InvScanApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHandOut));
-            this.label8 = new System.Windows.Forms.Label();
-            this.gpbStaff = new System.Windows.Forms.GroupBox();
-            this.cmbStaffName = new System.Windows.Forms.ComboBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.btnHandOut = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nudQty = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -40,51 +44,61 @@ namespace InvScanApp
             this.label10 = new System.Windows.Forms.Label();
             this.cmbCommodityName = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnHandOut = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmbRecipientName = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtRecipientName = new System.Windows.Forms.TextBox();
-            this.gpbStaff.SuspendLayout();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cmbStaffName = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnRemoveFromCart = new System.Windows.Forms.Button();
+            this.btnAddToCart = new System.Windows.Forms.Button();
+            this.dgvCart = new System.Windows.Forms.DataGridView();
+            this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.SuspendLayout();
             // 
-            // label8
+            // btnHandOut
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(115, 26);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "Staff Name:";
+            this.btnHandOut.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnHandOut.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHandOut.Location = new System.Drawing.Point(668, 268);
+            this.btnHandOut.Name = "btnHandOut";
+            this.btnHandOut.Size = new System.Drawing.Size(120, 82);
+            this.btnHandOut.TabIndex = 6;
+            this.btnHandOut.Text = "Checkout Cart";
+            this.btnHandOut.UseVisualStyleBackColor = false;
+            this.btnHandOut.Click += new System.EventHandler(this.btnHandOut_Click);
+            this.btnHandOut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
-            // gpbStaff
+            // btnBack
             // 
-            this.gpbStaff.BackColor = System.Drawing.Color.Transparent;
-            this.gpbStaff.Controls.Add(this.cmbStaffName);
-            this.gpbStaff.Controls.Add(this.label8);
-            this.gpbStaff.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpbStaff.Location = new System.Drawing.Point(12, 208);
-            this.gpbStaff.Name = "gpbStaff";
-            this.gpbStaff.Size = new System.Drawing.Size(645, 76);
-            this.gpbStaff.TabIndex = 2;
-            this.gpbStaff.TabStop = false;
-            this.gpbStaff.Text = "Staff Info";
+            this.btnBack.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBack.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(668, 356);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(120, 82);
+            this.btnBack.TabIndex = 7;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnBack.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
-            // cmbStaffName
+            // pictureBox1
             // 
-            this.cmbStaffName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbStaffName.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbStaffName.FormattingEnabled = true;
-            this.cmbStaffName.Location = new System.Drawing.Point(182, 21);
-            this.cmbStaffName.Name = "cmbStaffName";
-            this.cmbStaffName.Size = new System.Drawing.Size(457, 34);
-            this.cmbStaffName.TabIndex = 5;
-            this.cmbStaffName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(668, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(120, 190);
+            this.pictureBox1.TabIndex = 35;
+            this.pictureBox1.TabStop = false;
             // 
             // groupBox1
             // 
@@ -96,7 +110,7 @@ namespace InvScanApp
             this.groupBox1.Controls.Add(this.cmbCommodityName);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 51);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(645, 151);
             this.groupBox1.TabIndex = 1;
@@ -175,51 +189,27 @@ namespace InvScanApp
             this.label6.TabIndex = 30;
             this.label6.Text = "Item Name:";
             // 
-            // btnHandOut
+            // label1
             // 
-            this.btnHandOut.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnHandOut.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHandOut.Location = new System.Drawing.Point(668, 268);
-            this.btnHandOut.Name = "btnHandOut";
-            this.btnHandOut.Size = new System.Drawing.Size(120, 82);
-            this.btnHandOut.TabIndex = 6;
-            this.btnHandOut.Text = "Hand Out Item";
-            this.btnHandOut.UseVisualStyleBackColor = false;
-            this.btnHandOut.Click += new System.EventHandler(this.btnHandOut_Click);
-            this.btnHandOut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(442, 198);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 26);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Cart:";
             // 
-            // btnBack
+            // groupBox2
             // 
-            this.btnBack.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBack.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Location = new System.Drawing.Point(668, 356);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(120, 82);
-            this.btnBack.TabIndex = 7;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            this.btnBack.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(668, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(120, 190);
-            this.pictureBox1.TabIndex = 35;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 15);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(157, 26);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "Recipient Name:";
+            this.groupBox2.Controls.Add(this.cmbRecipientName);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtRecipientName);
+            this.groupBox2.Location = new System.Drawing.Point(12, 204);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(424, 110);
+            this.groupBox2.TabIndex = 43;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Recipeint Info";
             // 
             // cmbRecipientName
             // 
@@ -227,21 +217,143 @@ namespace InvScanApp
             this.cmbRecipientName.Enabled = false;
             this.cmbRecipientName.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbRecipientName.FormattingEnabled = true;
-            this.cmbRecipientName.Location = new System.Drawing.Point(374, 12);
+            this.cmbRecipientName.Location = new System.Drawing.Point(11, 62);
             this.cmbRecipientName.Name = "cmbRecipientName";
-            this.cmbRecipientName.Size = new System.Drawing.Size(277, 34);
-            this.cmbRecipientName.TabIndex = 36;
-            this.cmbRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
+            this.cmbRecipientName.Size = new System.Drawing.Size(407, 34);
+            this.cmbRecipientName.TabIndex = 39;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(157, 26);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Recipient Name:";
             // 
             // txtRecipientName
             // 
             this.txtRecipientName.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRecipientName.Location = new System.Drawing.Point(194, 12);
+            this.txtRecipientName.Location = new System.Drawing.Point(169, 23);
             this.txtRecipientName.Name = "txtRecipientName";
-            this.txtRecipientName.Size = new System.Drawing.Size(174, 33);
-            this.txtRecipientName.TabIndex = 1;
-            this.txtRecipientName.TextChanged += new System.EventHandler(this.txtRecipientName_TextChanged);
-            this.txtRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
+            this.txtRecipientName.Size = new System.Drawing.Size(249, 33);
+            this.txtRecipientName.TabIndex = 38;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cmbStaffName);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Location = new System.Drawing.Point(12, 352);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(424, 72);
+            this.groupBox3.TabIndex = 44;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Staff Info";
+            // 
+            // cmbStaffName
+            // 
+            this.cmbStaffName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStaffName.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbStaffName.FormattingEnabled = true;
+            this.cmbStaffName.Location = new System.Drawing.Point(133, 20);
+            this.cmbStaffName.Name = "cmbStaffName";
+            this.cmbStaffName.Size = new System.Drawing.Size(285, 34);
+            this.cmbStaffName.TabIndex = 45;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(6, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(115, 26);
+            this.label8.TabIndex = 46;
+            this.label8.Text = "Staff Name:";
+            // 
+            // btnRemoveFromCart
+            // 
+            this.btnRemoveFromCart.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRemoveFromCart.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveFromCart.Location = new System.Drawing.Point(442, 398);
+            this.btnRemoveFromCart.Name = "btnRemoveFromCart";
+            this.btnRemoveFromCart.Size = new System.Drawing.Size(220, 40);
+            this.btnRemoveFromCart.TabIndex = 47;
+            this.btnRemoveFromCart.Text = "Remove from Cart";
+            this.btnRemoveFromCart.UseVisualStyleBackColor = false;
+            this.btnRemoveFromCart.Click += new System.EventHandler(this.btnRemoveFromCart_Click);
+            // 
+            // btnAddToCart
+            // 
+            this.btnAddToCart.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnAddToCart.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddToCart.Location = new System.Drawing.Point(668, 208);
+            this.btnAddToCart.Name = "btnAddToCart";
+            this.btnAddToCart.Size = new System.Drawing.Size(120, 54);
+            this.btnAddToCart.TabIndex = 46;
+            this.btnAddToCart.Text = "Add to Cart";
+            this.btnAddToCart.UseVisualStyleBackColor = false;
+            this.btnAddToCart.Click += new System.EventHandler(this.btnAddToCart_Click);
+            // 
+            // dgvCart
+            // 
+            this.dgvCart.AllowUserToAddRows = false;
+            this.dgvCart.AllowUserToDeleteRows = false;
+            this.dgvCart.AllowUserToResizeColumns = false;
+            this.dgvCart.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmName,
+            this.clmQty});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCart.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvCart.Location = new System.Drawing.Point(442, 227);
+            this.dgvCart.MultiSelect = false;
+            this.dgvCart.Name = "dgvCart";
+            this.dgvCart.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvCart.RowHeadersVisible = false;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCart.Size = new System.Drawing.Size(220, 165);
+            this.dgvCart.TabIndex = 49;
+            // 
+            // clmName
+            // 
+            this.clmName.HeaderText = "Name";
+            this.clmName.Name = "clmName";
+            this.clmName.ReadOnly = true;
+            this.clmName.Width = 140;
+            // 
+            // clmQty
+            // 
+            this.clmQty.HeaderText = "Qty";
+            this.clmQty.Name = "clmQty";
+            this.clmQty.ReadOnly = true;
+            this.clmQty.Width = 76;
             // 
             // frmHandOut
             // 
@@ -251,14 +363,16 @@ namespace InvScanApp
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.cmbRecipientName);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtRecipientName);
+            this.Controls.Add(this.dgvCart);
+            this.Controls.Add(this.btnRemoveFromCart);
+            this.Controls.Add(this.btnAddToCart);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnHandOut);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gpbStaff);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -270,33 +384,43 @@ namespace InvScanApp
             this.Text = "Tech Bar Inventory | Hand Out Item";
             this.Load += new System.EventHandler(this.frmHandOut_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
-            this.gpbStaff.ResumeLayout(false);
-            this.gpbStaff.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox gpbStaff;
-        private System.Windows.Forms.ComboBox cmbStaffName;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cmbCommodityName;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cmbCommodityCategory;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown nudQty;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnHandOut;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown nudQty;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbCommodityCategory;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cmbCommodityName;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cmbRecipientName;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtRecipientName;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ComboBox cmbStaffName;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnRemoveFromCart;
+        private System.Windows.Forms.Button btnAddToCart;
+        private System.Windows.Forms.DataGridView dgvCart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmQty;
     }
 }
