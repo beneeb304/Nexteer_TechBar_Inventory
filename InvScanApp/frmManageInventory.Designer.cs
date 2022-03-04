@@ -32,6 +32,7 @@ namespace InvScanApp
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageInventory));
             this.tbcManage = new System.Windows.Forms.TabControl();
             this.tbpAddCommodity = new System.Windows.Forms.TabPage();
+            this.label21 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbAddCategory = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -81,7 +82,6 @@ namespace InvScanApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
             this.tbcManage.SuspendLayout();
             this.tbpAddCommodity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAddQty)).BeginInit();
@@ -125,6 +125,16 @@ namespace InvScanApp
             this.tbpAddCommodity.TabIndex = 0;
             this.tbpAddCommodity.Text = "Add Commodities";
             this.tbpAddCommodity.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(628, 58);
+            this.label21.TabIndex = 13;
+            this.label21.Text = "Select the category and commodity from the drop downs or scan a code to perform a" +
+    " quick lookup";
             // 
             // label12
             // 
@@ -471,19 +481,9 @@ namespace InvScanApp
             0,
             0,
             0});
-            this.nudEditQty.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudEditQty.Name = "nudEditQty";
             this.nudEditQty.Size = new System.Drawing.Size(88, 33);
             this.nudEditQty.TabIndex = 8;
-            this.nudEditQty.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudEditQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // chkEditQty
@@ -723,16 +723,6 @@ namespace InvScanApp
             this.btnSubmit.UseVisualStyleBackColor = false;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             this.btnSubmit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
-            // 
-            // label21
-            // 
-            this.label21.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(8, 16);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(628, 58);
-            this.label21.TabIndex = 13;
-            this.label21.Text = "Select the category and commodity from the drop downs or scan a code to perform a" +
-    " quick lookup";
             // 
             // frmManageInventory
             // 
