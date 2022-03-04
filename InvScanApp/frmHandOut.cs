@@ -46,15 +46,13 @@ namespace InvScanApp
         private void btnHandOut_Click(object sender, EventArgs e)
         {
             string strRecipient = "";
-            
             string strError = "Please fill out the following information before continuing!\n\n";
 
-            ////Make sure Item info is filled out
-            //if (cmbCommodityCategory.Text == "" || cmbCommodityName.Text == "")
-            //{
-            //    //Something isn't filled out, so inform user
-            //    strError += "Item Category, Item Name OR Item ID (barcode)\n";
-            //}
+            //Make sure Cart has items
+            if (dgvCart.Rows.Count == 0)
+            {
+                strError += "Cart is empty";
+            }
 
             //Make sure Staff info is filled out
             if (cmbStaffName.Text == "")
@@ -82,7 +80,7 @@ namespace InvScanApp
             }
 
             //Check if we had any errors
-            if (strError.Contains("Item") || strError.Contains("Staff") || strError.Contains("Recipient"))
+            if (strError.Contains("Cart") || strError.Contains("Staff") || strError.Contains("Recipient"))
             {
                 MessageBox.Show(strError, "Error");
             }
@@ -91,7 +89,7 @@ namespace InvScanApp
                 try
                 {
                     int intQty, intCurrentQty = 0, intLowQty = 0;
-                    string strCommodity, strVendor = "", strVendorURL = "", strCategory = "";
+                    string strCommodity, strVendor = "", strVendorURL = "", strCategory = "", strMessage = "Handed Out:\n";
                     SqlDataReader dataReader;
 
                     //Loop through each row
@@ -117,10 +115,11 @@ namespace InvScanApp
 
                         if(intQty > intCurrentQty)
                         {
-                            MessageBox.Show("There are not enough items in inventory for this transaction!", "Alert");
+                            MessageBox.Show("There are not enough items in inventory to hand out " + 
+                                intQty + " " + strCommodity + "!", "Alert");
                         }
                         else
-                        {
+                        {   
                             //Change qty
                             intCurrentQty = (intCurrentQty - intQty);
 
@@ -136,13 +135,16 @@ namespace InvScanApp
                                 "'" + DateTime.Now.ToString() + "');"))
                             {
                                 //Remove items from Commodity table
-                                if (!clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
-                                    (intCurrentQty) +
+                                if (!clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " + intCurrentQty +
                                     " WHERE Commodity_Category = '" + strCategory + "' AND Commodity_Name = '" + strCommodity + "'"))
                                 {
                                     MessageBox.Show("Couldn't Hand-Out " + intQty + " " + strCommodity + 
                                         " to " + strRecipient, "Failure");
+                                    break;
                                 }
+
+                                //Append to message for user
+                                strMessage += intQty + " " + strCommodity + "\n";
 
                                 //Check if we hit the low quantity threshold
                                 dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Qty_Alert FROM dbo.tblCategory " +
@@ -170,75 +172,19 @@ namespace InvScanApp
                         }
                     }
 
-                    ////Make sure there is enough quantity available to subtract
-                    //int intQty = 0;
-                    //string strVendor = "", strVendorURL = "";
-                    //SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Qty, Vendor_Name, Vendor_URL FROM dbo.tblCommodity WHERE Commodity_Name = '" + cmbCommodityName.Text + "';");
-
-                    //while (dataReader.Read())
-                    //{
-                    //    intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
-                    //    strVendor = dataReader["Vendor_Name"].ToString();
-                    //    strVendorURL = dataReader["Vendor_URL"].ToString();
-                    //}
-
-                    //dataReader.Close();
-
-                    //if (nudQty.Value > intQty)
-                    //{
-                    //    MessageBox.Show("There are not enough items in inventory for this transaction!", "Alert");
-                    //}
-                    //else
-                    //{
-                    //    intQty = (intQty - (int)nudQty.Value);
-
-                    //    //Add transaction to Log table
-                    //    if (clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
-                    //        "'" + cmbStaffName.Text + "'," +
-                    //        "'" + strRecipient + "'," +
-                    //        "'" + cmbCommodityCategory.Text + "'," +
-                    //        "'" + cmbCommodityName.Text + "'," +
-                    //        "'Hand-Out'," +
-                    //        nudQty.Value + "," +
-                    //        (intQty) + "," +
-                    //        "'" + DateTime.Now.ToString() + "');"))
-                    //    {
-                    //        //Remove items from Commodity table
-                    //        if (clsDatabase.ExecuteSQLNonQ("UPDATE dbo.tblCommodity SET Commodity_Qty = " +
-                    //            (intQty) +
-                    //            " WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "' AND Commodity_Name = '" + cmbCommodityName.Text + "'"))
-                    //        {
-                    //            MessageBox.Show("Handed-Out " + nudQty.Value + " " + cmbCommodityName.Text + " to " + strRecipient, "Success");
-                    //        }
-
-                    //        //Check if we hit the low quantity threshold
-                    //        int intLowQty = 0;
-                    //        dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Qty_Alert FROM dbo.tblCategory WHERE Category_Name = '" + cmbCommodityCategory.Text + "';");
-
-                    //        while (dataReader.Read())
-                    //        {
-                    //            intLowQty = int.Parse(dataReader["Qty_Alert"].ToString());
-                    //        }
-
-                    //        dataReader.Close();
-
-                    //        if (intQty <= intLowQty)
-                    //        {
-                    //            string strBody = "Low quantity alert triggered for " + cmbCommodityName.Text + ".\r" +
-                    //                "The current in-stock quantity is " + intQty + ".\r" +
-                    //                "Consider re-ordering these from " + strVendor + ".\r" +
-                    //                strVendorURL + "\r\r" +
-                    //                "Regards,\r" +
-                    //                "- Ben Bot\r";
-
-                    //            clsEmail.SendEmail(strBody, "Tech Bar Inventory - Low Quantity Alert", "", "");
-                    //        }
-                    //    }
-                    //}
+                    //Alert user of operation
+                    if(strMessage.Length > 12)
+                    {
+                        MessageBox.Show(strMessage);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No items handed-out");
+                    }
                 }
                 catch
                 {
-                    MessageBox.Show("Something went wrong handing this item out!", "Error");
+                    MessageBox.Show("Something went wrong handing item(s) out!", "Error");
                 }
 
                 //Back to home

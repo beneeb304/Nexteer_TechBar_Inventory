@@ -31,9 +31,6 @@ namespace InvScanApp
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHandOut));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnHandOut = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -193,7 +190,7 @@ namespace InvScanApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(442, 198);
+            this.label1.Location = new System.Drawing.Point(437, 175);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 26);
             this.label1.TabIndex = 41;
@@ -221,6 +218,7 @@ namespace InvScanApp
             this.cmbRecipientName.Name = "cmbRecipientName";
             this.cmbRecipientName.Size = new System.Drawing.Size(407, 34);
             this.cmbRecipientName.TabIndex = 39;
+            this.cmbRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label4
             // 
@@ -240,6 +238,7 @@ namespace InvScanApp
             this.txtRecipientName.Name = "txtRecipientName";
             this.txtRecipientName.Size = new System.Drawing.Size(249, 33);
             this.txtRecipientName.TabIndex = 38;
+            this.txtRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // groupBox3
             // 
@@ -261,6 +260,7 @@ namespace InvScanApp
             this.cmbStaffName.Name = "cmbStaffName";
             this.cmbStaffName.Size = new System.Drawing.Size(285, 34);
             this.cmbStaffName.TabIndex = 45;
+            this.cmbStaffName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label8
             // 
@@ -283,6 +283,7 @@ namespace InvScanApp
             this.btnRemoveFromCart.Text = "Remove from Cart";
             this.btnRemoveFromCart.UseVisualStyleBackColor = false;
             this.btnRemoveFromCart.Click += new System.EventHandler(this.btnRemoveFromCart_Click);
+            this.btnRemoveFromCart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // btnAddToCart
             // 
@@ -295,6 +296,7 @@ namespace InvScanApp
             this.btnAddToCart.Text = "Add to Cart";
             this.btnAddToCart.UseVisualStyleBackColor = false;
             this.btnAddToCart.Click += new System.EventHandler(this.btnAddToCart_Click);
+            this.btnAddToCart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // dgvCart
             // 
@@ -302,44 +304,22 @@ namespace InvScanApp
             this.dgvCart.AllowUserToDeleteRows = false;
             this.dgvCart.AllowUserToResizeColumns = false;
             this.dgvCart.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmName,
             this.clmQty});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCart.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvCart.Location = new System.Drawing.Point(442, 227);
+            this.dgvCart.Location = new System.Drawing.Point(442, 204);
             this.dgvCart.MultiSelect = false;
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCart.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCart.Size = new System.Drawing.Size(220, 165);
+            this.dgvCart.Size = new System.Drawing.Size(220, 188);
             this.dgvCart.TabIndex = 49;
+            this.dgvCart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // clmName
             // 
