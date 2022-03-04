@@ -238,6 +238,7 @@ namespace InvScanApp
             this.txtRecipientName.Name = "txtRecipientName";
             this.txtRecipientName.Size = new System.Drawing.Size(249, 33);
             this.txtRecipientName.TabIndex = 38;
+            this.txtRecipientName.TextChanged += new System.EventHandler(this.txtRecipientName_TextChanged);
             this.txtRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // groupBox3
