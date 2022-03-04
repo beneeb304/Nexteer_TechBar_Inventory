@@ -326,12 +326,13 @@ namespace InvScanApp
                 cmbEditNewVendor.ValueMember = "Vendor_Name";
 
                 //Comboboxes and textboxes
-                string strBarcode = "", strURL = "";
+                string strBarcode = "", strURL = "", strCategory = "";
                 int intQty = 0;
 
                 txtEditNewCommodity.Text = cmbEditCommodities.Text;
 
-                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_URL, Commodity_Barcode, Commodity_Qty FROM dbo.tblCommodity WHERE Commodity_Name = '"
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT * " +
+                    "FROM dbo.tblCommodity WHERE Commodity_Name = '"
                     + cmbEditCommodities.Text + "' AND Commodity_Category = '" + cmbEditCategory.Text + "';");
 
                 while (dataReader.Read())
@@ -339,6 +340,7 @@ namespace InvScanApp
                     strBarcode = dataReader["Commodity_Barcode"].ToString();
                     strURL = dataReader["Vendor_URL"].ToString();
                     intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
+                    strCategory = dataReader["Commodity_Category"].ToString();
                 }
 
                 dataReader.Close();
@@ -346,6 +348,7 @@ namespace InvScanApp
                 txtEditBarcode.Text = strBarcode;
                 txtEditVendorURL.Text = strURL;
                 nudEditQty.Value = intQty;
+                cmbEditNewCategory.SelectedItem = strCategory;
             }
             else
             {
