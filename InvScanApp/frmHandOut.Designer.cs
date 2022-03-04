@@ -30,7 +30,7 @@ namespace InvScanApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHandOut));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnHandOut = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -69,7 +69,7 @@ namespace InvScanApp
             this.btnHandOut.Location = new System.Drawing.Point(668, 268);
             this.btnHandOut.Name = "btnHandOut";
             this.btnHandOut.Size = new System.Drawing.Size(120, 82);
-            this.btnHandOut.TabIndex = 6;
+            this.btnHandOut.TabIndex = 8;
             this.btnHandOut.Text = "Checkout Cart";
             this.btnHandOut.UseVisualStyleBackColor = false;
             this.btnHandOut.Click += new System.EventHandler(this.btnHandOut_Click);
@@ -82,7 +82,7 @@ namespace InvScanApp
             this.btnBack.Location = new System.Drawing.Point(668, 356);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(120, 82);
-            this.btnBack.TabIndex = 7;
+            this.btnBack.TabIndex = 9;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -125,7 +125,7 @@ namespace InvScanApp
             0});
             this.nudQty.Name = "nudQty";
             this.nudQty.Size = new System.Drawing.Size(114, 33);
-            this.nudQty.TabIndex = 4;
+            this.nudQty.TabIndex = 3;
             this.nudQty.Value = new decimal(new int[] {
             1,
             0,
@@ -151,7 +151,7 @@ namespace InvScanApp
             this.cmbCommodityCategory.Location = new System.Drawing.Point(182, 21);
             this.cmbCommodityCategory.Name = "cmbCommodityCategory";
             this.cmbCommodityCategory.Size = new System.Drawing.Size(457, 34);
-            this.cmbCommodityCategory.TabIndex = 2;
+            this.cmbCommodityCategory.TabIndex = 1;
             this.cmbCommodityCategory.SelectedIndexChanged += new System.EventHandler(this.cmbItemCategory_SelectedIndexChanged);
             this.cmbCommodityCategory.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
@@ -173,7 +173,7 @@ namespace InvScanApp
             this.cmbCommodityName.Location = new System.Drawing.Point(182, 60);
             this.cmbCommodityName.Name = "cmbCommodityName";
             this.cmbCommodityName.Size = new System.Drawing.Size(457, 34);
-            this.cmbCommodityName.TabIndex = 3;
+            this.cmbCommodityName.TabIndex = 2;
             this.cmbCommodityName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label6
@@ -204,7 +204,7 @@ namespace InvScanApp
             this.groupBox2.Location = new System.Drawing.Point(12, 204);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(424, 110);
-            this.groupBox2.TabIndex = 43;
+            this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Recipeint Info";
             // 
@@ -217,7 +217,7 @@ namespace InvScanApp
             this.cmbRecipientName.Location = new System.Drawing.Point(11, 62);
             this.cmbRecipientName.Name = "cmbRecipientName";
             this.cmbRecipientName.Size = new System.Drawing.Size(407, 34);
-            this.cmbRecipientName.TabIndex = 39;
+            this.cmbRecipientName.TabIndex = 5;
             this.cmbRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label4
@@ -237,7 +237,7 @@ namespace InvScanApp
             this.txtRecipientName.Location = new System.Drawing.Point(169, 23);
             this.txtRecipientName.Name = "txtRecipientName";
             this.txtRecipientName.Size = new System.Drawing.Size(249, 33);
-            this.txtRecipientName.TabIndex = 38;
+            this.txtRecipientName.TabIndex = 4;
             this.txtRecipientName.TextChanged += new System.EventHandler(this.txtRecipientName_TextChanged);
             this.txtRecipientName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
@@ -248,7 +248,7 @@ namespace InvScanApp
             this.groupBox3.Location = new System.Drawing.Point(12, 352);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(424, 72);
-            this.groupBox3.TabIndex = 44;
+            this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Staff Info";
             // 
@@ -260,7 +260,7 @@ namespace InvScanApp
             this.cmbStaffName.Location = new System.Drawing.Point(133, 20);
             this.cmbStaffName.Name = "cmbStaffName";
             this.cmbStaffName.Size = new System.Drawing.Size(285, 34);
-            this.cmbStaffName.TabIndex = 45;
+            this.cmbStaffName.TabIndex = 6;
             this.cmbStaffName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // label8
@@ -280,7 +280,7 @@ namespace InvScanApp
             this.btnRemoveFromCart.Location = new System.Drawing.Point(442, 398);
             this.btnRemoveFromCart.Name = "btnRemoveFromCart";
             this.btnRemoveFromCart.Size = new System.Drawing.Size(220, 40);
-            this.btnRemoveFromCart.TabIndex = 47;
+            this.btnRemoveFromCart.TabIndex = 10;
             this.btnRemoveFromCart.Text = "Remove from Cart";
             this.btnRemoveFromCart.UseVisualStyleBackColor = false;
             this.btnRemoveFromCart.Click += new System.EventHandler(this.btnRemoveFromCart_Click);
@@ -293,7 +293,7 @@ namespace InvScanApp
             this.btnAddToCart.Location = new System.Drawing.Point(668, 208);
             this.btnAddToCart.Name = "btnAddToCart";
             this.btnAddToCart.Size = new System.Drawing.Size(120, 54);
-            this.btnAddToCart.TabIndex = 46;
+            this.btnAddToCart.TabIndex = 7;
             this.btnAddToCart.Text = "Add to Cart";
             this.btnAddToCart.UseVisualStyleBackColor = false;
             this.btnAddToCart.Click += new System.EventHandler(this.btnAddToCart_Click);
@@ -315,11 +315,12 @@ namespace InvScanApp
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCart.Size = new System.Drawing.Size(220, 188);
             this.dgvCart.TabIndex = 49;
+            this.dgvCart.TabStop = false;
             this.dgvCart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             // 
             // clmName
