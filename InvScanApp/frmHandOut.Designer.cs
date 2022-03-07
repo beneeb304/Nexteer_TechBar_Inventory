@@ -30,7 +30,7 @@ namespace InvScanApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHandOut));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnHandOut = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,11 +49,12 @@ namespace InvScanApp
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cmbStaffName = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnRemoveFromCart = new System.Windows.Forms.Button();
             this.btnAddToCart = new System.Windows.Forms.Button();
             this.dgvCart = new System.Windows.Forms.DataGridView();
             this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSubtract = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudQty)).BeginInit();
@@ -273,19 +274,6 @@ namespace InvScanApp
             this.label8.TabIndex = 46;
             this.label8.Text = "Staff Name:";
             // 
-            // btnRemoveFromCart
-            // 
-            this.btnRemoveFromCart.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnRemoveFromCart.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveFromCart.Location = new System.Drawing.Point(442, 398);
-            this.btnRemoveFromCart.Name = "btnRemoveFromCart";
-            this.btnRemoveFromCart.Size = new System.Drawing.Size(220, 40);
-            this.btnRemoveFromCart.TabIndex = 10;
-            this.btnRemoveFromCart.Text = "Remove from Cart";
-            this.btnRemoveFromCart.UseVisualStyleBackColor = false;
-            this.btnRemoveFromCart.Click += new System.EventHandler(this.btnRemoveFromCart_Click);
-            this.btnRemoveFromCart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
-            // 
             // btnAddToCart
             // 
             this.btnAddToCart.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -315,10 +303,10 @@ namespace InvScanApp
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCart.Size = new System.Drawing.Size(220, 188);
+            this.dgvCart.Size = new System.Drawing.Size(220, 190);
             this.dgvCart.TabIndex = 49;
             this.dgvCart.TabStop = false;
             this.dgvCart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
@@ -337,6 +325,32 @@ namespace InvScanApp
             this.clmQty.ReadOnly = true;
             this.clmQty.Width = 76;
             // 
+            // btnSubtract
+            // 
+            this.btnSubtract.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSubtract.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubtract.Location = new System.Drawing.Point(555, 400);
+            this.btnSubtract.Name = "btnSubtract";
+            this.btnSubtract.Size = new System.Drawing.Size(107, 38);
+            this.btnSubtract.TabIndex = 50;
+            this.btnSubtract.Text = "Subtract";
+            this.btnSubtract.UseVisualStyleBackColor = false;
+            this.btnSubtract.Click += new System.EventHandler(this.btnSubtract_Click);
+            this.btnSubtract.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnAdd.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(442, 400);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(107, 38);
+            this.btnAdd.TabIndex = 51;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
+            // 
             // frmHandOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,8 +359,9 @@ namespace InvScanApp
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnSubtract);
             this.Controls.Add(this.dgvCart);
-            this.Controls.Add(this.btnRemoveFromCart);
             this.Controls.Add(this.btnAddToCart);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -399,10 +414,11 @@ namespace InvScanApp
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox cmbStaffName;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnRemoveFromCart;
         private System.Windows.Forms.Button btnAddToCart;
         private System.Windows.Forms.DataGridView dgvCart;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmQty;
+        private System.Windows.Forms.Button btnSubtract;
+        private System.Windows.Forms.Button btnAdd;
     }
 }

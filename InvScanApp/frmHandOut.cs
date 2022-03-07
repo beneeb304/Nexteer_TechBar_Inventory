@@ -315,6 +315,14 @@ namespace InvScanApp
                     {
                         MessageBox.Show("No commodities with this barcode exist in inventory", "Alert");
                     }
+                    else
+                    {
+                        //If valid, add it to cart
+                        btnAddToCart_Click(sender, e);
+                    }
+
+                    //Clear fields
+                    cmbCommodityCategory.SelectedIndex = -1;
 
                     dataReader.Close();
                 }
@@ -341,13 +349,6 @@ namespace InvScanApp
             }
         }
 
-        private void btnRemoveFromCart_Click(object sender, EventArgs e)
-        {
-            //If a row is selected, remove it
-            if (dgvCart.SelectedRows.Count > 0)
-                dgvCart.Rows.RemoveAt(dgvCart.CurrentCell.RowIndex);
-        }
-
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
             //Check if item is selected
@@ -364,6 +365,47 @@ namespace InvScanApp
                 
                 //Add item to listbox
                 dgvCart.Rows.Add(cmbCommodityName.Text, nudQty.Value);
+            }
+        }
+
+        private void btnSubtract_Click(object sender, EventArgs e)
+        {
+            //If a row is selected, subtract from it
+            if (dgvCart.SelectedRows.Count > 0)
+            {
+                //Get selected row
+                DataGridViewRow row = dgvCart.SelectedRows[0];
+
+                //Get value
+                int intQty = int.Parse(row.Cells[1].Value.ToString());
+
+                //Check if we hit zero
+                if(intQty == 1)
+                {
+                    //If so, remove from cart
+                    dgvCart.Rows.RemoveAt(dgvCart.CurrentCell.RowIndex);
+                }
+                else
+                {
+                    //Otherwise, subtract one
+                    row.Cells[1].Value = (intQty -= 1);
+                }
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            //If a row is selected, add to it
+            if (dgvCart.SelectedRows.Count > 0)
+            {
+                //Get selected row
+                DataGridViewRow row = dgvCart.SelectedRows[0];
+
+                //Get value
+                int intQty = int.Parse(row.Cells[1].Value.ToString());
+
+                //Add one
+                row.Cells[1].Value = (intQty += 1);
             }
         }
     }
