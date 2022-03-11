@@ -30,7 +30,7 @@ namespace InvScanApp
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHandOut));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnHandOut = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -303,8 +303,8 @@ namespace InvScanApp
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.ReadOnly = true;
             this.dgvCart.RowHeadersVisible = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCart.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCart.Size = new System.Drawing.Size(220, 190);
             this.dgvCart.TabIndex = 49;
@@ -378,7 +378,7 @@ namespace InvScanApp
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmHandOut";
-            this.Text = "Tech Bar Inventory | Hand Out Item";
+            this.Text = "calc";
             this.Load += new System.EventHandler(this.frmHandOut_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BarcodeKeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

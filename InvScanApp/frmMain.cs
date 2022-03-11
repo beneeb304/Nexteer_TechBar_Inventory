@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -68,6 +69,12 @@ namespace InvScanApp
                         row.DefaultCellStyle.BackColor = Color.LightSalmon;
                     }
                 }
+
+                //Set interval to 1 minute
+                tmrMain.Interval = 60000;
+
+                //Start tick timer
+                tmrMain.Start();
             }
             catch (Exception ex)
             {
@@ -76,7 +83,7 @@ namespace InvScanApp
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
-        {           
+        {
             //Close the program
             Application.Exit();
         }
@@ -123,6 +130,44 @@ namespace InvScanApp
 
             //Hide main form
             Hide();
+        }
+
+        private void tmrMain_Tick(object sender, EventArgs e)
+        {
+            //Check if it's friday at 2pm
+            if(DateTime.Now.DayOfWeek == DayOfWeek.Friday && DateTime.Now.Hour == DateTime.Parse("14").Hour && DateTime.Now.Minute == DateTime.Parse("0").Minute)
+            {
+                string strFormat = "{0,-10} {1,-20} {2,-10} {3,-10}";
+                string strData = String.Format(strFormat, "Category", "Commodity", "Used Qty", "Current Qty") + '\r';
+
+                //Get all the items we've handed out and quantities of each in the past 7 days
+                SqlDataReader dataReader = clsDatabase.ExecuteSqlReader(
+                    "SELECT Commodity_Category, " +
+                    "Commodity_Name, " +
+                    "SUM(Qty_Action) AS Used, " +
+                    "MAX(Qty_New) AS New " +
+                    "FROM dbo.tblLog " +
+                    "WHERE Staff_Action = 'Hand-Out' AND Action_Time > GETDATE() - 50 " +
+                    "GROUP BY Commodity_Category, Commodity_Name;");
+
+                while (dataReader.Read())
+                {
+                    strData += String.Format(strFormat,
+                        dataReader["Commodity_Category"].ToString(),
+                        dataReader["Commodity_Name"].ToString(),
+                        dataReader["Used"].ToString(),
+                        dataReader["New"].ToString()) + "\r";
+                }
+
+                //Send the email
+                string strBody = "Tech Bar Inventory Weekly Usage report has been generated.\r\r" +
+                    strData + "\r\r" +
+                    "Regards,\r" +
+                    "- Ben Bot\r";
+
+                //Send email with attachment
+                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Weekly Report", "", "");
+            }
         }
     }
 }

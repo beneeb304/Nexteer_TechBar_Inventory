@@ -69,8 +69,8 @@ namespace InvScanApp
                                 clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
                                     "''," + //staff name
                                     "''," + //user name
-                                    "'" + cmbAddCommodities.Text + "'," +
                                     "'" + cmbAddCategory.Text + "'," +
+                                    "'" + cmbAddCommodities.Text+ "'," +
                                     "'Add'," +
                                     nudAddQty.Value + "," +
                                     (intQty + nudAddQty.Value) + "," +
@@ -107,8 +107,8 @@ namespace InvScanApp
                                 clsDatabase.ExecuteSQLNonQ("INSERT INTO dbo.tblLog VALUES(" +
                                     "''," + //staff name
                                     "''," + //user name
-                                    "'" + txtCreateCommodity.Text + "'," +
                                     "'" + cmbCreateCategory.Text + "'," +
+                                    "'" + txtCreateCommodity.Text + "'," +
                                     "'Add'," +
                                     nudCreateQty.Value + "," +
                                     nudCreateQty.Value + "," +
