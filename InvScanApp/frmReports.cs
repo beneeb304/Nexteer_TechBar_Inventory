@@ -36,51 +36,24 @@ namespace InvScanApp
             
             try
             {
-                //Populate DGV
-                DataTable dt = new DataTable();
-
-                //SQL query
-                string strSQL = "USE TBInvDB; ";
-
                 switch (cmbReportType.SelectedIndex)
                 {
                     case 0:
-                        //Set SQL query
-                        strSQL += "SELECT o.Commodity_Name, o.Commodity_Qty, a.Qty_Alert " +
-                        "FROM dbo.tblCommodity o " +
-                        "INNER JOIN dbo.tblCategory a " +
-                        "ON o.Commodity_Category = a.Category_Name " +
-                        "WHERE o.Commodity_Qty < a.Qty_Alert;";
-
-                        //Load the datatable
-                        dt.Load(clsDatabase.ExecuteSqlReader(strSQL));
-                        
-                        //Set the DGV
-                        dgvReport.DataSource = dt;
-
-                        //Set column names
-                        dgvReport.Columns[0].HeaderText = "Commodity";
-                        dgvReport.Columns[1].HeaderText = "Current Qty";
-                        dgvReport.Columns[2].HeaderText = "Alert Qty";
-
-                        //Set column widths
-                        dgvReport.Columns[0].Width = 150;
-                        dgvReport.Columns[1].Width = 150;
-                        dgvReport.Columns[2].Width = 125;
-
-                        //Unselect row
-                        dgvReport.ClearSelection();
+                        LowQty();
                         break;
                     case 1:
-                        CategoryBreakdown();
+                        WeeklyReport();
                         break;
                     case 2:
-                        LogDays();
+                        CategoryBreakdown();
                         break;
                     case 3:
-                        RecipientList();
+                        LogDays();
                         break;
                     case 4:
+                        RecipientList();
+                        break;
+                    case 5:
                         StaffList();
                         break;
                 }
@@ -89,6 +62,57 @@ namespace InvScanApp
             {
                 MessageBox.Show(ex.Message, "Error with Database connections");
             }
+        }
+
+        private void LowQty()
+        {
+            //Populate DGV
+            DataTable dt = new DataTable();
+
+            //Set SQL query
+            string strSQL = "USE TBInvDB; SELECT o.Commodity_Name, o.Commodity_Qty, a.Qty_Alert " +
+            "FROM dbo.tblCommodity o " +
+            "INNER JOIN dbo.tblCategory a " +
+            "ON o.Commodity_Category = a.Category_Name " +
+            "WHERE o.Commodity_Qty < a.Qty_Alert;";
+
+            //Load the datatable
+            dt.Load(clsDatabase.ExecuteSqlReader(strSQL));
+
+            //Set the DGV
+            dgvReport.DataSource = dt;
+
+            //Set column names
+            dgvReport.Columns[0].HeaderText = "Commodity";
+            dgvReport.Columns[1].HeaderText = "Current Qty";
+            dgvReport.Columns[2].HeaderText = "Alert Qty";
+
+            //Set column widths
+            dgvReport.Columns[0].Width = 150;
+            dgvReport.Columns[1].Width = 150;
+            dgvReport.Columns[2].Width = 125;
+
+            //Unselect row
+            dgvReport.ClearSelection();
+        }
+
+        private void WeeklyReport()
+        {
+            DataTable dt = new DataTable();
+
+            //Load the datatable
+            dt.Load(clsDatabase.ExecuteSqlReader("SELECT Commodity_Category, " +
+                "Commodity_Name, " +
+                "SUM(Qty_Action) AS Used, " +
+                "MAX(Qty_New) AS New " +
+                "FROM dbo.tblLog " +
+                "WHERE Staff_Action = 'Hand-Out' AND Action_Time > GETDATE() - 7 " +
+                "GROUP BY Commodity_Category, Commodity_Name;"));
+
+            //Set the DGV
+            dgvReport.DataSource = dt;
+
+
         }
 
         private void CategoryBreakdown()
@@ -282,16 +306,16 @@ namespace InvScanApp
         {
             switch (cmbReportType.SelectedIndex)
             {
-                case 1:
+                case 2:
                     CategoryBreakdown();
                     break;
-                case 2:
+                case 3:
                     LogDays();
                     break;
-                case 3:
+                case 4:
                     RecipientList();
                     break;
-                case 4:
+                case 5:
                     StaffList();
                     break;
             }
@@ -351,7 +375,7 @@ namespace InvScanApp
                 //Send email
                 string strWhichReport = cmbReportType.Text;
 
-                if(cmbReportType.SelectedIndex > 0)
+                if(cmbReportType.SelectedIndex > 1)
                 {
                     strWhichReport += " for the last " + nudDays.Value + " days";
                 }
@@ -368,7 +392,7 @@ namespace InvScanApp
 
         private void cmbReportType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbReportType.SelectedIndex > 0)
+            if (cmbReportType.SelectedIndex > 1)
             {
                 lblLast.Visible = true;
                 lblDays.Visible = true;

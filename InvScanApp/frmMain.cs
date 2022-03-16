@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace InvScanApp
@@ -72,7 +74,6 @@ namespace InvScanApp
 
                 //Set interval to 1 hour
                 tmrMain.Interval = 3600000;
-                tmrMain.Interval = 60000;
 
                 //Start tick timer
                 tmrMain.Start();
@@ -84,7 +85,7 @@ namespace InvScanApp
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
-        {
+        { 
             //Close the program
             Application.Exit();
         }
@@ -136,17 +137,27 @@ namespace InvScanApp
         private void tmrMain_Tick(object sender, EventArgs e)
         {
             //If it's Friday at 2pm
-            if (DateTime.Now.DayOfWeek == DayOfWeek.Monday &&
-                DateTime.Now.Hour == DateTime.Parse("15:00").Hour)
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday &&
+                DateTime.Now.Hour == DateTime.Parse("14:00").Hour)
             {
+                //Run the report
                 FridayReport();
             }
         }
 
-        public void FridayReport()
+        private void FridayReport()
         {
-            string strFormat = "{0,-10} {1,-20} {2,-10} {3,-10}";
-            string strData = string.Format(strFormat, "Category", "Commodity", "Used Qty", "Current Qty") + '\r';
+            //Set path
+            string strPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\TechBarReports\\";
+
+            //Create directory if needed
+            Directory.CreateDirectory(strPath);
+
+            //Set file name
+            string strFile = "fridayreport" + DateTimeOffset.Now.ToUnixTimeSeconds() + ".csv";
+
+            //Set file format
+            string strFormat = "{0,-10}, {1,-20}, {2,-10}, {3,-10}";
 
             //Get all the items we've handed out and quantities of each in the past 7 days
             SqlDataReader dataReader = clsDatabase.ExecuteSqlReader(
@@ -155,27 +166,44 @@ namespace InvScanApp
                 "SUM(Qty_Action) AS Used, " +
                 "MAX(Qty_New) AS New " +
                 "FROM dbo.tblLog " +
-                "WHERE Staff_Action = 'Hand-Out' AND Action_Time > GETDATE() - 50 " +
+                "WHERE Staff_Action = 'Hand-Out' AND Action_Time > GETDATE() - 7 " +
                 "GROUP BY Commodity_Category, Commodity_Name;");
 
-            while (dataReader.Read())
+            try
             {
-                strData += string.Format(strFormat,
-                    dataReader["Commodity_Category"].ToString(),
-                    dataReader["Commodity_Name"].ToString(),
-                    dataReader["Used"].ToString(),
-                    dataReader["New"].ToString()) + "\r";
+                //Make CSV file
+                var sb = new StringBuilder();
+
+                //CSV header
+                sb.AppendLine(string.Format(strFormat, "Category", "Commodity", "Used Qty", "Current Qty"));
+
+                //Read the data
+                while (dataReader.Read())
+                {
+                    sb.AppendLine(string.Format(strFormat,
+                        dataReader["Commodity_Category"].ToString(),
+                        dataReader["Commodity_Name"].ToString(),
+                        dataReader["Used"].ToString(),
+                        dataReader["New"].ToString()));
+                }
+
+                //Write the file
+                File.WriteAllText(strPath + strFile, sb.ToString());
+            } 
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error exporting friday report\r\n" + ex.Message, "Error");
+                return;
             }
 
             //Send the email
-            string strBody = "Tech Bar Inventory Weekly Usage report has been generated.\r\r" +
-                "<span style =\"font-family:Consolas;font-size: 10pt;\">" +
-                strData + "</span>\r\r" +
+            string strBody = "Tech Bar Inventory Friday usage report has been generated.\r" +
+                "Please reference the attached CSV file to view the report.\r\r" +
                 "Regards,\r" +
                 "- Ben Bot\r";
 
             //Send email with attachment
-            clsEmail.SendEmail(strBody, "Tech Bar Inventory - Weekly Report", "", "");
+            clsEmail.SendEmail(strBody, "Tech Bar Inventory - Friday Report", "", strPath + strFile);
         }
     }
 }
