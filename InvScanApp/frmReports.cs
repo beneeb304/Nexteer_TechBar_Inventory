@@ -104,7 +104,7 @@ namespace InvScanApp
             dt.Load(clsDatabase.ExecuteSqlReader("SELECT Commodity_Category, " +
                 "Commodity_Name, " +
                 "SUM(Qty_Action) AS Used, " +
-                "MAX(Qty_New) AS New " +
+                "MIN(Qty_New) AS New " +
                 "FROM dbo.tblLog " +
                 "WHERE Staff_Action = 'Hand-Out' AND Action_Time > GETDATE() - 7 " +
                 "GROUP BY Commodity_Category, Commodity_Name;"));
@@ -112,7 +112,18 @@ namespace InvScanApp
             //Set the DGV
             dgvReport.DataSource = dt;
 
+            //Set column names
+            dgvReport.Columns[2].HeaderText = "Qty Used";
+            dgvReport.Columns[3].HeaderText = "Qty Current";
 
+            //Set column widths
+            dgvReport.Columns[0].Width = 200;
+            dgvReport.Columns[1].Width = 200;
+            dgvReport.Columns[2].Width = 120;
+            dgvReport.Columns[3].Width = 120;
+
+            //Unselect row
+            dgvReport.ClearSelection();
         }
 
         private void CategoryBreakdown()

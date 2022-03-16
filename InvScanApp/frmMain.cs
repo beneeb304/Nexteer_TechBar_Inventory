@@ -164,7 +164,7 @@ namespace InvScanApp
                 "SELECT Commodity_Category, " +
                 "Commodity_Name, " +
                 "SUM(Qty_Action) AS Used, " +
-                "MAX(Qty_New) AS New " +
+                "MIN(Qty_New) AS New " +
                 "FROM dbo.tblLog " +
                 "WHERE Staff_Action = 'Hand-Out' AND Action_Time > GETDATE() - 7 " +
                 "GROUP BY Commodity_Category, Commodity_Name;");
