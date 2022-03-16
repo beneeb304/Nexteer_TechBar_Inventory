@@ -28,12 +28,14 @@ namespace InvScanApp
             dtStaff.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Staff_Name FROM dbo.tblStaff;"));
             cmbStaffName.DataSource = dtStaff;
             cmbStaffName.ValueMember = "Staff_Name";
+            cmbStaffName.DisplayMember = "Staff_Name";
             cmbStaffName.SelectedIndex = -1;
 
             //Get list of categories and populate combobox
             dtCat.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
             cmbCommodityCategory.DataSource = dtCat;
             cmbCommodityCategory.ValueMember = "Category_Name";
+            cmbCommodityCategory.DisplayMember = "Category_Name";
             cmbCommodityCategory.SelectedIndex = -1;
         }
 
@@ -195,6 +197,7 @@ namespace InvScanApp
             dtName.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Commodity_Name FROM dbo.tblCommodity WHERE Commodity_Category = '" + cmbCommodityCategory.Text + "';"));
             cmbCommodityName.DataSource = dtName;
             cmbCommodityName.ValueMember = "Commodity_Name";
+            cmbCommodityName.DisplayMember = "Commodity_Name";
             cmbCommodityName.SelectedIndex = -1;
         }
 

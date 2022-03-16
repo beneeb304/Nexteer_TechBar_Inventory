@@ -206,6 +206,7 @@ namespace InvScanApp
                     dtAddCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
                     cmbAddCategory.DataSource = dtAddCategory;
                     cmbAddCategory.ValueMember = "Category_Name";
+                    cmbAddCategory.DisplayMember = "Category_Name";
                     cmbAddCategory.SelectedIndex = -1;
                     break;
                 case 1:
@@ -217,12 +218,14 @@ namespace InvScanApp
                     dtCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
                     cmbCreateCategory.DataSource = dtCategory;
                     cmbCreateCategory.ValueMember = "Category_Name";
+                    cmbCreateCategory.DisplayMember = "Category_Name";
                     cmbCreateCategory.SelectedIndex = -1;
 
                     //Get list of vendors
                     dtVendor.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_Name FROM dbo.tblVendor;"));
                     cmbCreateVendor.DataSource = dtVendor;
                     cmbCreateVendor.ValueMember = "Vendor_Name";
+                    cmbCreateVendor.DisplayMember = "Vendor_Name";
                     cmbCreateVendor.SelectedIndex = -1;
 
                     break;
@@ -234,6 +237,7 @@ namespace InvScanApp
                     dtOldCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
                     cmbEditCategory.DataSource = dtOldCategory;
                     cmbEditCategory.ValueMember = "Category_Name";
+                    cmbEditCategory.DisplayMember = "Category_Name";
                     cmbEditCategory.SelectedIndex = -1;
                     break;
                 case 3:
@@ -244,6 +248,7 @@ namespace InvScanApp
                     dtQtyCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
                     cmbQtyCategory.DataSource = dtQtyCategory;
                     cmbQtyCategory.ValueMember = "Category_Name";
+                    cmbQtyCategory.DisplayMember = "Category_Name";
                     cmbQtyCategory.SelectedIndex = -1;
                     break;
             }
@@ -259,6 +264,7 @@ namespace InvScanApp
                 + cmbAddCategory.Text + "';"));
             cmbAddCommodities.DataSource = dtCommodity;
             cmbAddCommodities.ValueMember = "Commodity_Name";
+            cmbAddCommodities.DisplayMember = "Commodity_Name";
             cmbAddCommodities.SelectedIndex = -1;
         }
 
@@ -283,6 +289,7 @@ namespace InvScanApp
                 + cmbEditCategory.Text + "';"));
             cmbEditCommodities.DataSource = dtCommodity;
             cmbEditCommodities.ValueMember = "Commodity_Name";
+            cmbEditCommodities.DisplayMember = "Commodity_Name";
             cmbEditCommodities.SelectedIndex = -1;
         }
 
@@ -313,14 +320,16 @@ namespace InvScanApp
                 dtNewCategory.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Category_Name FROM dbo.tblCategory;"));
                 cmbEditNewCategory.DataSource = dtNewCategory;
                 cmbEditNewCategory.ValueMember = "Category_Name";
+                cmbEditNewCategory.DisplayMember = "Category_Name";
 
                 //Get list of vendors
                 dtVendor.Load(clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT Vendor_Name FROM dbo.tblVendor;"));
                 cmbEditNewVendor.DataSource = dtVendor;
                 cmbEditNewVendor.ValueMember = "Vendor_Name";
+                cmbEditNewVendor.DisplayMember= "Vendor_Name";
 
                 //Comboboxes and textboxes
-                string strBarcode = "", strURL = "", strCategory = "";
+                string strBarcode = "", strURL = "", strCategory = "", strVendor = "";
                 int intQty = 0;
 
                 txtEditNewCommodity.Text = cmbEditCommodities.Text;
@@ -334,6 +343,7 @@ namespace InvScanApp
                     strBarcode = dataReader["Commodity_Barcode"].ToString();
                     strURL = dataReader["Vendor_URL"].ToString();
                     intQty = int.Parse(dataReader["Commodity_Qty"].ToString());
+                    strVendor = dataReader["Vendor_Name"].ToString();
                     strCategory = dataReader["Commodity_Category"].ToString();
                 }
 
@@ -342,7 +352,10 @@ namespace InvScanApp
                 txtEditBarcode.Text = strBarcode;
                 txtEditVendorURL.Text = strURL;
                 nudEditQty.Value = intQty;
-                cmbEditNewCategory.SelectedItem = strCategory;
+                cmbEditNewVendor.SelectedValue = strVendor;
+                cmbEditNewCategory.SelectedValue = strCategory;
+
+
             }
             else
             {
