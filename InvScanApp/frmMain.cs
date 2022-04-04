@@ -72,9 +72,6 @@ namespace InvScanApp
                     }
                 }
 
-                //Set interval to 1 hour
-                tmrMain.Interval = 3600000;
-
                 //Start tick timer
                 tmrMain.Start();
             }
@@ -138,7 +135,8 @@ namespace InvScanApp
         {
             //If it's Friday at 2pm
             if (DateTime.Now.DayOfWeek == DayOfWeek.Friday &&
-                DateTime.Now.Hour == DateTime.Parse("14:00").Hour)
+                DateTime.Now.Hour == DateTime.Parse("14:00").Hour &&
+                DateTime.Now.Minute == DateTime.Parse("14:00").Minute)
             {
                 //Run the report
                 FridayReport();
@@ -186,6 +184,8 @@ namespace InvScanApp
                         dataReader["Used"].ToString(),
                         dataReader["New"].ToString()));
                 }
+
+                dataReader.Close();
 
                 //Write the file
                 File.WriteAllText(strPath + strFile, sb.ToString());

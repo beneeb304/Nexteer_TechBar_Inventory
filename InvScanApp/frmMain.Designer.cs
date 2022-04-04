@@ -134,6 +134,7 @@ namespace InvScanApp
             // 
             // tmrMain
             // 
+            this.tmrMain.Interval = 60000;
             this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
             // 
             // frmMain
