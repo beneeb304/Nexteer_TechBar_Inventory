@@ -51,7 +51,7 @@ namespace InvScanApp
                         LogDays();
                         break;
                     case 4:
-                        RecipientList();
+                        RecipientList(txtSearch.Text);
                         break;
                     case 5:
                         StaffList();
@@ -222,8 +222,8 @@ namespace InvScanApp
             dgvReport.ClearSelection();
         }
 
-        private void RecipientList()
-        {
+        private void RecipientList(string strName)
+        {           
             DataTable dt1 = new DataTable();
             DataTable dt2 = new DataTable();
             DataRow dr = null;
@@ -231,8 +231,11 @@ namespace InvScanApp
             dt2.Columns.Add("Recipient");
             dt2.Columns.Add("Commodity");
             dt2.Columns.Add("Qty Given");
-            
+
             string strSQL = "SELECT DISTINCT Recipient_Name FROM dbo.tblLog";
+            
+            if (strName.Length > 0)
+                strSQL += " WHERE Recipient_Name LIKE '%" + strName + "%';";
 
             SqlDataReader dataReader;
 
@@ -242,10 +245,10 @@ namespace InvScanApp
             foreach (DataRow row in dt1.Rows)
             {
                 dataReader = clsDatabase.ExecuteSqlReader("USE TBInvDB; SELECT SUM(Qty_Action) AS Quantity, Commodity_Name FROM dbo.tblLog " +
-                "WHERE Staff_Action = 'Hand-Out' AND " +
-                "Recipient_Name = '" + row[0].ToString() + "' AND " +
-                "Action_Time > GETDATE() - " + nudDays.Value + " " +
-                "GROUP BY Commodity_Name; ");
+                    "WHERE Staff_Action = 'Hand-Out' AND " +
+                    "Recipient_Name = '" + row[0].ToString() + "' AND " +
+                    "Action_Time > GETDATE() - " + nudDays.Value + " " +
+                    "GROUP BY Commodity_Name; ");
 
                 while (dataReader.Read())
                 {
@@ -324,7 +327,7 @@ namespace InvScanApp
                     LogDays();
                     break;
                 case 4:
-                    RecipientList();
+                    RecipientList(txtSearch.Text);
                     break;
                 case 5:
                     StaffList();
@@ -416,8 +419,21 @@ namespace InvScanApp
                 nudDays.Visible = false;
             }
 
+            if(cmbReportType.Text == "Recipient List")
+                txtSearch.Visible = true;
+            else
+            {
+                txtSearch.Visible = false;
+                txtSearch.Text = "";
+            }
+
             //Set the data
             PopulateDGV();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            RecipientList(txtSearch.Text);
         }
     }
 }

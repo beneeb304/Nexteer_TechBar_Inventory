@@ -39,6 +39,7 @@ namespace InvScanApp
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnEmail = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -56,7 +57,7 @@ namespace InvScanApp
             "All Logs",
             "Recipient List",
             "Staff Hand-Out Quantities"});
-            this.cmbReportType.Location = new System.Drawing.Point(149, 406);
+            this.cmbReportType.Location = new System.Drawing.Point(141, 356);
             this.cmbReportType.Name = "cmbReportType";
             this.cmbReportType.Size = new System.Drawing.Size(234, 34);
             this.cmbReportType.TabIndex = 1;
@@ -66,7 +67,7 @@ namespace InvScanApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 409);
+            this.label1.Location = new System.Drawing.Point(12, 359);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(123, 26);
             this.label1.TabIndex = 34;
@@ -75,7 +76,7 @@ namespace InvScanApp
             // nudDays
             // 
             this.nudDays.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudDays.Location = new System.Drawing.Point(476, 406);
+            this.nudDays.Location = new System.Drawing.Point(468, 356);
             this.nudDays.Maximum = new decimal(new int[] {
             365,
             0,
@@ -101,7 +102,7 @@ namespace InvScanApp
             // 
             this.lblDays.AutoSize = true;
             this.lblDays.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDays.Location = new System.Drawing.Point(544, 409);
+            this.lblDays.Location = new System.Drawing.Point(536, 358);
             this.lblDays.Name = "lblDays";
             this.lblDays.Size = new System.Drawing.Size(53, 26);
             this.lblDays.TabIndex = 36;
@@ -112,7 +113,7 @@ namespace InvScanApp
             // 
             this.lblLast.AutoSize = true;
             this.lblLast.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLast.Location = new System.Drawing.Point(389, 409);
+            this.lblLast.Location = new System.Drawing.Point(381, 359);
             this.lblLast.Name = "lblLast";
             this.lblLast.Size = new System.Drawing.Size(81, 26);
             this.lblLast.TabIndex = 37;
@@ -136,7 +137,7 @@ namespace InvScanApp
             this.dgvReport.ShowCellToolTips = false;
             this.dgvReport.ShowEditingIcon = false;
             this.dgvReport.ShowRowErrors = false;
-            this.dgvReport.Size = new System.Drawing.Size(650, 388);
+            this.dgvReport.Size = new System.Drawing.Size(650, 338);
             this.dgvReport.TabIndex = 39;
             // 
             // pictureBox1
@@ -172,6 +173,16 @@ namespace InvScanApp
             this.btnEmail.UseVisualStyleBackColor = false;
             this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(141, 396);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(234, 33);
+            this.txtSearch.TabIndex = 41;
+            this.txtSearch.Visible = false;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // frmReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +190,7 @@ namespace InvScanApp
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnEmail);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.pictureBox1);
@@ -212,5 +224,6 @@ namespace InvScanApp
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnEmail;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }
