@@ -133,12 +133,11 @@ namespace InvScanApp
 
         private void tmrMain_Tick(object sender, EventArgs e)
         {
-            //If it's Friday at 2pm
-            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday &&
-                DateTime.Now.Hour == DateTime.Parse("14:00").Hour &&
-                DateTime.Now.Minute == DateTime.Parse("14:00").Minute)
+            //Run Friday at 14:05
+            if(DateTime.Now.DayOfWeek == DayOfWeek.Friday &&
+                DateTime.Now.Hour == 14 &&
+                DateTime.Now.Minute == 5)
             {
-                //Run the report
                 FridayReport();
             }
         }
