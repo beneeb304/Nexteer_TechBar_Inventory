@@ -29,8 +29,7 @@ namespace InvScanApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnAddEdit = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
@@ -39,7 +38,6 @@ namespace InvScanApp
             this.btnHandOut = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tmrMain = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -84,8 +82,8 @@ namespace InvScanApp
             // 
             this.dgvMain.AllowUserToAddRows = false;
             this.dgvMain.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMain.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvMain.Location = new System.Drawing.Point(12, 132);
@@ -132,11 +130,6 @@ namespace InvScanApp
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
-            // tmrMain
-            // 
-            this.tmrMain.Interval = 60000;
-            this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,7 +168,6 @@ namespace InvScanApp
         private System.Windows.Forms.Button btnHandOut;
         private System.Windows.Forms.Button btnReports;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Timer tmrMain;
     }
 }
 

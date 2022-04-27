@@ -338,69 +338,72 @@ namespace InvScanApp
         private void btnEmail_Click(object sender, EventArgs e)
         {
             //Only continue if there is data to email
-            if(dgvReport.Rows.Count > 0)
+            if(dgvReport.Rows.Count >= 0)
             {
                 //Allow user to send to a different email
-                string strEmail = Interaction.InputBox("To what address should I email the report?", "Confirm Email", Settings.Default.strToEmail);
+                string strEmail = Interaction.InputBox("To what email address should the report be sent?", "Confirm Email", Settings.Default.strToEmail);
 
-                //Set path
-                string strPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\TechBarReports\\";
-
-                //Create directory if needed
-                Directory.CreateDirectory(strPath);
-
-                //Set file name
-                string strFile = "report" + DateTimeOffset.Now.ToUnixTimeSeconds() + ".csv";
-                
-                try
+                if(strEmail.Length > 0)
                 {
-                    //See if valid email
-                    var addEmail = new System.Net.Mail.MailAddress(strEmail);
-                    strEmail = addEmail.ToString();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("You must enter a valid address before emailing the report", "Error");
-                    return;
-                }
+                    //Set path
+                    string strPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\TechBarReports\\";
 
-                try
-                {
-                    //Make CSV file
-                    var sb = new StringBuilder();
+                    //Create directory if needed
+                    Directory.CreateDirectory(strPath);
 
-                    var headers = dgvReport.Columns.Cast<DataGridViewColumn>();
-                    sb.AppendLine(string.Join(",", headers.Select(column => "\"" + column.HeaderText + "\"").ToArray()));
+                    //Set file name
+                    string strFile = "report" + DateTimeOffset.Now.ToUnixTimeSeconds() + ".csv";
 
-                    foreach (DataGridViewRow row in dgvReport.Rows)
+                    try
                     {
-                        var cells = row.Cells.Cast<DataGridViewCell>();
-                        sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
+                        //See if valid email
+                        var addEmail = new System.Net.Mail.MailAddress(strEmail);
+                        strEmail = addEmail.ToString();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("You must enter a valid address before emailing the report", "Error");
+                        return;
                     }
 
-                    File.WriteAllText(strPath + strFile, sb.ToString());
+                    try
+                    {
+                        //Make CSV file
+                        var sb = new StringBuilder();
+
+                        var headers = dgvReport.Columns.Cast<DataGridViewColumn>();
+                        sb.AppendLine(string.Join(",", headers.Select(column => "\"" + column.HeaderText + "\"").ToArray()));
+
+                        foreach (DataGridViewRow row in dgvReport.Rows)
+                        {
+                            var cells = row.Cells.Cast<DataGridViewCell>();
+                            sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
+                        }
+
+                        File.WriteAllText(strPath + strFile, sb.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error exporting report\r\n" + ex.Message, "Error");
+                        return;
+                    }
+
+                    //Send email
+                    string strWhichReport = cmbReportType.Text;
+
+                    if (cmbReportType.SelectedIndex > 1)
+                    {
+                        strWhichReport += " for the last " + nudDays.Value + " days";
+                    }
+
+                    string strBody = "A Tech Bar Inventory report has been generated for " + strWhichReport + ".\r" +
+                        "Please reference '" + strFile + "' (attached to this email) using Excel to view the report.\r\r" +
+                        "Regards,\r" +
+                        "- Ben Bot\r";
+
+                    //Send email with attachment
+                    clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strEmail, strPath + strFile);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error exporting report\r\n" + ex.Message, "Error");
-                    return;
-                }
-
-                //Send email
-                string strWhichReport = cmbReportType.Text;
-
-                if(cmbReportType.SelectedIndex > 1)
-                {
-                    strWhichReport += " for the last " + nudDays.Value + " days";
-                }
-
-                string strBody = "A Tech Bar Inventory report has been generated for " + strWhichReport + ".\r" +
-                    "Please reference '" + strFile + "' (attached to this email) using Excel to view the report.\r\r" +
-                    "Regards,\r" +
-                    "- Ben Bot\r";
-
-                //Send email with attachment
-                clsEmail.SendEmail(strBody, "Tech Bar Inventory - Report Export", strEmail, strPath + strFile);
             }
         }
 
